@@ -1,0 +1,659 @@
+/* تحسين تنسيق الصفحة */
+.container {
+    max-width: 1300px;
+    margin: 0 auto;
+    padding: 50px 15px;
+}
+
+/* ضبط المسافة داخل row */
+.row.height-control {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 60vh;
+    // overflow: hidden; /* للتأكد من أن المحتوى لا يتجاوز */
+    padding: 20px;
+}
+
+
+@media (max-width:768px) {
+    .row.height-control {
+        height: auto;
+    }
+
+}
+
+/* تحسين تنسيق العنوان */
+.product-title {
+    font-size: 1.8rem;
+    /* تصغير حجم العنوان ليناسب المساحة */
+    font-weight: 700;
+    color: #333;
+    text-align: center;
+    margin-bottom: 10px;
+    /* تقليص المسافة */
+}
+
+/* تحسين نبذة عن المنتج */
+.product-description {
+    font-size: 1rem;
+    /* تصغير حجم النص */
+    color: #666;
+    line-height: 1.4;
+    margin-bottom: 15px;
+}
+
+/* تنسيق الفوائد */
+.product-benefits {
+    list-style-type: disc;
+    margin-left: 20px;
+    font-size: 0.9rem;
+    /* تصغير الخط */
+    color: #555;
+}
+
+/* تنسيق السعر */
+.product-price {
+    font-size: 1.4rem;
+    /* تصغير الخط */
+    color: #28a745;
+    margin-bottom: 15px;
+}
+
+.price-amount {
+    font-size: 1.6rem;
+    font-weight: bold;
+}
+
+.price-currency {
+    font-size: 1.1rem;
+}
+
+/* تنسيق التقييم */
+.rating i {
+    font-size: 1rem;
+    /* تصغير حجم النجوم */
+}
+
+/* أزرار السلة والقلب */
+.d-flex {
+    display: flex;
+    gap: 10px;
+}
+
+.d-flex .btn {
+    font-size: 1rem;
+    padding: 8px 12px;
+    /* تقليل المسافة داخل الأزرار */
+    border-radius: 5px;
+}
+
+// .d-flex .fa-heart {
+//     cursor: pointer;
+//     transition: color 0.3s ease;
+// }
+
+// .d-flex .fa-heart:hover {
+//     color: #e74c3c;
+// }
+
+/* تأثير التمرير على الصورة */
+.image-container img {
+    transition: transform 0.3s ease;
+    border-radius: 10px;
+    max-width: 100%;
+    /* ضمان تناسب الصورة مع المساحة */
+    height: 100%;
+    /* الحفاظ على النسبة */
+    width: 100%;
+    object-fit: cover;
+}
+
+.image-container img:hover {
+    transform: scale(1.05);
+}
+
+/* تحسين الواجهة للهواتف */
+@media (max-width: 767px) {
+    .product-title {
+        font-size: 1.5rem;
+    }
+
+    .product-description {
+        font-size: 1rem;
+    }
+
+    .product-price {
+        font-size: 1.3rem;
+    }
+
+    .rating i {
+        font-size: 1rem;
+    }
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* تنسيق عنوان قسم المنتجات الموصى بها */
+.recommended-section {
+    margin: 50px 0;
+    text-align: center;
+}
+
+.section-title {
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: #fff;
+    /* اللون الأبيض أو يمكنك اختيار لون قوي */
+    letter-spacing: 5px;
+    position: relative;
+    display: inline-block;
+    padding-bottom: 10px;
+    background-image: linear-gradient(90deg, #062E2A, #B88C57);
+    /* خلفية متدرجة */
+    background-clip: text;
+    -webkit-background-clip: text;
+    text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
+    /* تأثير الظل لإبراز العنوان */
+    animation: glowing 1.5s infinite alternate;
+}
+
+/* تأثير التوهج المتحرك على العنوان */
+@keyframes glowing {
+    0% {
+        text-shadow: 0 0 5px #B88C57, 0 0 10px #B88C57, 0 0 15px #B88C57;
+    }
+
+    100% {
+        text-shadow: 0 0 10px #062E2A, 0 0 20px #062E2A, 0 0 30px #062E2A;
+    }
+}
+
+.section-title::after {
+    content: "";
+    position: absolute;
+    width: 50%;
+    height: 3px;
+    background-color: #062E2A;
+    /* يمكن تغيير اللون إذا كنتِ تفضلين */
+    left: 25%;
+    bottom: 0;
+}
+
+
+
+
+
+
+////////////////////////////////////////////////////////
+
+
+
+
+.pic {
+    background-color: #2d6a4f;
+    background-image: url('../../../assets/seamless-pattern-of-stylized-leaves-vector-5960488.jpg');
+    min-height: 100vh;
+}
+
+.product {
+    max-width: 1300px;
+    margin: auto;
+    // margin-top: 75px;
+}
+
+// .card-img-top {
+//     height: 250px;
+//     object-fit: cover;
+// }
+
+// img .card-img-top {
+//     overflow: hidden;
+
+// }
+
+
+.card {
+    overflow: hidden;
+}
+
+i {
+    cursor: pointer;
+}
+
+.tog {
+    opacity: 0;
+    transition: opacity 0.5s ease-in;
+}
+
+.card-body:hover .tog {
+    opacity: 1;
+}
+
+// .dynamicPad {
+//     transition: padding-bottom 0.3s ease-in;
+// }
+
+// .card-body:hover .dynamicPad {
+//     padding-bottom: 20px;
+// }
+
+// .flip-container {
+//     width: 100%;
+//     height: 250px;
+//     /* ضبط الارتفاع حسب الحاجة */
+//     perspective: 1000px;
+//     /* تأثير ثلاثي الأبعاد */
+// }
+
+// .flipper {
+//     position: relative;
+//     width: 100%;
+//     height: 100%;
+//     transform-style: preserve-3d;
+//     transition: transform 0.6s;
+// }
+
+// .flip-container:hover .flipper {
+//     transform: rotateY(180deg);
+// }
+
+// .front,
+// .back {
+//     position: absolute;
+//     width: 100%;
+//     height: 100%;
+//     backface-visibility: hidden;
+//     /* إخفاء الوجه الخلفي */
+// }
+
+// .back {
+//     transform: rotateY(180deg);
+// }
+
+
+
+
+.price-text {
+    font-size: 1.2rem;
+    /* حجم النص */
+    color: #2d6a4f;
+    /* لون النص الأخضر الجميل */
+    letter-spacing: 1px;
+    /* تباعد الحروف */
+    display: flex;
+    align-items: baseline;
+    justify-content: center;
+}
+
+.price-currency {
+    font-size: 1rem;
+    /* حجم أصغر للعملة */
+    color: #6c757d;
+    /* لون العملة */
+    margin-right: 5px;
+    /* مسافة صغيرة بين العملة والسعر */
+}
+
+.price-amount {
+    font-size: 1.5rem;
+    /* حجم أكبر للسعر */
+    font-weight: bold;
+    color: #3a863b;
+    /* لون أخضر مميز */
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.2);
+    /* تأثير الظل لإبراز النص */
+}
+
+
+
+.price-amount {
+    font-size: 1.3rem;
+    font-weight: bold;
+    color: black;
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.2);
+}
+
+.price-currency {
+    font-size: 1rem;
+    color: #6c757d;
+    margin-right: 5px;
+}
+
+.old-price {
+    font-size: 1.2rem;
+    // color: #888;
+    text-decoration: line-through;
+    margin-right: 8px;
+}
+
+
+.price-text {
+    font-size: 1rem;
+    color: #686868;
+    // letter-spacing: 1px;
+    display: flex;
+    align-items: baseline;
+    justify-content: start;
+    // background-color: #28a745;
+}
+
+
+.btn-gold {
+    background-color: #f0c48a;
+}
+
+.btn-gold:hover {
+    background-color: #c09150;
+}
+
+.fa-heart {
+    color: #686868;
+}
+
+.fa-solid {
+    color: #e0a96d;
+}
+
+
+
+
+
+
+
+
+
+
+/////////////////////////////////////////////////////////////////////
+
+
+
+
+
+
+.price-text {
+    font-size: 1rem;
+    color: #686868;
+    letter-spacing: 1px;
+    display: flex;
+    align-items: baseline;
+    justify-content: center;
+}
+
+.price-currency {
+    font-size: 1rem;
+    color: #6c757d;
+    margin-right: 5px;
+}
+
+.price-amount {
+    font-size: 1.3rem;
+    font-weight: bold;
+    color: black;
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.2);
+}
+
+.product {
+    max-width: 1300px;
+    margin: auto;
+    cursor: pointer;
+}
+
+.card-img-top {
+    height: 220px;
+    object-fit: cover;
+    overflow: hidden;
+}
+
+.imgInCarousel{
+    height: 220px!important;
+}
+
+.section-title {
+    margin-top: 24px;
+    font-size: 2rem;
+    font-weight: bold;
+    color: #062E2A;
+    // letter-spacing: 3px;
+    position: relative;
+    display: inline-block;
+    padding-bottom: 10px;
+}
+
+.section-title::after {
+    content: "";
+    position: absolute;
+    width: 100%;
+    height: 3px;
+    background-color: #062E2A;
+    left: 0;
+    bottom: 0;
+}
+
+.tog {
+    opacity: 0;
+    margin-top: 5px;
+    transition: opacity 0.3s ease-in;
+}
+
+.card-body:hover .tog {
+    opacity: 1;
+}
+
+
+
+#priceRange {
+    width: 85%;
+}
+
+#priceValue {
+    font-size: 14px;
+    color: #4a936f;
+}
+
+.card-title {
+    font-weight: bold;
+}
+
+.card-text {
+    color: #555;
+}
+
+.subPrnt {
+    display: flex;
+    align-items: flex-start;
+    height: calc(100vh - 92px);
+    overflow-x: hidden;
+    max-width: 1500px;
+    margin: auto;
+}
+
+.child {
+    position: sticky;
+    top: 0;
+    height: calc(100vh - 92px);
+    overflow-x: hidden;
+}
+
+.card {
+    overflow: hidden;
+}
+
+@media (max-width: 768px) {
+    .filters-container {
+        position: fixed;
+        top: 122px;
+        left: -100%;
+        width: 100%;
+        z-index: 9999;
+        background: #f8f1e7;
+        padding: 15px;
+        display: block;
+        max-height: 200vh;
+        overflow-y: auto;
+        box-shadow: 0 -5px 15px rgba(0, 0, 0, 0.1);
+        transition: transform 0.3s ease-in-out;
+    }
+
+    .filters-container.show {
+        transform: translateX(100%);
+    }
+
+    .toggle-filters-btn {
+        display: block;
+        width: 100%;
+        background: #f0c48a;
+        color: white;
+        border: none;
+        padding: 10px;
+        font-size: 18px;
+        text-align: center;
+        cursor: pointer;
+    }
+
+    .filter-bigScreen {
+        border: none;
+    }
+
+    .section-title {
+        margin-top: 2!important;
+    }
+    
+    .fltr{
+        display: none;
+
+    }
+
+}
+
+
+.btn-gold {
+    background-color: #f0c48a;
+}
+
+.btn-gold:hover {
+    background-color: #c09150;
+}
+
+input[type="range"] {
+    -webkit-appearance: none;
+    width: 100%;
+    height: 6px;
+    background: linear-gradient(to left, #e0a96d var(--progress), #f8f1e7 var(--progress));
+    border-radius: 5px;
+    border: 1px solid rgb(140, 140, 140);
+    // outline: none;
+    transition: background 0.3s;
+}
+
+input[type="range"]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    width: 18px;
+    height: 18px;
+    background: #e0a96d;
+    border-radius: 50%;
+    cursor: pointer;
+}
+
+.old-price {
+    font-size: 1.2rem;
+    // color: #888;
+    text-decoration: line-through;
+    margin-right: 8px;
+}
+
+.offer-label {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    background-color: #c09150;
+    color: white;
+    padding: 5px 10px;
+    font-size: 14px;
+    font-weight: bold;
+    border-radius: 5px;
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
+    z-index: 10;
+}
+
+
+
+
+
+.fa-heart {
+    color: #686868;
+}
+
+.fa-solid {
+    color: #e0a96d;
+}
+
+
+
+
+
+.form-control {
+    border-color: #062E2A;
+    /* تغيير لون الحدود */
+    box-shadow: none;
+    /* إزالة التأثير الأزرق */
+}
+
+.form-control:focus {
+    border-color: #B88C57;
+    /* لون جديد عند التركيز */
+    box-shadow: 0 0 5px rgba(212, 138, 61, 0.5);
+    /* تأثير ناعم */
+}
+
+::-webkit-scrollbar {
+    display: none;
+}
+
+.carousel-indicators [data-bs-target] {
+    width: 5px;
+}
+
+.filters-container {
+    background: #f7f7f7;
+    padding: 15px;
+    // border-radius: 8px;
+}
+
+.card {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+.card-body {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}

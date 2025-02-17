@@ -1,0 +1,140 @@
+<div class="container mb-2 pt-5 bg-white">
+    <div class="row height-control justify-content-center align-items-between p-2 pt-5 " >
+        <div class="col-md-6 h-100 ">
+            <!-- صورة المنتج -->
+            <div class="image-container w-100 h-100">
+                <img [src]="product.image" alt="Blueberry Blues" class="">
+            </div>
+        </div>
+        <div class="col-md-6 h-100 d-flex flex-column justify-content-between py-1">
+            <h2 class="product-title">{{product.title}}</h2> <!-- اسم المنتج -->
+
+            <!-- نبذة عن المنتج -->
+            <p class="product-description">
+                {{product.description}} </p>
+
+            <!-- الفوائد -->
+            <h5>الفوائد:</h5>
+            <ul class="product-benefits">
+                <li *ngFor="let item of product.benifits">{{item.benifit}}</li>
+            </ul>
+
+            <!-- السعر -->
+            <div class="product-price ">
+                <h5 class="fw-bold m-0 price-text d-flex justify-content-start align-items-center  gap-0">
+                    <span class=" price-currency fs-6">د.ك</span>
+                    <span class=" price-amount">{{ product.newPrice }}</span>
+                    <span class=" old-price fs-6 m-0">{{ product.oldPrice }}</span>
+                    <span class=" text-success fs-6">{{ product.discount }}%</span>
+                </h5>
+            </div>
+            
+
+            <!-- تقييم المنتج -->
+            <div class="rating mt-3">
+                <i class="fa-solid fa-star text-warning fs-4"></i>
+                <i class="fa-solid fa-star text-warning fs-4"></i>
+                <i class="fa-solid fa-star text-warning fs-4"></i>
+                <i class="fa-solid fa-star text-warning fs-4"></i>
+                <i class="fa-regular fa-star text-warning fs-4"></i>
+            </div>
+
+            <!-- الأزرار -->
+            <div class="d-flex mt-4 ">
+                <!-- زر إضافة إلى السلة -->
+                <a href="#" class="btn btn-gold w-75 " (click)="goToCart($event, 1)">اضف الي السلة</a>
+
+                <!-- زر إضافة إلى قائمة الرغبات -->
+                <i class="fa-heart fs-3 d-flex align-items-center justify-content-between me-3"
+                    [ngClass]="{'fa-solid': favourites.has(1), 'fa-regular': !favourites.has(1)}"
+                    (click)="toggleFavourite($event, 1)">
+                </i>
+            </div>
+        </div>
+    </div>
+
+
+
+
+    <div class="recomended">
+        <div class="recommended-section">
+            <h2 class="section-title">Recommended Products</h2>
+            <!-- هنا يمكنك إضافة المنتجات الموصى بها -->
+        </div>
+
+        <div class="row product ">
+
+            <div class="col-md-4 in-out mt-4" *ngFor="let product of products">
+                <div class="card w-100">
+                    <div class="offer-label" *ngIf="product.offer==true">عرض</div>
+
+                    <div class="carousel slide bg-dark card-img-top" [attr.id]="'carousel' + product.id"
+                        (mouseenter)="startCarousel('carousel' + product.id)"
+                        (mouseleave)="pauseCarousel('carousel' + product.id)">
+
+
+                        <!-- النقاط (Indicators) -->
+                        <div class="carousel-indicators my-0">
+                            <button *ngFor="let image of product.images; let index = index" type="button"
+                                [attr.data-bs-target]="'#carousel' + product.id" [attr.data-bs-slide-to]="index"
+                                [ngClass]="{'active': index === 0}" [attr.aria-current]="index === 0 ? 'true' : null"
+                                [attr.aria-label]="'Slide ' + (index + 1)">
+                            </button>
+                        </div>
+
+                        <div class="carousel-inner">
+                            <div class="carousel-item" *ngFor="let image of product.images; let first = first"
+                                [ngClass]="{'active': first}">
+                                <img [src]="image" class="d-block w-100 h-100 imgInCarousel" alt="Product Image">
+                            </div>
+                        </div>
+
+                        <!-- أزرار التحكم -->
+                        <button class="carousel-control-prev" type="button"
+                            [attr.data-bs-target]="'#carousel' + product.id" data-bs-slide="prev">
+                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                            <span class="visually-hidden">Previous</span>
+                        </button>
+                        <button class="carousel-control-next" type="button"
+                            [attr.data-bs-target]="'#carousel' + product.id" data-bs-slide="next">
+                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                            <span class="visually-hidden">Next</span>
+                        </button>
+
+                    </div>
+
+
+
+                    <div class="card-body text-center" (click)="goToDetails(product.id)">
+                        <h5 class="card-title">{{product.name}}</h5>
+                        <p class="card-text">{{product.description }}</p>
+
+                        <div class="d-flex justify-content-between align-items-center dynamicPad">
+                            <h5 class="fw-bold m-0 price-text">
+                                <span class="price-currency fs-6">د.ك</span>
+                                <span class="price-amount">{{product.newPrice}}</span>
+                                <span class="old-price fs-6 me-1 ms-0">{{product.oldPrice}}</span>
+                                <span class="text-success fs-6">{{product.discount}}%</span>
+                            </h5>
+                            <div class="d-flex align-items-center">
+                                <i class="fa-solid fa-star text-warning"></i>
+                                <p class="m-0 pe-1"> {{product.rating}} </p>
+                            </div>
+                        </div>
+
+                        <div class="d-flex justify-content-between tog">
+                            <a class="btn btn-gold w-75" (click)="goToCart($event ,product.id)">اضف الي السله</a>
+                            <i class="fa-heart fs-3 d-flex align-items-center justify-content-end me-3"
+                                [ngClass]="{'fa-solid': favourites.has(product.id), 'fa-regular': !favourites.has(product.id)}"
+                                (click)="toggleFavourite($event, product.id)">
+                            </i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+
+        </div>
+    </div>
+</div>

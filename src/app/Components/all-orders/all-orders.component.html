@@ -1,0 +1,44 @@
+<div class="container ">
+    <h2 class="text-end  header">جميع الطلبات</h2>
+    
+    <div *ngIf="orders.length > 0; else noOrders">
+      <div class="order-card" *ngFor="let order of orders; let i = index">
+        <h4 class="text-end text-darkgreen">طلب #{{ i + 1 }}</h4>
+        <table class="table table-bordered text-center">
+          <thead class="">
+            <tr>
+              <th class="text-darkgreen">المنتج</th>
+              <th class="text-darkgreen">السعر</th>
+              <th class="text-darkgreen">الكمية</th>
+              <th class="text-darkgreen">الإجمالي</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let item of order.items">
+              <td>{{ item.productName }}</td>
+              <td>{{ item.price }} ج.م</td>
+              <td>{{ item.quantity }}</td>
+              <td>{{ item.total }} ج.م</td>
+            </tr>
+          </tbody>
+        </table>
+        <div class="order-summary text-end">
+          <p class="fs-5 text-darkgreen">الإجمالي الكلي: {{ order.totalAmount }} ج.م</p>
+        </div>
+        <div class="text-end mt-2">
+          <span class="badge" [ngClass]="{
+            'bg-success': order.status === 'مكتمل',
+            'bg-warning': order.status === 'قيد التنفيذ',
+            'bg-danger': order.status === 'ملغي'
+          }">
+            {{ order.status }}
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    <ng-template #noOrders>
+      <p class="text-center text-muted text-darkgreen">لا توجد طلبات حتى الآن.</p>
+    </ng-template>
+  </div>
+  

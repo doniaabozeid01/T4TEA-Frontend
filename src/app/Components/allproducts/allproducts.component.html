@@ -1,0 +1,339 @@
+<section class="pic py-0 bg-light-subtle">
+
+    <div class="row subPrnt ">
+        <button class="toggle-filters-btn d-md-none" (click)="toggleFilters()">☰ الفلاتر</button>
+
+        <div class="col-md-3 filters-container filter-bigScreen child bg-gold bg-white" #filtersPanel>
+            <h4 class="section-title mt-2 fltr me-2">الفلاتر</h4>
+
+            <!-- فلتر البحث -->
+            <div class="filter-search mb-3 me-md-2">
+                <label for="search">البحث:</label>
+                <input type="text" id="search" class="form-control" [(ngModel)]="searchQuery" (input)="filterProducts()"
+                    placeholder="ابحث عن المنتج..." />
+            </div>
+
+            <!-- فلتر السعر -->
+            <div class="filter-price mb-3 me-md-2">
+                <label for="priceRange">نطاق السعر:</label>
+                <div class="price-range d-flex align-items-center w-100">
+                    <span class="price-label">10</span>
+                    <input type="range" id="priceRange" min="10" max="1000" step="5" [(ngModel)]="selectedPrice"
+                        (input)="updatePriceLabel()" />
+                    <span class="price-label">1000</span>
+                </div>
+                <p id="priceValue">الحد الأدنى: {{ priceRange.min }} دينار - الحد الأقصى: {{ priceRange.max }} دينار</p>
+            </div>
+
+            <!-- فلتر التقييم -->
+            <div class="filter-rating mb-3 me-md-2">
+                <label>التقييم:</label>
+                <select class="form-control" [(ngModel)]="ratingFilter" (change)="filterProducts()">
+                    <option value="all">من 1 إلى 5 نجوم</option>
+                    <option value="2">من 2 إلى 5 نجوم</option>
+                    <option value="3">من 3 إلى 5 نجوم</option>
+                    <option value="4">من 4 إلى 5 نجوم</option>
+                    <option value="5">من 5 نجوم فقط</option>
+                </select>
+            </div>
+
+            <!-- فلتر النكهة -->
+            <div class="filter-flavor mb-3 me-md-2">
+                <label>النكهة:</label>
+                <select class="form-control" [(ngModel)]="selectedFlavor" (change)="filterProducts()">
+                    <option value="all">جميع النكهات</option>
+                    <option value="مانجو">مانجو</option>
+                    <option value="فراولة">فراولة</option>
+                    <option value="لافندر">لافندر</option>
+                </select>
+            </div>
+
+            <!-- فلتر العروض -->
+            <div class="filter-availability mb-3 me-md-2">
+                <label>التوفر مع عروض:</label>
+                <select class="form-control" [(ngModel)]="offerFilter" (change)="filterProducts()">
+                    <option value="all">جميع المنتجات</option>
+                    <option value="offers">المنتجات التي تحتوي على عروض فقط</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="col-md-9 products bg-white pb-3">
+            <ng-container *ngFor="let category of filteredProducts">
+                <div class="product">
+
+                    <h2 class="text-center section-title mx-2">{{category.title}}</h2>
+                </div>
+
+                <div class="row product ">
+
+
+                    <div class="col-md-4 in-out mt-4" *ngFor="let product of category.products">
+                        <div class="card w-100">
+                            <div class="offer-label" *ngIf="product.offer==true">عرض</div>
+
+                            <div class="carousel slide  card-img-top" [attr.id]="'carousel' + product.id"
+                                (mouseenter)="startCarousel('carousel' + product.id)"
+                                (mouseleave)="pauseCarousel('carousel' + product.id)">
+
+
+                                <!-- النقاط (Indicators) -->
+                                <div class="carousel-indicators my-0">
+                                    <button *ngFor="let image of product.images; let index = index" type="button"
+                                        [attr.data-bs-target]="'#carousel' + product.id" [attr.data-bs-slide-to]="index"
+                                        [ngClass]="{'active': index === 0}"
+                                        [attr.aria-current]="index === 0 ? 'true' : null"
+                                        [attr.aria-label]="'Slide ' + (index + 1)">
+                                    </button>
+                                </div>
+
+                                <div class="carousel-inner">
+                                    <div class="carousel-item" *ngFor="let image of product.images; let first = first"
+                                        [ngClass]="{'active': first}">
+                                        <img [src]="image" class="d-block w-100 h-100" alt="Product Image">
+                                    </div>
+                                </div>
+
+                                <!-- أزرار التحكم -->
+                                <button class="carousel-control-prev" type="button"
+                                    [attr.data-bs-target]="'#carousel' + product.id" data-bs-slide="prev">
+                                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                    <span class="visually-hidden">Previous</span>
+                                </button>
+                                <button class="carousel-control-next" type="button"
+                                    [attr.data-bs-target]="'#carousel' + product.id" data-bs-slide="next">
+                                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                    <span class="visually-hidden">Next</span>
+                                </button>
+
+                            </div>
+
+
+
+                            <div class="card-body text-center" (click)="goToDetails(product.id)">
+                                <h5 class="card-title">{{product.name}}</h5>
+                                <p class="card-text">{{product.description }}</p>
+
+                                <div class="d-flex justify-content-between align-items-center dynamicPad">
+                                    <h5 class="fw-bold m-0 price-text">
+                                        <span class="price-currency fs-6">د.ك</span>
+                                        <span class="price-amount">{{product.newPrice}}</span>
+                                        <span class="old-price fs-6 me-1 ms-0">{{product.oldPrice}}</span>
+                                        <span class="text-success fs-6">{{product.discount}}%</span>
+                                    </h5>
+                                    <div class="d-flex align-items-center">
+                                        <i class="fa-solid fa-star text-warning"></i>
+                                        <p class="m-0 pe-1"> {{product.rating}} </p>
+                                    </div>
+                                </div>
+
+                                <div class="d-flex justify-content-between tog">
+                                    <a class="btn btn-gold w-75" (click)="goToCart($event ,product.id)">اضف الي
+                                        السله</a>
+                                    <i class="fa-heart fs-3 d-flex align-items-center justify-content-end me-3"
+                                        [ngClass]="{'fa-solid': favourites.has(product.id), 'fa-regular': !favourites.has(product.id)}"
+                                        (click)="toggleFavourite($event, product.id)">
+                                    </i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </ng-container>
+        </div>
+    </div>
+</section>
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- <div id="carousel{{product.id}}" class="carousel slide bg-dark card-img-top"
+                            (mouseenter)="startCarousel('carousel{{product.id}}')"
+                            (mouseleave)="pauseCarousel('carousel{{product.id}}')">
+                            <div class="carousel-indicators my-0">
+                                <button *ngFor="let image of product.images; let index = index" type="button"
+                                    [attr.data-bs-target]="'#carousel' + product.id" [attr.data-bs-slide-to]="index"
+                                    [ngClass]="{'active': index === 0}"
+                                    [attr.aria-current]="index === 0 ? 'true' : null"
+                                    [attr.aria-label]="'Slide ' + (index + 1)"></button>
+                            </div>
+
+                            <div class="carousel-inner">
+                                <div class="carousel-item active" *ngFor="let image of product.images">
+                                    <img [src]="image" class="d-block w-100" alt="صورة 1">
+                                </div>
+                            </div>
+                        </div> -->
+
+
+
+
+
+
+<!-- <div class="col-md-4 in-out mt-4">
+                    <div class="card w-100">
+                        <div class="offer-label">عرض</div>
+
+                        <div id="carousel2" class="carousel slide bg-dark card-img-top"
+                            (mouseenter)="startCarousel('carousel2')" (mouseleave)="pauseCarousel('carousel2')">
+                            <div class="carousel-indicators my-0">
+                                <button type="button" data-bs-target="#myCarousel" data-bs-slide-to="0" class="active"
+                                    aria-current="true" aria-label="Slide 1"></button>
+                                <button type="button" data-bs-target="#myCarousel" data-bs-slide-to="1"
+                                    aria-label="Slide 2"></button>
+
+                            </div>
+
+                            <div class="carousel-inner">
+                                <div class="carousel-item active">
+                                    <img src="../../../assets/pattern.jpeg" class="d-block w-100" alt="صورة 1">
+                                </div>
+                                <div class="carousel-item">
+                                    <img src="../../../assets/redberry-01.png" class="d-block w-100" alt="صورة 2">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="card-body text-center" (click)="goToDetails(1)">
+                            <h5 class="card-title">شاي البابونج</h5>
+                            <p class="card-text">Some quick example text to build on the card title and make up the bulk
+                                of the card's content.</p>
+
+                            <div class="d-flex justify-content-between align-items-center dynamicPad">
+                                <h5 class="fw-bold m-0 price-text">
+                                    <span class="price-currency fs-6">د.ك</span>
+                                    <span class="price-amount">37.5</span>
+                                    <span class="old-price fs-6 me-1 ms-0">50</span>
+                                    <span class="text-success fs-6">25%</span>
+                                </h5>
+                                <div class="d-flex align-items-center">
+                                    <i class="fa-solid fa-star text-warning"></i>
+                                    <p class="m-0 pe-1"> 4.9 </p>
+                                </div>
+                            </div>
+
+                            <div class="d-flex justify-content-between tog">
+                                <a class="btn btn-gold w-75" (click)="goToCart($event)">اضف الي السله</a>
+                                <i class="fa-heart fs-3 d-flex align-items-center justify-content-end me-3"
+                                    [ngClass]="{'fa-solid': favourites.has(1), 'fa-regular': !favourites.has(1)}"
+                                    (click)="toggleFavourite($event, 1)">
+                                </i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="col-md-4 in-out mt-4">
+                    <div class="card w-100">
+                        <div class="offer-label">عرض</div>
+
+                        <div id="carousel3" class="carousel slide bg-dark card-img-top"
+                            (mouseenter)="startCarousel('carousel3')" (mouseleave)="pauseCarousel('carousel3')">
+                            <div class="carousel-indicators my-0">
+                                <button type="button" data-bs-target="#myCarousel" data-bs-slide-to="0" class="active"
+                                    aria-current="true" aria-label="Slide 1"></button>
+                                <button type="button" data-bs-target="#myCarousel" data-bs-slide-to="1"
+                                    aria-label="Slide 2"></button>
+
+                            </div>
+
+                            <div class="carousel-inner">
+                                <div class="carousel-item active">
+                                    <img src="../../../assets/pattern.jpeg" class="d-block w-100" alt="صورة 1">
+                                </div>
+                                <div class="carousel-item">
+                                    <img src="../../../assets/redberry-01.png" class="d-block w-100" alt="صورة 2">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="card-body text-center" (click)="goToDetails(1)">
+                            <h5 class="card-title">شاي البابونج</h5>
+                            <p class="card-text">Some quick example text to build on the card title and make up the bulk
+                                of the card's content.</p>
+
+                            <div class="d-flex justify-content-between align-items-center dynamicPad">
+                                <h5 class="fw-bold m-0 price-text">
+                                    <span class="price-currency fs-6">د.ك</span>
+                                    <span class="price-amount">37.5</span>
+                                    <span class="old-price fs-6 me-1 ms-0">50</span>
+                                    <span class="text-success fs-6">25%</span>
+                                </h5>
+                                <div class="d-flex align-items-center">
+                                    <i class="fa-solid fa-star text-warning"></i>
+                                    <p class="m-0 pe-1"> 4.9 </p>
+                                </div>
+                            </div>
+
+                            <div class="d-flex justify-content-between tog">
+                                <a class="btn btn-gold w-75" (click)="goToCart($event)">اضف الي السله</a>
+                                <i class="fa-heart fs-3 d-flex align-items-center justify-content-end me-3"
+                                    [ngClass]="{'fa-solid': favourites.has(1), 'fa-regular': !favourites.has(1)}"
+                                    (click)="toggleFavourite($event, 1)">
+                                </i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-4 in-out mt-4">
+                    <div class="card w-100">
+                        <div class="offer-label">عرض</div>
+
+                        <div id="carousel4" class="carousel slide bg-dark card-img-top"
+                            (mouseenter)="startCarousel('carousel4')" (mouseleave)="pauseCarousel('carousel4')">
+                            <div class="carousel-indicators my-0">
+                                <button type="button" data-bs-target="#myCarousel" data-bs-slide-to="0" class="active"
+                                    aria-current="true" aria-label="Slide 1"></button>
+                                <button type="button" data-bs-target="#myCarousel" data-bs-slide-to="1"
+                                    aria-label="Slide 2"></button>
+
+                            </div>
+
+                            <div class="carousel-inner">
+                                <div class="carousel-item active">
+                                    <img src="../../../assets/pattern.jpeg" class="d-block w-100" alt="صورة 1">
+                                </div>
+                                <div class="carousel-item">
+                                    <img src="../../../assets/redberry-01.png" class="d-block w-100" alt="صورة 2">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="card-body text-center" (click)="goToDetails(1)">
+                            <h5 class="card-title">شاي البابونج</h5>
+                            <p class="card-text">Some quick example text to build on the card title and make up the bulk
+                                of the card's content.</p>
+
+                            <div class="d-flex justify-content-between align-items-center dynamicPad">
+                                <h5 class="fw-bold m-0 price-text">
+                                    <span class="price-currency fs-6">د.ك</span>
+                                    <span class="price-amount">37.5</span>
+                                    <span class="old-price fs-6 me-1 ms-0">50</span>
+                                    <span class="text-success fs-6">25%</span>
+                                </h5>
+                                <div class="d-flex align-items-center">
+                                    <i class="fa-solid fa-star text-warning"></i>
+                                    <p class="m-0 pe-1"> 4.9 </p>
+                                </div>
+                            </div>
+
+                            <div class="d-flex justify-content-between tog">
+                                <a class="btn btn-gold w-75" (click)="goToCart($event)">اضف الي السله</a>
+                                <i class="fa-heart fs-3 d-flex align-items-center justify-content-end me-3"
+                                    [ngClass]="{'fa-solid': favourites.has(1), 'fa-regular': !favourites.has(1)}"
+                                    (click)="toggleFavourite($event, 1)">
+                                </i>
+                            </div>
+                        </div>
+                    </div>
+</div> -->

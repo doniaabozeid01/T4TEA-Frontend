@@ -1,0 +1,304 @@
+.pic {
+    // background-color: #4a936f;
+    // background-image: url('../../../assets/seamless-pattern-of-stylized-leaves-vector-5960488.jpg');
+    height: calc(100vh - 92px);
+    margin-top: 75px;
+}
+
+i {
+    cursor: pointer;
+}
+
+.price-text {
+    font-size: 1rem;
+    color: #686868;
+    letter-spacing: 1px;
+    display: flex;
+    align-items: baseline;
+    justify-content: center;
+}
+
+
+.products{
+    min-height: 90vh;
+}
+.price-currency {
+    font-size: 1rem;
+    color: #6c757d;
+    margin-right: 5px;
+}
+
+.price-amount {
+    font-size: 1.3rem;
+    font-weight: bold;
+    color: black;
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.2);
+}
+
+.product {
+    max-width: 1300px;
+    margin: auto;
+    cursor: pointer;
+}
+
+.card-img-top {
+    height: 220px;
+    object-fit: cover;
+    overflow: hidden;
+}
+
+img{
+    height: 220px!important;
+}
+
+.section-title {
+    margin-top: 24px;
+    font-size: 2rem;
+    font-weight: bold;
+    color: #062E2A;
+    // letter-spacing: 3px;
+    position: relative;
+    display: inline-block;
+    padding-bottom: 10px;
+}
+
+.section-title::after {
+    content: "";
+    position: absolute;
+    width: 100%;
+    height: 3px;
+    background-color: #062E2A;
+    left: 0;
+    bottom: 0;
+}
+
+.tog {
+    opacity: 0;
+    margin-top: 5px;
+    transition: opacity 0.3s ease-in;
+}
+
+.card-body:hover .tog {
+    opacity: 1;
+}
+
+
+
+#priceRange {
+    width: 85%;
+}
+
+#priceValue {
+    font-size: 14px;
+    color: #4a936f;
+}
+
+.card-title {
+    font-weight: bold;
+}
+
+.card-text {
+    color: #555;
+}
+
+.subPrnt {
+    display: flex;
+    align-items: flex-start;
+    height: calc(100vh - 92px);
+    overflow-x: hidden;
+    max-width: 1500px;
+    margin: auto;
+}
+
+.child {
+    position: sticky;
+    top: 0;
+    height: calc(100vh - 92px);
+    overflow-x: hidden;
+}
+
+.card {
+    overflow: hidden;
+}
+
+.filter-bigScreen {
+    border-left: 1px solid #f0c48a;
+    background-color: white;
+}
+
+@media (max-width: 768px) {
+    .filters-container {
+        position: fixed;
+        top: 122px;
+        left: -100%;
+        width: 100%;
+        z-index: 9999;
+        background: #f8f1e7;
+        padding: 15px;
+        display: block;
+        max-height: 200vh;
+        overflow-y: auto;
+        box-shadow: 0 -5px 15px rgba(0, 0, 0, 0.1);
+        transition: transform 0.3s ease-in-out;
+    }
+
+    .filters-container.show {
+        transform: translateX(100%);
+    }
+
+    .toggle-filters-btn {
+        display: block;
+        width: 100%;
+        background: #f0c48a;
+        color: white;
+        border: none;
+        padding: 10px;
+        font-size: 18px;
+        text-align: center;
+        cursor: pointer;
+    }
+
+    .filter-bigScreen {
+        border: none;
+    }
+
+    .section-title {
+        margin-top: 2!important;
+    }
+    
+    .fltr{
+        display: none;
+
+    }
+
+}
+
+
+.btn-gold {
+    background-color: #f0c48a;
+}
+
+.btn-gold:hover {
+    background-color: #c09150;
+}
+
+input[type="range"] {
+    -webkit-appearance: none;
+    width: 100%;
+    height: 6px;
+    background: linear-gradient(to left, #e0a96d var(--progress), #f8f1e7 var(--progress));
+    border-radius: 5px;
+    border: 1px solid rgb(140, 140, 140);
+    // outline: none;
+    transition: background 0.3s;
+}
+
+input[type="range"]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    width: 18px;
+    height: 18px;
+    background: #e0a96d;
+    border-radius: 50%;
+    cursor: pointer;
+}
+
+.old-price {
+    font-size: 1.2rem;
+    // color: #888;
+    text-decoration: line-through;
+    margin-right: 8px;
+}
+
+.offer-label {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    background-color: #c09150;
+    color: white;
+    padding: 5px 10px;
+    font-size: 14px;
+    font-weight: bold;
+    border-radius: 5px;
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
+    z-index: 10;
+}
+
+
+
+
+
+.fa-heart {
+    color: #686868;
+}
+
+.fa-solid {
+    color: #e0a96d;
+}
+
+
+
+
+
+.form-control {
+    border-color: #062E2A;
+    /* تغيير لون الحدود */
+    box-shadow: none;
+    /* إزالة التأثير الأزرق */
+}
+
+.form-control:focus {
+    border-color: #B88C57;
+    /* لون جديد عند التركيز */
+    box-shadow: 0 0 5px rgba(212, 138, 61, 0.5);
+    /* تأثير ناعم */
+}
+
+::-webkit-scrollbar {
+    display: none;
+}
+
+.carousel-indicators [data-bs-target] {
+    width: 5px;
+}
+
+.filters-container {
+    background: #f7f7f7;
+    padding: 15px;
+    // border-radius: 8px;
+}
+
+.card {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+.card-body {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+
+
+// input[type="range"] {
+//     -webkit-appearance: none;
+//     width: 100%;
+//     height: 6px;
+//     background: linear-gradient(to right, #4caf50 var(--progress), #ddd var(--progress));
+//     border-radius: 3px;
+//     outline: none;
+//     transition: background 0.2s ease-in-out;
+//   }
+  
+//   input[type="range"]::-webkit-slider-thumb {
+//     -webkit-appearance: none;
+//     appearance: none;
+//     width: 15px;
+//     height: 15px;
+//     background: #4caf50;
+//     border-radius: 50%;
+//     cursor: pointer;
+//   }
+  

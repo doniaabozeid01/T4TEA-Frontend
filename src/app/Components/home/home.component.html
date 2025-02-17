@@ -1,0 +1,532 @@
+<section class="home1 bg-white">
+  <div id="carouselExampleAutoplaying" class="carousel slide" data-bs-ride="carousel">
+    <div class="carousel-inner">
+      <div class="carousel-item active d-flex justify-content-center align-items-center">
+        <img src="../../../assets/10.png" class="d-block w-100 slide" alt="...">
+        <div class="carousel-caption p-5 d-flex justify-content-center align-items-center flex-column">
+          <h3>T4 Tea</h3>
+          <p>تجربة شاي فريدة تمزج بين النكهة الأصيلة والجودة العالية، لتمنحك لحظات من الاستمتاع والانتعاش في كل كوب.
+            استمتع بمذاق غني يعكس تراث الشاي الحقيقي.</p>
+        </div>
+      </div>
+      <div class="carousel-item">
+        <img src="../../../assets/philip-myrtorp-46Y946UVyfw-unsplash.jpg" class="d-block w-100 slide" alt="...">
+        <div class="carousel-caption2 p-5 text-center">
+          <h3>T4 Tea</h3>
+          <p>تجربة شاي فريدة تمزج بين النكهة الأصيلة والجودة العالية، لتمنحك لحظات من الاستمتاع والانتعاش في كل كوب.
+            استمتع بمذاق غني يعكس تراث الشاي الحقيقي.</p>
+        </div>
+      </div>
+      <div class="carousel-item">
+        <div class="carousel-image-wrapper bg-info ">
+          <img src="../../../assets/philip-myrtorp-46Y946UVyfw-unsplash.jpg" class="d-block w-100 slide" alt="...">
+          <div class="carousel-caption p-5">
+            <h3>T4 Tea</h3>
+            <p>تجربة شاي فريدة تمزج بين النكهة الأصيلة والجودة العالية، لتمنحك لحظات من الاستمتاع والانتعاش في كل كوب.
+              استمتع بمذاق غني يعكس تراث الشاي الحقيقي.</p>
+          </div>
+        </div>
+      </div>
+
+    </div>
+    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleAutoplaying"
+      data-bs-slide="prev">
+      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">Previous</span>
+    </button>
+    <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleAutoplaying"
+      data-bs-slide="next">
+      <span class="carousel-control-next-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">Next</span>
+    </button>
+  </div>
+</section>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<section class="home2 d-flex w-100 bg-white">
+
+  <div class="row categories ">
+
+    <div class="col-lg-4 p-3" *ngFor="let category of categories">
+      <div class="card m-auto w-100 p-5 border-secondary-subtle border " style="width: 18rem;">
+        <img [src]="category.image" class="card-img-top rounded-circle m-auto" alt="...">
+        <div class="card-body text-center">
+          <h2 class="card-title">{{category.title}}</h2>
+          <p class="card-text fs-5">{{category.description}}</p>
+          <a class="btn bg-gold w-75" [routerLink]="['/product', 1]"> عرض المنتجات</a>
+        </div>
+      </div>
+    </div>
+<!-- 
+    <div class="col-lg-4 p-3">
+      <div class="card m-auto w-100 p-5" style="width: 18rem;">
+        <img src="../../../assets/22.jpg" class="card-img-top rounded-circle bg-info m-auto" alt="...">
+        <div class="card-body text-center">
+          <h2 class="card-title">شاي اخضر</h2>
+          <p class="card-text fs-5">شاي أخضر منعش، يساعد على الاسترخاء ويدعم صحة الجسم العامه.</p>
+          <a class="btn btn-success w-75" [routerLink]="['/product', 2]"> عرض المنتجات</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-lg-4 p-3">
+      <div class="card m-auto w-100 p-5" style="width: 18rem;">
+        <img src="../../../assets/33.jpg" class="card-img-top rounded-circle bg-info m-auto" alt="...">
+        <div class="card-body text-center">
+          <h2 class="card-title">شاي اعشاب</h2>
+          <p class="card-text fs-5">خليط من الأعشاب الطبيعية المهدئة، يبعث على الراحة والهدوء.</p>
+          <a class="btn btn-success w-75" [routerLink]="['/product', 3]"> عرض المنتجات</a>
+        </div>
+      </div>
+    </div> -->
+
+  </div>
+
+</section>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<section class="home-section pb-5 bg-white text-center">
+  <h2 class="text-center mb-4 text-gold"> عروض مميزة لهذا الأسبوع </h2>
+
+  <ul class="nav nav-pills justify-content-center text-center mb-3  p-0">
+    <li class="nav-item m-0 p-0">
+      <button class="nav-link active" data-bs-toggle="pill" data-bs-target="#daily-offers">عروض اليوم</button>
+    </li>
+    <li class="nav-item m-0 p-0">
+      <button class="nav-link" data-bs-toggle="pill" data-bs-target="#weekly-offers">عروض الأسبوع</button>
+    </li>
+    <li class="nav-item m-0 p-0">
+      <button class="nav-link" data-bs-toggle="pill" data-bs-target="#vip-offers">عروض VIP</button>
+    </li>
+  </ul>
+
+  <div class="tab-content offrs-parts">
+    <!-- عروض اليوم -->
+    <div class="tab-pane fade show active" id="daily-offers">
+      <div class="row off3">
+        <div class="col-md-4 " *ngFor="let offer of dailyOffers">
+          <div class="card border my-1 ">
+            <img [src]="offer.image" class="card-img-top">
+            <div class="card-body">
+              <h5 class="card-title">{{ offer.name }}</h5>
+              <p class="card-text"><del>{{ offer.oldPrice }} EGP</del> <strong>{{ offer.newPrice }} EGP</strong></p>
+              <button class="btn bg-gold">اطلب الآن</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- عروض الأسبوع -->
+    <div class="tab-pane fade" id="weekly-offers">
+      <div class="row">
+        <div class="col-md-4" *ngFor="let offer of weeklyOffers">
+          <div class="card border">
+            <img [src]="offer.image" class="card-img-top">
+            <div class="card-body">
+              <h5 class="card-title">{{ offer.name }}</h5>
+              <p class="card-text"><del>{{ offer.oldPrice }} EGP</del> <strong>{{ offer.newPrice }} EGP</strong></p>
+              <button class="btn bg-gold">اطلب الآن</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- عروض VIP -->
+    <div class="tab-pane fade" id="vip-offers">
+      <div class="row">
+        <div class="col-md-4" *ngFor="let offer of vipOffers">
+          <div class="card border">
+            <img [src]="offer.image" class="card-img-top">
+            <div class="card-body">
+              <h5 class="card-title">{{ offer.name }}</h5>
+              <p class="card-text"><del>{{ offer.oldPrice }} EGP</del> <strong>{{ offer.newPrice }} EGP</strong></p>
+              <button class="btn bg-gold">اطلب الآن</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<section class="bg-white">
+  <div id="carouselExampleAutoplayingOffers" class="carousel slide custom-carousel " data-bs-ride="carousel">
+    <div class="carousel-inner">
+      <div class="carousel-item" *ngFor="let offer of offers; let first = first" [ngClass]="{'active': first}">
+        <img [src]="offer.image" class="carousel-img" alt="عرض">
+      </div>
+    </div>
+
+    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleAutoplayingOffers"
+      data-bs-slide="prev">
+      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">Previous</span>
+    </button>
+    <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleAutoplayingOffers"
+      data-bs-slide="next">
+      <span class="carousel-control-next-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">Next</span>
+    </button>
+  </div>
+</section>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<section class="why-choose-us text-center py-5 fade-in bg-white">
+  <h2 class="section-title custom-title py-3 fw-light text-gold">لماذا تختارنا؟</h2>
+
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-md-4" *ngFor="let feature of features">
+        <div class="feature-card p-4 rounded bg-white shadow-sm">
+          <div class="icon-wrapper">
+            <i [class]="feature.icon + ' fs-1 text-gold'"></i>
+          </div>
+          <h4 class="text-dark mt-3">{{ feature.title }}</h4>
+          <p class="text-muted">{{ feature.description }}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<section class="customer-reviews text-center my-5 fade-in ">
+  <h2 class="section-title custom-title py-3 fw-light fs-1 text-gold">آراء العملاء</h2>
+
+  <div class="container ">
+    <div id="reviewCarousel" class="carousel slide" data-bs-ride="carousel">
+      <div class="carousel-inner py-2 h-100 ">
+        <div class="carousel-item " *ngFor="let review of reviews; let first = first" [ngClass]="{'active': first}">
+          <div class="row justify-content-center ">
+            <div class="col-md-6 d-flex justify-content-center">
+              <div class="review-card p-4 shadow rounded bg-white text-center  w-100">
+                <p class="mb-3 review-text">"{{ review.text }}"</p>
+                <div class="rating mb-2">
+                  <span *ngFor="let star of [].constructor(review.rating)">⭐</span>
+                </div>
+                <h5 class="text-success">- {{ review.author }}</h5>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <button class="carousel-control-prev" type="button" data-bs-target="#reviewCarousel" data-bs-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Previous</span>
+      </button>
+      <button class="carousel-control-next" type="button" data-bs-target="#reviewCarousel" data-bs-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Next</span>
+      </button>
+    </div>
+  </div>
+</section>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<section class="footer d-flex justify-content-center align-items-center flex-column border-top">
+
+  <div class="row w-100 foot1 p-3 pt-5 mt-3">
+
+    <div class="col-md-4 mb-2 text-center d-flex flex-column justify-content-center">
+      <h3>Working Our</h3>
+      <p>Monday/Friday 9:00-23:00</p>
+      <p>Saturday 10:00-21:00</p>
+      <p>Wekend Closed</p>
+    </div>
+
+    <div class="col-md-4 mb-2 left text-center  d-flex flex-column align-items-center justify-content-center">
+      <img src="../../../assets/logo-removebg-preview.png" class="logo-img" alt="">
+      <!-- <h2>T4 TEA</h2> -->
+      <div class="d-flex justify-content-center">
+        <i class="fa-brands fa-facebook-f fs-4 p-2"></i>
+        <i class="fa-brands fa-instagram fs-4 p-2"></i>
+        <i class="fa-brands fa-twitter fs-4 p-2"></i>
+        <i class="fa-brands fa-tiktok fs-4 p-2"></i>
+      </div>
+    </div>
+
+
+    <div class="col-md-4 my-2 left text-center d-flex flex-column justify-content-center">
+      <h3>Get In Touch</h3>
+      <p>+012-345-6789</p>
+      <p>tealand@contact.com</p>
+      <p>9889 Lorem, ipsum dolor. palltrtffd, CA, USA</p>
+    </div>
+
+  </div>
+
+
+
+  <div class="pt-3">
+    <p>copyright Dotcreativemarket</p>
+  </div>
+
+</section>

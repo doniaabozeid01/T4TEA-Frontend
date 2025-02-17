@@ -1,0 +1,56 @@
+<div class="cart-container">
+    <h2 class="header text-end">قائمة الرغبات</h2>
+    <div class="sub-container pt-0 rounded-2 ">
+
+        <div class="row cart-header d-none d-md-flex justify-content-between p-2 mt-0 px-4">
+            <div class="col-4 fs-5 fw-light">المنتجات</div>
+            <div class="col-4 fs-5 fw-light text-center">السعر</div>
+            <div class="col-4 fs-5 fw-light"></div>
+        </div>
+
+        <div class="cart-items p-3">
+            <div class="row cart-item py-3" *ngFor="let item of products; let i = index">
+                <!-- عند الشاشات الكبيرة -->
+                <div class="col-4 d-flex align-items-center d-none d-md-flex">
+                    <i class="fa-solid fa-x remove-icon" (click)="removeProduct(i)"></i>
+                    <img [src]="item.image" alt="صورة المنتج" class="cart-item-image me-2">
+                    <p class="m-0 me-2">{{ item.name }}</p>
+                </div>
+
+                <div class="col-4 d-none d-md-block text-center">د.ك {{ item.price }}</div>
+
+
+
+                <div class="col-4 d-none d-md-block text-start">
+                    <button  class="btn btn-gold" (click)="addToCart(item)">
+                        اضف إلى السلة
+                    </button>
+                </div>
+
+                <!-- عند الشاشات الصغيرة -->
+                <div class="col-12 d-flex d-md-none flex-column p-0">
+                    <i class="fa-solid fa-x remove-icon my-1" (click)="removeProduct(i)"></i>
+                    <div class="d-flex align-items-center w-100">
+                        <img [src]="item.image" alt="صورة المنتج" class="cart-item-image me-0 ms-2">
+                        <div class="d-flex flex-column">
+                            <p class="m-0 fw-bold">{{ item.name }}</p>
+                            <p class="m-0 text-muted">د.ك {{ item.price }}</p>
+                        </div>
+                    </div>
+
+                    <div class="mt-2 text-end w-100 ">
+                        <button  class="btn btn-gold w-100" (click)="addToCart(item)">
+                            اضف إلى السلة
+                        </button>
+                        <!-- <button *ngIf="!item.inStock" class="btn w-100" disabled>
+                            اضف إلى السلة
+                        </button> -->
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+
+</div>

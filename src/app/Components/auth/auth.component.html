@@ -1,0 +1,136 @@
+<section class="parent">
+
+  <!-- شاشه كبيره  -->
+  <div class="container d-none d-md-block" [ngClass]="{'right-panel-active': isSignUp}">
+
+    <!-- تسجيل جديد -->
+    <div class="sign-up">
+      <form>
+        <h1 class="mb-2">إنشاء حساب</h1>
+        <input type="text" placeholder="الاسم" class="border rounded-1" required>
+        <input type="email" placeholder="البريد الإلكتروني" class="border rounded-1" required>
+        <input type="password" placeholder="كلمة المرور" class="border rounded-1" required>
+        <button (click)="signUp()">تسجيل</button>
+      </form>
+    </div>
+
+    <!-- تسجيل الدخول -->
+    <div class="sign-in">
+      <form>
+        <h1 class="mb-2">تسجيل الدخول</h1>
+        <input type="email" placeholder="البريد الإلكتروني" class="border rounded-1" required>
+        <input type="password" placeholder="كلمة المرور" class="border rounded-1" required>
+        <a href="#">هل نسيت كلمة المرور؟</a>
+        <button (click)="signIn()">تسجيل الدخول</button>
+      </form>
+    </div>
+
+    <!-- الجزء المتحرك -->
+    <div class="overlay-container">
+      <div class="overlay">
+        <div class="overlay-left">
+          <h1>مرحبًا بعودتك!</h1>
+          <p>للبقاء على اتصال معنا، يرجى تسجيل الدخول</p>
+          <button (click)="togglePanel()">تسجيل الدخول</button>
+        </div>
+        <div class="overlay-right">
+          <h1>مرحبًا بك، صديقنا!</h1>
+          <p>أدخل بياناتك وابدأ رحلتك معنا</p>
+          <button (click)="togglePanel()">إنشاء حساب</button>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+
+
+
+
+  <!-- شاشه صغيره  -->
+
+<!-- شاشة صغيرة -->
+<!-- <div class="container small-container d-md-none" [ngClass]="{'signup-mode': isSignUp}">
+  
+  <div class="form-container2">
+    <h1 class="mb-3">{{ isSignUp ? 'إنشاء حساب' : 'تسجيل الدخول' }}</h1>
+
+    <form *ngIf="!isSignUp" class="p-0 form">
+      <input type="email" placeholder="البريد الإلكتروني" class="border rounded-1" required>
+      <input type="password" placeholder="كلمة المرور" class="border rounded-1" required>
+      <a href="#">هل نسيت كلمة المرور؟</a>
+      <button class="btn2" (click)="signIn()">تسجيل الدخول</button>
+    </form>
+
+    <form *ngIf="isSignUp" class="p-0 form">
+      <input type="text" placeholder="الاسم" class="border rounded-1" required>
+      <input type="email" placeholder="البريد الإلكتروني" class="border rounded-1" required>
+      <input type="password" placeholder="كلمة المرور" class="border rounded-1" required>
+      <button class="btn2" (click)="signUp()">تسجيل</button>
+    </form>
+
+    <button class="toggle-btn bg-info m-auto btn2" (click)="togglePanel()">
+      {{ isSignUp ? 'تسجيل الدخول' : 'إنشاء حساب' }}
+    </button>
+  </div>
+
+</div> -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="container small-container d-md-none" [ngClass]="{'signup-mode': isSignUp}">
+  
+  <div class="form-container">
+    <!-- عنوان متغير حسب الحالة -->
+    <h1 class="mb-3 h1">{{ isSignUp ? 'إنشاء حساب' : 'تسجيل الدخول' }}</h1>
+
+    <!-- نموذج تسجيل الدخول -->
+    <form *ngIf="!isSignUp" class="form">
+      <input type="email" placeholder="البريد الإلكتروني" class="border rounded-1 input" required>
+      <input type="password" placeholder="كلمة المرور" class="border rounded-1 input" required>
+      <a href="#">هل نسيت كلمة المرور؟</a>
+      <button class="button" (click)="signIn()">تسجيل الدخول</button>
+    </form>
+
+    <!-- نموذج إنشاء الحساب -->
+    <form *ngIf="isSignUp" class="form">
+      <input type="text" placeholder="الاسم" class="border rounded-1 input" required>
+      <input type="email" placeholder="البريد الإلكتروني" class="border rounded-1 input" required>
+      <input type="password" placeholder="كلمة المرور" class="border rounded-1 input" required>
+      <button class="button" (click)="signUp()">تسجيل</button>
+    </form>
+
+    <!-- زر تبديل أنيق -->
+    <p class="toggle-text" (click)="togglePanel()">
+      {{ isSignUp ? 'لديك حساب؟ تسجيل الدخول' : 'ليس لديك حساب؟ إنشاء حساب' }}
+    </p>
+  </div>
+
+</div>
+
+
+</section>

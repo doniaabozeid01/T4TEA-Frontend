@@ -1,0 +1,41 @@
+.container {
+    max-width: 1200px;
+    margin: 0px auto;
+    margin-top: 85px;
+    padding: 20px 0px;
+    border-radius: 12px;
+
+}
+
+.header {
+    color: #c09150;
+    margin-bottom:12px;
+}
+
+
+form {
+    padding: 10px;
+    border-radius: 8px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+
+}
+
+.btn-gold {
+    // background-color: #e6a800;
+    background-color: #FAEED8;
+    transition: all 0.4s ease-in;
+    border: none !important;
+}
+
+.btn-gold:hover {
+    // background-color: #e6a800;
+    background-color: #B88C57;
+}
+
+
+@media (max-width:768px) {
+    .container {
+        width: 95%;
+    }
+}
+

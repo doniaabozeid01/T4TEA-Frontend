@@ -1,0 +1,93 @@
+.container {
+    max-width: 1200px;
+    margin: auto;
+    padding: 20px 0px;
+    margin-top: 85px;
+    border-radius: 12px;
+    background: #fff;
+    // box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+h2 {
+    font-size: 1.8rem;
+    color: #333;
+}
+
+.table {
+    background-color: #fff;
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.table th {
+    background-color: #B88C57;
+    border: none;
+    color: white;
+}
+
+.table tbody tr:hover {
+    background-color: #FAEED8;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+
+}
+
+.badge {
+    font-size: 0.9rem;
+    padding: 5px 10px;
+    border-radius: 5px;
+}
+
+.bg-success {
+    background-color: #28a745 !important;
+}
+
+.bg-warning {
+    background-color: #ffc107 !important;
+    color: black !important;
+}
+
+.bg-danger {
+    background-color: #dc3545 !important;
+}
+
+
+.order-card {
+    border: 1px solid #ddd;
+    padding: 15px;
+    border-radius: 10px;
+    margin-bottom: 20px;
+    background-color: #fff;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.order-summary {
+    font-size: 18px;
+    font-weight: bold;
+}
+
+@media (max-width: 768px) {
+    .order-card {
+        padding: 10px;
+    }
+
+    .table {
+        font-size: 14px;
+    }
+
+    .order-summary {
+        font-size: 16px;
+    }
+
+    .container {
+        width: 95%;
+    }
+}
+
+.header {
+    color: #c09150;
+    margin-bottom: 12px;
+}
+
+.text-darkgreen{
+    color: #062E2A;
+}

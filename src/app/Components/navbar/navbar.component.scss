@@ -1,0 +1,59 @@
+// .logo-img {
+//   height: 50px; /* حجم الصورة */
+// }
+// .navbar-logo {
+//   position: absolute;
+//   left: 50%;
+//   transform: translateX(-50%);
+//   display: flex;
+//   align-items: center;
+// }
+// .nav-icon {
+//   font-size: 1.4rem;
+//   color: #333;
+//   transition: color 0.3s ease-in-out;
+// }
+// .nav-icon:hover {
+//   color: #008000; /* لون مميز عند التمرير */
+// }
+
+// .navbar{
+//   z-index: 5;
+// }
+
+.navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 99999;
+  background-color: white;
+}
+
+.logo-img {
+  height: 60px;
+}
+
+/* اللوجو الآن ثابت ولا يتحرك */
+.navbar-logo {
+  position: fixed;  /* تغيير من absolute إلى fixed */
+  left: 50%;
+  top: 5px; /* التحكم في مكان اللوجو */
+  transform: translateX(-50%);
+  z-index: 100000; /* يبقى دائمًا فوق القائمة */
+  // pointer-events: none; /* حتى لا يتداخل مع النقر */
+  cursor: pointer;
+}
+
+/* في الشاشات الصغيرة، اللوجو يظل ثابتًا */
+@media (max-width: 991px) {
+  .navbar-logo {
+    top: 5px; /* تعديله قليلًا ليبقى واضحًا */
+  }
+}
+
+i{
+  color: #000000A6;
+  cursor: pointer;
+}
+

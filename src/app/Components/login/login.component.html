@@ -1,0 +1,79 @@
+<!-- <section class="parent pt-5 d-flex justify-content-center align-items-center ">
+    <div class="row justify-content-center mt-5">
+        <div class="col-md-8 bg-info p-5 shadow  d-flex justify-content-center align-items-center flex-column">
+            <h2 class="mb-4">تسجيل الدخول</h2>
+
+            <input type="email" class="form-control mb-3" placeholder="البريد الإلكتروني" required>
+            <input type="password" class="form-control mb-4" placeholder="كلمة المرور" required>
+
+            <a href="" class="text-decoration-none text-primary">هل نسيت كلمة المرور؟</a>
+
+            <button class="btn btn-success w-100 mt-4">تسجيل الدخول</button>
+        </div>
+
+        <div class="col-md-4 bg-light p-5 shadow  mt-4 mt-md-0 d-flex justify-content-center align-items-center flex-column">
+            <h2 class="mb-4">مرحبا صديقي</h2>
+
+            <p class="mb-4">ادخل بياناتك الشخصية وابدأ رحلتك معنا.</p>
+
+            <button class="btn btn-outline-success w-100" (click)="goToSignUp()">تسجيل الاشتراك</button>
+        </div>
+    </div>
+</section> -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="auth-container">
+    <div *ngIf="isLogin" class="auth-box" id="loginBox">
+      <div class="content">
+        <h2>تسجيل الدخول</h2>
+        <input type="email" class="form-control mb-3" placeholder="البريد الإلكتروني" required>
+        <input type="password" class="form-control mb-4" placeholder="كلمة المرور" required>
+        <a href="" class="text-decoration-none text-primary">هل نسيت كلمة المرور؟</a>
+        <button class="btn btn-success w-100 mt-4">تسجيل الدخول</button>
+        <p class="switch-link" (click)="toggleForm()">إنشاء حساب جديد</p>
+      </div>
+    </div>
+  
+    <div *ngIf="!isLogin" class="auth-box" id="signupBox">
+      <div class="content">
+        <h2>مرحبا صديقي</h2>
+        <p>ادخل بياناتك الشخصية وابدأ رحلتك معنا.</p>
+        <button class="btn btn-outline-success w-100">تسجيل الاشتراك</button>
+        <p class="switch-link" (click)="toggleForm()">لديك حساب بالفعل؟ تسجيل الدخول</p>
+      </div>
+    </div>
+  </div>
+  

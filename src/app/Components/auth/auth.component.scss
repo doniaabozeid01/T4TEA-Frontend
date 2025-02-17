@@ -1,0 +1,478 @@
+@import url('https://fonts.googleapis.com/css?family=Montserrat:400,800');
+
+* {
+    box-sizing: border-box;
+}
+
+.parent {
+    align-items: center;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    background-color: #f6f5f7;
+    font-family: 'Montserrat', sans-serif;
+    min-height: 100vh;
+    margin: 0;
+    // background-image: url('../../../assets/seamless-pattern-of-stylized-leaves-vector-5960488.jpg');
+}
+
+.container {
+    position: relative;
+    width: 768px;
+    max-width: 100%;
+    min-height: 480px;
+    background-color: #fff;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25),
+                0 10px 10px rgba(0, 0, 0, 0.22);
+}
+
+.sign-up,
+.sign-in {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    transition: all 0.6s ease-in-out;
+}
+
+.sign-up {
+    width: 50%;
+    opacity: 0;
+    z-index: 1;
+}
+
+.sign-in {
+    width: 50%;
+    z-index: 2;
+}
+
+form {
+    background-color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    padding: 0 50px;
+    height: 100%;
+    text-align: center;
+}
+
+h1 {
+    font-weight: bold;
+    margin: 0;
+}
+
+p {
+    font-size: 14px;
+    font-weight: 100;
+    line-height: 20px;
+    // letter-spacing: 0.5px;
+    margin: 15px 0 20px;
+}
+
+input {
+    background-color: #eee;
+    padding: 12px 15px;
+    margin: 8px 15px;
+    width: 100%;
+    border-radius: 5px;
+    border: none;
+    outline: none;
+}
+
+a {
+    color: #333;
+    font-size: 14px;
+    text-decoration: none;
+    margin: 15px 0;
+}
+
+button {
+    color: #fff;
+    background-color: rgb(34, 180, 34);
+    font-size: 12px;
+    font-weight: bold;
+    padding: 12px 55px;
+    margin: 20px;
+    border-radius: 20px;
+    border: 1px solid green;
+    outline: none;
+    // letter-spacing: 1px;
+    text-transform: uppercase;
+    transition: transform 80ms ease-in;
+    cursor: pointer;
+}
+
+button:active {
+    transform: scale(0.90);
+}
+
+#signIn,
+#signUp {
+    background-color: transparent;
+    border: 2px solid #fff;
+}
+
+.container.right-panel-active .sign-in {
+    transform: translateX(100%);
+}
+
+.container.right-panel-active .sign-up {
+    transform: translateX(100%);
+    opacity: 1;
+    z-index: 5;
+}
+
+.overlay-container {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    width: 50%;
+    height: 100%;
+    overflow: hidden;
+    transition: transform 0.6s ease-in-out;
+    z-index: 100;
+}
+
+.container.right-panel-active .overlay-container {
+    transform: translateX(-100%);
+}
+
+.overlay {
+    position: relative;
+    color: #fff;
+    background: linear-gradient(to right, #B88C57, #FAEED8,#062E2A);
+    // background: linear-gradient(to right, #c09150, #16312b);
+    left: 0;
+    height: 100%;
+    width: 200%!important;
+    transform: translateX(0);
+    transition: transform 0.6s ease-in-out;
+}
+
+.container.right-panel-active .overlay {
+    transform: translateX(50%);
+}
+
+.overlay-left, .overlay-right {
+    position: absolute;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    padding: 0 40px;
+    text-align: center;
+    top: 0;
+    height: 100%;
+    width: 50%;
+    transform: translateX(0);
+    transition: transform 0.6s ease-in-out;
+}
+
+.overlay-left {
+    transform: translateX(-100%);
+}
+
+.overlay-right {
+    right: 0;
+    transform: translateX(0%);
+    width: 50%;
+}
+
+.container.right-panel-active .overlay-left {
+    transform: translateX(-50);
+}
+
+.container.right-panel-active .overlay-right {
+    transform: translateX(20%);
+}
+
+.social-container {
+    margin: 20px 0;
+}
+
+.social-container a {
+    height: 40px;
+    width: 40px;
+    margin: 0 5px;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid #ccc;
+    border-radius: 50%;
+}
+
+
+
+
+
+
+
+
+
+
+/////////////////////////////////////////////////////////////////////////////////// 
+
+
+
+// .small-container {
+//     background: linear-gradient(to right, #B88C57, #FAEED8,);
+//     width: 95%;
+//     max-width: 400px;
+//     padding: 20px;
+//     border-radius: 10px;
+//     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+//     text-align: center;
+// }
+
+// .form-container2 {
+//     // background-color: #fff;
+//     padding: 30px 0px;
+//     border-radius: 10px;
+// }
+
+// .small-container.signup-mode {
+//     background: linear-gradient(to right, #FAEED8, #16312b);
+// }
+
+// .form{
+//     background-color: transparent;
+// }
+
+// h1 {
+//     font-size: 22px;
+//     margin-bottom: 15px;
+// }
+
+// input {
+//     display: block;
+//     width: 100%;
+//     padding: 10px;
+//     margin: 10px 0;
+//     border-radius: 5px;
+//     border: 1px solid #ccc;
+// }
+
+// .btn2 {
+//     width: 100%;
+//     padding: 10px;
+//     border-radius: 5px;
+//     background-color: #16312b;
+//     color: white;
+//     border: none;
+//     cursor: pointer;
+// }
+
+// .btn2:hover {
+//     background-color: darkgreen;
+// }
+
+// .toggle-btn {
+//     margin-top: 10px;
+//     background-color: #ccc;
+//     color: black;
+// }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// .small-container {
+//     background: #B88C57; /* خلفية تسجيل الدخول */
+//     width: 95%;
+//     max-width: 400px;
+//     padding: 20px;
+//     border-radius: 10px;
+//     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+//     text-align: center;
+//     transition: background 0.3s ease-in-out;
+// }
+
+// .small-container.signup-mode {
+//     background: #FAEED8; /* خلفية إنشاء الحساب */
+// }
+
+// .form-container {
+//     padding: 30px 0;
+//     border-radius: 10px;
+// }
+
+// .form {
+//     background-color: transparent;
+//     padding: 0px;
+// }
+
+// .h1 {
+//     font-size: 22px;
+//     margin-bottom: 15px;
+//     color: #062E2A; /* لون داكن للعناوين ليكون واضحًا */
+// }
+
+// .input {
+//     display: block;
+//     width: 100%;
+//     padding: 10px;
+//     margin: 10px 0;
+//     border-radius: 5px;
+//     border: 1px solid #ccc;
+//     background: #FAEED8; /* لون خلفية خفيف لمزيد من التناسق */
+//     color: #062E2A; /* لون النصوص داخل الحقول */
+// }
+
+// .input:focus {
+//     border-color: #062E2A;
+//     outline: none;
+// }
+
+// .button {
+//     width: 100%;
+//     padding: 10px;
+//     border-radius: 5px;
+//     background-color: #062E2A; /* لون الزر أساسي */
+//     color: white;
+//     border: none;
+//     cursor: pointer;
+//     transition: background 0.3s;
+// }
+
+// .button:hover {
+//     background-color: #B88C57; /* عند التمرير يصبح بنفس لون الخلفية العكسية */
+// }
+
+// /* زر التبديل على شكل نص */
+// .toggle-text {
+//     margin-top: 15px;
+//     color: #FAEED8; /* لون النص لتوضيح الفرق */
+//     cursor: pointer;
+//     font-weight: bold;
+//     transition: color 0.3s;
+// }
+
+// .toggle-text:hover {
+//     color: #062E2A; /* عند التمرير يصبح داكنًا لمزيد من التفاعل */
+// }
+
+// .signup-mode .toggle-text {
+//     color: #062E2A; /* عندما يكون في وضع التسجيل يكون اللون داكنًا */
+// }
+
+// .signup-mode .toggle-text:hover {
+//     color: #B88C57;
+// }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* الحاوية الأساسية */
+.small-container {
+    background: linear-gradient(to bottom, #B88C57, #8F5E34);
+    width: 95%;
+    max-width: 400px;
+    padding: 25px;
+    border-radius: 15px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+    text-align: center;
+    transition: background 0.3s ease-in-out;
+}
+
+/* خلفية وضع التسجيل */
+.small-container.signup-mode {
+    background: linear-gradient(to bottom, #FAEED8, #DED0B6);
+}
+
+.form {
+    background-color: transparent;
+    padding: 0px;
+}
+
+/* صندوق الإدخال */
+.input {
+    display: block;
+    width: 100%;
+    padding: 12px;
+    margin: 12px 0;
+    border-radius: 8px;
+    border: 1px solid #8F5E34;
+    background: #FAEED8;
+    color: #062E2A;
+    font-size: 16px;
+}
+
+.input:focus {
+    border-color: #062E2A;
+    outline: none;
+    box-shadow: 0 0 5px rgba(6, 46, 42, 0.5);
+}
+
+/* زر العمليات */
+.button {
+    width: 100%;
+    padding: 12px;
+    border-radius: 8px;
+    background-color: #062E2A;
+    color: white;
+    font-size: 16px;
+    font-weight: bold;
+    border: none;
+    cursor: pointer;
+    transition: background 0.3s, transform 0.2s;
+}
+
+.button:hover {
+    background-color: #B88C57;
+    transform: scale(1.05);
+}
+
+/* زر التبديل */
+.toggle-text {
+    margin-top: 20px;
+    color: #FAEED8;
+    cursor: pointer;
+    font-weight: bold;
+    transition: color 0.3s;
+    font-size: 14px;
+}
+
+.toggle-text:hover {
+    color: #8F5E34;
+}
+
+/* عند التبديل إلى وضع التسجيل */
+.signup-mode .toggle-text {
+    color: #062E2A;
+}
+
+.signup-mode .toggle-text:hover {
+    color: #B88C57;
+}

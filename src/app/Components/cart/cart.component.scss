@@ -1,0 +1,205 @@
+.cart-item img {
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
+    border-radius: 8px;
+    margin-right: 20px;
+}
+
+.cart-item-details {
+    flex-grow: 1;
+}
+
+.cart-container {
+    max-width: 1200px;
+    margin: 0px auto;
+    margin-top: 85px;
+    padding: 20px 0px;
+    border-radius: 12px;
+    min-height: 90vh;
+    // box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+}
+
+.cart-items {
+    max-height: 72vh;
+    overflow-y: auto;
+}
+
+.cart-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    // border-bottom: 1px solid #daddda;
+    // background-color: #fafafa;
+    // border-radius: 8px;
+    transition: background-color 0.5s ease;
+}
+
+@media (max-width: 768px) {
+    .cart-container {
+        width: 90%;
+    }
+}
+
+.btn-gold {
+    background-color: #d8ab6b;
+    transition: all 0.3s ease-out;
+}
+
+.btn-gold:hover {
+    background-color: #c09150;
+}
+
+.remove-icon {
+    font-size: 8px;
+    color: #000000A6;
+    cursor: pointer;
+    transition: 0.3s;
+    padding: 8px;
+    border-radius: 50%;
+}
+
+.remove-icon:hover {
+    background: #ddd;
+}
+
+.btn:disabled,
+.btn.disabled,
+fieldset:disabled .btn {
+    border: none;
+}
+
+::-webkit-scrollbar {
+    display: none;
+}
+
+.header {
+    color: #c09150;
+}
+
+.cart-header {
+    background: #f8f9fa;
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.cart-header p {
+    margin-bottom: 0;
+}
+
+.cart-header {
+    background: #f8f9fa;
+    font-size: 18px;
+    font-weight: bold;
+    padding: 10px 0;
+}
+
+.cart-item {
+    padding: 10px 0;
+    margin: 0;
+}
+
+@media (max-width: 768px) {
+    .cart-header {
+        background: none;
+        /* إزالة الخلفية من الهيدر */
+        font-size: 16px;
+        font-weight: bold;
+    }
+
+    .cart-item {
+        flex-direction: column;
+        /* ترتيب العناصر رأسيًا */
+        text-align: start;
+        // padding: 15px;
+        border-bottom: 1px solid #ddd;
+        // background-color: #fff;
+        // border-radius: 8px;
+    }
+
+    .cart-item img {
+        width: 80px;
+        height: 80px;
+    }
+
+    .btn-gold {
+        width: 100%;
+        /* جعل الزر بعرض العنصر */
+    }
+
+    .remove-icon {
+        font-size: 12px;
+        padding: 5px;
+    }
+
+    .cart-item .d-flex {
+        align-items: flex-start;
+        /* ترتيب العناصر بشكل رأسي */
+    }
+
+    .cart-item p {
+        margin-bottom: 4px;
+        /* تقليل المسافة بين النصوص */
+    }
+
+    .cart-item .text-muted {
+        font-size: 14px;
+    }
+}
+
+
+.right{
+    height: 210px;
+    // padding: 20px 0px;
+    // box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+    border-radius: 5px;
+}
+
+.left{
+    // box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+}
+
+
+
+.right {
+    width: fit-content; /* يأخذ عرض المحتوى فقط */
+    align-self: start; /* يجعله بمحاذاة بداية الصف */
+    padding: 20px;
+    // box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    border-radius: 8px;
+    background-color: white;
+}
+
+.left {
+    flex: 1; /* يأخذ المتبقي من المساحة */
+    padding: 20px;
+    // box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    border-radius: 8px;
+    background-color: white;
+}
+
+.cart-container .row {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-start; /* ضمان أن `right` يكون بمحاذاة `left` */
+}
+
+.cart-header {
+    background: #f8f9fa;
+    font-size: 18px;
+    font-weight: bold;
+    padding: 10px;
+    border-radius: 8px 8px 0 0; /* جعل الحواف العلوية مستديرة */
+}
+
+.cart-items {
+    max-height: 70vh;
+    overflow-y: auto;
+    padding: 10px;
+}
+
+/* التأكد من أن الـ header داخل الـ shadow */
+.shadow-lg {
+    border-radius: 8px;
+    overflow: hidden; /* يمنع خروج أي عنصر من الظل */
+}

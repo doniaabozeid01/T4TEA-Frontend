@@ -1,0 +1,530 @@
+.home1 {
+    height: 100vh;
+    width: 100%;
+    // overflow: hidden;
+}
+
+img {
+    width: 100%;
+    object-fit: cover;
+    /* اجعل الصورة تغطي كامل المساحة دون تشويه */
+
+}
+
+.slide {
+    height: 100vh !important;
+    width: 100% !important;
+}
+
+
+.carousel-item {
+    position: relative;
+    /* لجعل العنصر يحتوي على العناصر المدمجة مثل النص */
+}
+
+.carousel-image-wrapper {
+    position: relative;
+}
+
+.carousel-caption {
+    position: absolute;
+    bottom: 40%;
+    /* المسافة من أسفل الصورة */
+    left: 50%;
+    /* المسافة من اليسار */
+    // background-color: rgba(0, 0, 0, 0.5);
+    background-color: #acabaa;
+    /* خلفية نصف شفافة */
+    color: white;
+    /* النص باللون الأبيض */
+    border-radius: 5px;
+    width: 30%;
+    /* لتدوير الزوايا */
+}
+
+.carousel-caption2 {
+    position: absolute;
+    bottom: 40%;
+    /* المسافة من أسفل الصورة */
+    left: 15%;
+    /* المسافة من اليسار */
+    // background-color: rgba(0, 0, 0, 0.5);
+    background-color: #acabaa;
+    /* خلفية نصف شفافة */
+    color: white;
+    /* النص باللون الأبيض */
+    border-radius: 5px;
+    /* لتدوير الزوايا */
+    width: 30%;
+}
+
+.carousel-caption h3 {
+    margin: 0;
+}
+
+.carousel-caption p {
+    margin: 5px 0 0;
+}
+
+
+@media (max-width:768px) {
+    .carousel-caption {
+        width: 70%;
+        left: 15%;
+        bottom: 35%;
+    }
+
+    .carousel-caption2 {
+        width: 70%;
+        left: 15%;
+        bottom: 35%;
+    }
+}
+
+
+.carousel-caption, 
+.carousel-caption2 {
+    opacity: 0; /* البداية تكون مخفية */
+    transform: translateY(-20px); /* يبدأ مرتفعًا قليلاً */
+    transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+}
+
+/* عند تفعيل العنصر، يظهر مع الأنيميشن */
+.carousel-item.active .carousel-caption,
+.carousel-item.active .carousel-caption2 {
+    opacity: 1;
+    transform: translateY(0); /* ينزلق للأسفل */
+}
+
+
+.bg-gold{
+    // background-color: #e6a800;
+    background-color: #FAEED8;
+    transition: all 0.4s ease-in;
+}
+
+.bg-gold:hover{
+    // background-color: #e6a800;
+    background-color: #B88C57;
+}
+
+////////////////////////////////////////////////////////////////////////////
+
+
+
+.home2 {
+    height: auto;
+    padding: 100px 0px;
+    // background-image: url('../../../assets/seamless-pattern-of-stylized-leaves-vector-5960488.jpg');
+    background-position: cover;
+}
+
+
+.categories {
+    max-width: 1300px;
+    width: 75%;
+    margin: auto;
+}
+
+.card-img-top {
+    // border-radius: 50%;
+    /* لتدوير الصورة بشكل كامل */
+    object-fit: cover;
+    /* لتغطي الصورة العنصر بالكامل دون التشويه */
+    width: 100%;
+    /* تأكد من أن الصورة تغطي العنصر */
+    height: auto;
+    width: 140px;
+    height: 140px;
+
+}
+
+
+.card {
+    transition: all 0.4s ease-in;
+    // border: 1px solid rgb(0, 0, 0);
+    border-radius: 3px;
+    // border: 1px solid rgb(0, 0, 0);
+}
+
+.card:hover {
+    transform: scale(1.03);
+    background-color: #fff;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    /* تأثير الظل */
+    border-radius: 8px;
+    /* إذا أردت زوايا دائرية */
+}
+
+@media (max-width:768px) {
+    .categories {
+        width: 100%;
+    }
+
+    .home2 {
+        padding: 50px 0px;
+    }
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+//////////////////////////////////////////////////////////////////////
+
+
+
+
+// .special-offers {
+//     background: linear-gradient(to right, #009688, #4caf50);
+//     color: rgb(0, 0, 0);
+//     padding: 50px 0;
+//     overflow: hidden;
+// }
+
+// .offer-card {
+//     background: white;
+//     border-radius: 12px;
+//     transition: transform 0.3s ease-in-out;
+// }
+
+// .offer-card:hover {
+//     transform: scale(1.05);
+// }
+
+// .countdown {
+//     font-weight: bold;
+//     font-size: 1.5rem;
+//     color: #ffeb3b;
+// }
+
+// .fade-in {
+//     animation: fadeInUp 1s ease-out;
+// }
+
+// @keyframes fadeInUp {
+//     from {
+//         opacity: 0;
+//         transform: translateY(20px);
+//     }
+
+//     to {
+//         opacity: 1;
+//         transform: translateY(0);
+//     }
+// }
+
+
+
+
+
+
+/////////////////////////////////////////////////////////////////
+
+
+.review-card {
+    background: white;
+    border-radius: 12px;
+    padding: 20px;
+    transition: transform 0.3s ease-in-out;
+}
+
+.review-card:hover {
+    transform: scale(1.05);
+}
+
+.rating {
+    color: #ff9800;
+}
+
+.customer-reviews{
+    height: 300px;
+    overflow: hidden;
+}
+
+.review-text{
+    color: #c09150!important;
+    font-weight: bold;
+}
+
+
+///////////////////////////////////////////////////////////////////////////
+
+.custom-carousel {
+    max-width: 1300px;
+    margin: auto;
+    height: 60vh !important;
+    overflow: hidden;
+    background-color: #067cf2; /* لون خلفية خفيف للفراغات */
+  }
+  
+  .carousel-img {
+    width: 100%;
+    height: 60vh;
+    object-fit: cover; /* يضمن ظهور الصورة كاملة */
+    // background-color: white; /* خلفية للصورة */
+  }
+  
+  
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+////////////////////////////////////////////////////////////////
+// .feature-card {
+//     background: white;
+//     border-radius: 12px;
+//     transition: transform 0.3s ease-in-out;
+// }
+
+// .feature-card:hover {
+//     transform: scale(1.05);
+// }
+
+
+
+
+// .custom-title {
+//     font-size: 2.5rem;
+//     font-weight: bold;
+//     color: #000000;
+//     /* أخضر داكن */
+//     text-align: center;
+//     text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.3);
+//     /* ظل خفيف */
+// }
+
+
+// .icon {
+//     color: #000000A6;
+// }
+
+
+
+.why-choose-us {
+    background-color: #fff;
+}
+
+.section-title {
+    font-size: 2.2rem;
+    font-weight: bold;
+}
+
+.text-gold {
+    color: #C9A547;
+}
+
+.feature-card {
+    transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+    border: 1px solid #eee;
+    border-radius: 12px;
+    padding: 30px;
+}
+
+.feature-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+}
+
+.icon-wrapper {
+    width: 80px;
+    height: 80px;
+    background: linear-gradient(135deg, #FAEED8, #E0C28A);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    margin: 0 auto;
+}
+
+.icon-wrapper i {
+    color: white;
+    font-size: 2rem;
+}
+
+//////////////////////////////////////////////////////////////////
+
+
+
+
+.footer {
+    width: 100%;
+    text-align: center;
+    background-color: #FAEED8;
+}
+
+.left {
+    position: relative;
+}
+
+/* الخط الفاصل في الشاشات الكبيرة */
+.left::after {
+    content: "";
+    position: absolute;
+    right: 0;
+    top: 50%;
+    height: 50%;
+    width: 1px;
+    background-color: black;
+    transform: translateY(-50%);
+}
+
+
+
+.logo-img {
+    max-width: 150px;
+    /* عرض أقصى للصورة */
+    max-height: 150px;
+    /* ارتفاع أقصى للصورة */
+    width: auto;
+    /* السماح للصورة بالحفاظ على نسبة الأبعاد */
+    height: auto;
+    display: block;
+    /* منع أي مسافات زائدة بسبب الـ inline display */
+}
+
+
+.foot1 {
+    border-bottom: 1px solid black;
+}
+
+
+
+/* تحسين التصميم في الشاشات الصغيرة */
+@media (max-width: 768px) {
+    .foot1 {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        border-bottom: none;
+    }
+
+    .left::after {
+        right: 50%;
+        top: auto;
+        bottom: 0;
+        height: 0px;
+        width: 50%;
+        transform: translateX(50%);
+    }
+
+    .footer-title {
+        font-size: 1.8rem;
+        font-weight: bold;
+        text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
+    }
+
+    .logo-img {
+        max-width: 120px;
+    }
+
+    .d-flex.gap-3 i {
+        font-size: 1.5rem;
+    }
+}
+
+
+//////////////////////////////////////////////////////////////
+
+
+.offrs-parts{
+    max-width: 1300px!important;
+    margin:auto;
+}
+
+.card {
+    border: none;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+  }
+  
+  .card:hover {
+    transform: scale(1.05);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+  }
+  
+  /* تأثير دخول الكروت */
+  @keyframes fadeInUp {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  
+  .tab-pane .row .col-md-4 {
+    animation: fadeInUp 0.6s ease-in-out;
+  }
+  
+  /* تحسين توزيع النص والصور داخل الكارد */
+  .card-body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+  
+  .card img {
+    width: 100%;
+    height: 200px;
+    object-fit: contain;
+    border-top-left-radius: 12px;
+    border-top-right-radius: 12px;
+    // background: #FAEED8;
+  }
+  
+  /* تحسين الأزرار */
+  .btn-danger, .btn-warning {
+    transition: background-color 0.3s ease-in-out;
+  }
+  
+  .btn-danger:hover {
+    background-color: #a00;
+  }
+  
+  .btn-warning:hover {
+    background-color: #062e2a;
+  }
+  
+
+  .off3{
+    width: 95%;
+    margin: auto;
+  }
+
+  .nav-pills .nav-link {
+    color: #062e2a !important; /* لون ذهبي للنص */
+}
+
+.nav-pills .nav-link.active {
+    background-color: #062e2a !important; /* خلفية ذهبية للعنصر النشط */
+    color: white !important; /* النص يصبح أبيض */
+}
