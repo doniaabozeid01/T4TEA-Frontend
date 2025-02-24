@@ -13,7 +13,9 @@
     font-family: 'Montserrat', sans-serif;
     min-height: 100vh;
     margin: 0;
-    // background-image: url('../../../assets/seamless-pattern-of-stylized-leaves-vector-5960488.jpg');
+    background-image: url('../../../assets/11-01.png');
+    background-position: center;
+    background-size: cover;
 }
 
 .container {
@@ -208,7 +210,12 @@ button:active {
 
 
 
-
+.error-text {
+    color: #B88C57;
+    font-size: 14px;
+    margin-top: 5px;
+  }
+  
 
 
 
@@ -396,7 +403,7 @@ button:active {
 
 /* الحاوية الأساسية */
 .small-container {
-    background: linear-gradient(to bottom, #B88C57, #8F5E34);
+    background: linear-gradient(to bottom, #FAEED8, #062E2A);
     width: 95%;
     max-width: 400px;
     padding: 25px;
@@ -408,7 +415,7 @@ button:active {
 
 /* خلفية وضع التسجيل */
 .small-container.signup-mode {
-    background: linear-gradient(to bottom, #FAEED8, #DED0B6);
+    background: linear-gradient(to bottom, #FAEED8, #B88C57);
 }
 
 .form {
@@ -450,7 +457,7 @@ button:active {
 }
 
 .button:hover {
-    background-color: #B88C57;
+    background-color: #926b3b;
     transform: scale(1.05);
 }
 
@@ -465,7 +472,7 @@ button:active {
 }
 
 .toggle-text:hover {
-    color: #8F5E34;
+    color: #ad9476;
 }
 
 /* عند التبديل إلى وضع التسجيل */
@@ -474,5 +481,11 @@ button:active {
 }
 
 .signup-mode .toggle-text:hover {
-    color: #B88C57;
+    color: #77552b;
+}
+
+
+.btn-light:hover {
+    background-color: #e7d1a9!important;
+    transform: scale(1.05);
 }

@@ -1,6 +1,10 @@
 import { Component, ElementRef, ViewChild } from '@angular/core';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import * as bootstrap from 'bootstrap';
+import { ToastrService } from 'ngx-toastr';
+import { Category } from 'src/app/Interfaces/category';
+import { Product } from 'src/app/Interfaces/product';
+import { CallApisService } from 'src/app/Services/call-apis.service';
 
 @Component({
   selector: 'app-product-in-category',
@@ -8,96 +12,133 @@ import * as bootstrap from 'bootstrap';
   styleUrls: ['./product-in-category.component.scss']
 })
 export class ProductInCategoryComponent {
-  constructor(private router: Router) { }
+  orderId: string | null = null; // متغير لتخزين الـ ID
+
+  constructor(private router: Router, private activatedRoute: ActivatedRoute, private callApis : CallApisService , private toastr : ToastrService) { 
+    // this.updateFavouritesSet();
+  }
+
+
+  TeaFlavorsAr: string[] = [
+    "شاي المانجو",
+    "شاي التفاح والكراميل",
+    "شاي فراولة الشيكولاتة",
+    "شاي الرمان",
+    "شاي اللافندر",
+    "شاي التوت الأحمر",
+    "شاي النعناع المغربي",
+    "شاي الشوكولاتة بالنعناع",
+    "شاي القطيفة الأولى",
+    "شاي الياسمين والبرتقال",
+    "شاي الليمون الحمضي",
+    "شاي الليمون والعسل",
+    "شاي الخوخ الأخضر",
+    "شاي Tranquility",
+    "شاي التفاح والقرفة",
+    "شاي بلو بيري بلوز",
+    "شاي Chai",
+    "شاي جوز الهند",
+    "شاي الليمون بالجنزبيل",
+    "شاي Luscious Lavender",
+    "شاي المورينجا والكركم",
+    "شاي البابونج والبرتقال",
+    "شاي الرويبوس بالنعناع",
+    "شاي ثمر الورد والخوخ",
+    "شاي الفواكه الاستوائية"
+  ];
 
   priceRange = { min: 10, max: 1000 };
   ratingFilter = 'all';
   flavorFilter = 'all';
   offerFilter = 'all';
+  baseUrl!:string;
+  userId: any;
+  favouritesList: any;
 
-  products = [
-    {
-      id: 1,
-      name: 'شاي الصعيد - المانجو',
-      description: 'نكهة منعشة من المانجو الطبيعي مع أفضل أنواع الشاي.',
-      oldPrice: 150,
-      newPrice: 120,
-      discount: 20,
-      rating: 4.8,
-      offer: true,
-      flavor: 'فراولة',
-      images: [
-        '../../../assets/1.jpg',
-        '../../../assets/11.jpg',
-        '../../../assets/11.jpg',
-      ]
-    },
-    {
-      id: 2,
-      name: 'شاي الصعيد - الفراولة',
-      description: 'طعم الفراولة المميز ممزوج بأفضل أوراق الشاي.',
-      oldPrice: 140,
-      newPrice: 110,
-      discount: 21,
-      rating: 4.5,
-      offer: true,
-      flavor: 'مانجو',
-      images: [
-        '../../../assets/1.jpg',
-        '../../../assets/11.jpg',
-        '../../../assets/11.jpg',
-      ]
-    },
-    {
-      id: 3,
-      name: 'شاي الصعيد - اللافندر',
-      description: 'نكهة اللافندر المهدئة مع مزيج شاي فاخر.',
-      oldPrice: 160,
-      newPrice: 130,
-      discount: 18,
-      rating: 4.7,
-      offer: false,
-      flavor: 'لافندر',
-      images: [
-        '../../../assets/1.jpg',
-        '../../../assets/11.jpg',
-        '../../../assets/11.jpg',
-      ]
-    }
-  ];
+  products:any;
+  filteredProducts!:any;
+  title!:string ;
 
-  filteredProducts = [...this.products];
 
   ngOnInit() {
+    this.baseUrl = this.callApis.baseUrl;
+    this.orderId = this.activatedRoute.snapshot.paramMap.get('id'); // سحب الـ ID من الرابط
+    console.log(this.orderId);
+    
+    this.callApis.GetProductsOfSpecificCategory(Number(this.orderId)).subscribe({
+      next:(response)=>{
+        console.log(response);
+        this.title = response.name;
+        this.products = response.products;
+        
+        this.filteredProducts = [...this.products];
+      }
+    })
+
+
+
+    this.callApis.getUserId().subscribe({
+      next: (response) => {
+        console.log(response);
+
+        console.log('User ID:', response.userId);
+        this.userId = response.userId;
+
+
+        this.callApis.GetProductFavouriteByUserId(this.userId).subscribe({
+          next: (favouritesData: { id: number, productId: number }[]) => {
+            this.favouritesList = favouritesData; // تحميل البيانات
+            this.updateFavouritesSet(); // تحديث الـ Set لضبط الأيقونات
+          },
+          error: (err) => console.error('خطأ في جلب المفضلة:', err)
+        });
+      },
+      error: (err) => {
+        console.error('خطأ في جلب معرف المستخدم:', err);
+      }
+    });
+
     const range = document.getElementById('priceRange') as HTMLInputElement;
     range.style.setProperty('--progress', `100%`);
   }
-  updatePriceLabel() {
-    const range = document.getElementById('priceRange') as HTMLInputElement;
-    
-    // نسبة التقدم بناءً على الفرق بين `selectedPrice` و `min`
-    const min = parseInt(range.min);
-    const max = parseInt(range.max);
-    const value = parseInt(range.value);
-    
-    const progress = ((value - min) / (max - min)) * 100;
-    
-    // تحديث الخط من `min` إلى `selectedPrice`
-    range.style.setProperty('--progress', `${progress}%`);
-    
-    // تحديث الفلاتر عند تحريك الشريط
-    this.filterProducts();
-  }
-  
+
+
+
 
   goToDetails(productId: number) {
     this.router.navigate(['/product-details', productId]);
   }
 
 
-  goToCart(event: MouseEvent, id: number) {
+  goToCart(event: MouseEvent, prodId: number) {
     event.stopPropagation(); // منع الانتقال إلى صفحة التفاصيل عند النقر على "اضف الى السلة"
-    // هنا يمكنك تنفيذ الكود الخاص بإضافة المنتج إلى السلة
+
+    // if (product.inStock) {
+    //   console.log(`${product.name} تمت إضافته إلى السلة!`);
+    // }
+
+    const token = localStorage.getItem('Token');
+    if(!token){
+      this.router.navigate(['/auth']);
+    }
+
+    console.log(prodId);
+    const data =
+    {
+      userId: this.userId,
+      productId: prodId,
+      quantity: 1
+    }
+
+    this.callApis.addToCart(data).subscribe({
+      next: (response) => {
+        console.log(response);
+        this.callApis.updateCartCount(this.userId);
+        this.toastr.success('تم إضافة المنتج إلي السلة بنجاح!');
+
+      }
+    })
+
   }
 
   goToWishlist(event: MouseEvent) {
@@ -121,15 +162,61 @@ export class ProductInCategoryComponent {
 
   favourites: Set<number> = new Set(); // لتخزين المنتجات المفضلة
 
-  toggleFavourite(event: Event, productId: number): void {
-    event.stopPropagation(); // لمنع تأثير click على الـ card
 
-    if (this.favourites.has(productId)) {
-      this.favourites.delete(productId); // إزالة المنتج من المفضلة
-    } else {
-      this.favourites.add(productId); // إضافة المنتج إلى المفضلة
+  toggleFavourite(event: Event, productId: number): void {
+
+    const token = localStorage.getItem('Token');
+    if(!token){
+      this.router.navigate(['/auth']);
     }
 
+
+    event.stopPropagation(); // منع تأثير click على الـ card
+  
+    if (!this.userId) {
+      console.error('المستخدم غير مسجل دخول.');
+      return;
+    }
+  
+    // البحث عن المنتج في المفضلة
+    const favouriteIndex = this.favouritesList.findIndex((fav: { productId: number }) => fav.productId === productId);
+  
+    if (favouriteIndex !== -1) {
+      // المنتج موجود، نحذفه
+      const favouriteIdToDelete = this.favouritesList[favouriteIndex].id;
+  
+      this.callApis.removeFromFavourites(favouriteIdToDelete).subscribe({
+        next: () => {
+          this.favouritesList.splice(favouriteIndex, 1); // حذف العنصر من المصفوفة
+          this.updateFavouritesSet(); // تحديث Set بعد الحذف
+          console.log('تم الحذف بنجاح:', this.favourites);
+          this.callApis.updateWishlistCount(this.userId);
+
+          this.toastr.success('تم حذف المنتج من المفضلة بنجاح!');
+
+        },
+        error: (err) => console.error('خطأ في الحذف:', err)
+      });
+    } else {
+      // المنتج غير موجود، نضيفه
+      this.callApis.addToFavourites(this.userId, productId).subscribe({
+        next: (newFavourite: { id: number, productId: number }) => {
+          this.favouritesList.push(newFavourite); // إضافة العنصر للمصفوفة
+          this.updateFavouritesSet(); // تحديث Set بعد الإضافة
+          console.log('تمت الإضافة بنجاح:', this.favourites);
+          this.callApis.updateWishlistCount(this.userId);
+
+          this.toastr.success('تم إضافة المنتج إلي المفضلة بنجاح!');
+
+        },
+        error: (err) => console.error('خطأ في الإضافة:', err)
+      });
+    }
+  }
+  
+  // تحديث Set بعد التعديل
+  updateFavouritesSet(): void {
+    this.favourites = new Set(this.favouritesList.map((fav: { productId: number }) => fav.productId));
   }
 
 
@@ -197,30 +284,99 @@ export class ProductInCategoryComponent {
 
 
 
-
-
-
-
-  categories = ['أسود', 'أخضر', 'أعشاب'];
-  flavors = ['مانجو', 'فراولة', 'لافندر'];
+  // categories = ['أسود', 'أخضر', 'أعشاب'];
+  flavors = this.TeaFlavorsAr;
   selectedCategory = '';
   selectedFlavor = 'all';
-  selectedPrice = this.priceRange.max;
+  selectedPrice = this.priceRange.min;
 
 
-  searchQuery = "";
+  searchQuery: string = ''; // متغير البحث
 
-  filterProducts() {
-    console.log('flavor : ', this.selectedFlavor);
-    console.log('price : ', this.selectedPrice);
-    console.log("this.priceRange.min ", this.priceRange.min, "  ,this.selectedPrice ", this.selectedPrice);
 
-    this.filteredProducts = this.products.filter(product =>
-      (this.ratingFilter === "all" || product.rating >= +this.ratingFilter) &&
-      (this.selectedFlavor === "all" || product.flavor.includes(this.selectedFlavor)) &&
-      (this.offerFilter === "all" || product.offer) &&
-      (this.searchQuery === "" || product.name.includes(this.searchQuery)) &&
-      (product.newPrice >= this.priceRange.min && product.newPrice <= this.selectedPrice)
-    );
+  getFlvourName(flavorId: number): string {
+    return this.TeaFlavorsAr[flavorId] || " ";
+
   }
+  
+
+
+
+
+  getPriceAfterDiscount(disc:number, oldPrice:number):number{
+    return oldPrice - (oldPrice * (disc / 100));
+  }
+
+
+  applyFilters(product: Product): boolean {
+    console.log("product : ", product);
+    
+    // 1️⃣ فلتر البحث
+    const matchesSearch = this.searchQuery
+      ? product.description.toLowerCase().includes(this.searchQuery.toLowerCase()) ||
+        product.name.toLowerCase().includes(this.searchQuery.toLowerCase()) ||
+        this.getFlvourName(product.flavour).toLowerCase().includes(this.searchQuery.toLowerCase()) 
+      : true;
+  
+    // 2️⃣ فلتر السعر
+    const matchesPrice = this.getPriceAfterDiscount(product.discount,product.oldPrice) >= this.selectedPrice && this.getPriceAfterDiscount(product.discount,product.oldPrice) <= this.priceRange.max;
+
+  
+    // 3️⃣ فلتر التقييم
+    const matchesRating = this.ratingFilter === 'all' || product.rate >= parseInt(this.ratingFilter, 10);
+  
+    // 4️⃣ فلتر النكهة
+    const matchesFlavor = this.selectedFlavor === 'all' || this.getFlvourName(product.flavour) === this.selectedFlavor;
+  
+    // 5️⃣ فلتر العروض
+    const matchesOffer = this.offerFilter === 'all' || (this.offerFilter === 'offers' && product.discount > 0);
+  
+    console.log(this.filterProducts);
+
+    // ✅ عودة المنتج إذا اجتاز جميع الفلاتر
+    return matchesSearch && matchesPrice && matchesRating && matchesFlavor && matchesOffer;
+  }
+
+  
+  filterProducts() {
+    if (!this.products || !Array.isArray(this.products)) {
+      console.error("products is undefined or not an array!", this.products);
+      return;
+    }
+  
+    console.log("this.products : ", this.products);
+  
+    // ⚡ تأكد من أن this.products هو مصفوفة من المنتجات مباشرة وليس من الفئات
+    this.filteredProducts = this.products.filter((product: Product) => this.applyFilters(product));
+  
+    console.log("Filtered Products:", this.filteredProducts);
+  }
+  
+  
+  
+
+
+  updateProgress() {
+    const range = document.getElementById('priceRange') as HTMLInputElement;
+    range.style.setProperty('--progress', `100%`);
+  }
+
+
+  updatePriceLabel() {
+    const range = document.getElementById('priceRange') as HTMLInputElement;
+
+    // نسبة التقدم بناءً على الفرق بين `selectedPrice` و `min`
+    const min = parseInt(range.min);
+    const max = parseInt(range.max);
+    const value = parseInt(range.value);
+
+    const progress = ((value - min) / (max - min)) * 100;
+
+    // تحديث الخط من `min` إلى `selectedPrice`
+    range.style.setProperty('--progress', `${progress}%`);
+
+    // تحديث الفلاتر عند تحريك الشريط
+    this.filterProducts();
+  }
+  
 }

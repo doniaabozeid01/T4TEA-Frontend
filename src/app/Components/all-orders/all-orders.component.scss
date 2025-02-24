@@ -4,7 +4,7 @@
     padding: 20px 0px;
     margin-top: 85px;
     border-radius: 12px;
-    background: #fff;
+    // background: #fff;
     // box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
 }
 
@@ -90,4 +90,13 @@ h2 {
 
 .text-darkgreen{
     color: #062E2A;
+}
+
+.btn-gold {
+    background-color: #d8ab6b;
+    transition: all 0.3s ease-out;
+}
+
+.btn-gold:hover {
+    background-color: #c09150;
 }

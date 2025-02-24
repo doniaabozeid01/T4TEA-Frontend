@@ -1,4 +1,7 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
+import { CallApisService } from 'src/app/Services/call-apis.service';
 import Swiper from 'swiper';
 
 @Component({
@@ -7,11 +10,151 @@ import Swiper from 'swiper';
   styleUrls: ['./home.component.scss']
 })
 export class HomeComponent {
-  countdown: string = '';
 
+  constructor(private callApis: CallApisService, private toastr : ToastrService, private router:Router) { }
+  countdown: string = '';
+  userId: any;
+  baseUrl = this.callApis.baseUrl;
   ngOnInit() {
     this.startCountdown();
+
+    this.callApis.getUserId().subscribe({
+      next: (response) => {
+        console.log(response);
+        this.userId = response.userId;
+      }
+    })
+
+
+    this.callApis.GetAllCategories().subscribe({
+      next: (response) => {
+        console.log(response);
+        this.categories = response;
+
+      }
+    })
+
+    this.callApis.GetAllAdvertise().subscribe({
+      next: (response) => {
+        console.log(response);
+        this.offers = response;
+
+      }
+    })
+
+
+
+    // this.callApis.GetAllReviews().subscribe({
+    //   next: (response) => {
+    //     console.log(response);
+    //     console.log(response.user);
+
+    //     this.reviews = response;
+
+    //   }
+    // })
+
+
+
+    this.callApis.GetAllReviews().subscribe({
+      next: (response) => {
+        console.log(response);
+
+        // 🔥 تصفية التقييمات بحيث نأخذ فقط التقييمات التي قيمتها 4 أو 5
+        let filteredReviews = response.filter((review: any) => review.rating >= 4);
+
+        // 🔥 إذا كان هناك أكثر من 5 تقييمات، نختار 5 منها بشكل عشوائي
+        if (filteredReviews.length > 5) {
+          filteredReviews = this.getRandomReviews(filteredReviews, 5);
+        }
+
+        // ✅ تخزين التقييمات النهائية
+        this.reviews = filteredReviews;
+      },
+      error: (err) => {
+        console.log("خطأ في جلب التقييمات:", err);
+      }
+    });
+
+
+
+
+    this.callApis.GetOriginalOffers().subscribe({
+      next: (response) => {
+        console.log('GetOriginalOffers', response);
+        this.originalOffers = response;
+
+        if (this.originalOffers.length > 3) {
+          console.log('yes');
+
+          this.updateRandomOffers(); // استدعاء الدالة لاختيار 3 عروض عشوائية
+          setInterval(() => {
+            this.updateRandomOffers();
+          }, 5000); // كل 5 ثوانٍ
+        } else {
+          this.displayedOffers = [...this.originalOffers]; // لو أقل من 3، نعرضهم كما هم بدون تبديل
+        }
+      }
+    });
+
+
+    this.callApis.GetVIPOffers().subscribe({
+      next: (response) => {
+        console.log('GetOriginalOffers', response);
+        this.vipOffers = response;
+
+        if (this.vipOffers.length > 3) {
+          console.log('yes');
+
+          this.updateRandomOffers(); // استدعاء الدالة لاختيار 3 عروض عشوائية
+          setInterval(() => {
+            this.updateRandomOffers();
+          }, 5000); // كل 5 ثوانٍ
+        } else {
+          this.displayedVipOffers = [...this.vipOffers]; // لو أقل من 3، نعرضهم كما هم بدون تبديل
+        }
+      }
+    });
+
   }
+
+
+
+
+
+  getRandomReviews(reviews: any[], count: number): any[] {
+    return reviews.sort(() => 0.5 - Math.random()).slice(0, count);
+  }
+
+
+
+
+  getStars(rating: number): number[] {
+    return Array.from({ length: Math.round(rating) });
+  }
+
+
+  displayedOffers: any;
+  displayedVipOffers: any;
+  // // دالة لاختيار 3 عروض عشوائية
+  // updateRandomOffers() {
+  //   if (this.originalOffers.length > 3) {
+  //     const shuffled = [...this.originalOffers].sort(() => 0.5 - Math.random()); // خلط العروض
+  //     this.displayedOffers = shuffled.slice(0, 3); // اختيار أول 3 عروض
+  //   } else {
+  //     this.displayedOffers = [...this.originalOffers]; // لو أقل من 3، نعرضهم كما هم
+  //   }
+  // }
+
+  updateRandomOffers() {
+    const shuffled = [...this.originalOffers].sort(() => 0.5 - Math.random()); // خلط العروض
+    this.displayedOffers = shuffled.slice(0, 3); // اختيار أول 3 عروض
+    console.log('this.displayedOffers : ', this.displayedOffers);
+  }
+
+
+
+
 
   startCountdown() {
     let countDownDate = new Date().getTime() + (3 * 24 * 60 * 60 * 1000);
@@ -28,10 +171,7 @@ export class HomeComponent {
 
 
 
-  reviews = [
-    { text: "أفضل شاي جربته على الإطلاق! الطعم لا يقاوم!", rating: 5, author: "أحمد حسن" },
-    { text: "نكهة مميزة ورائعة، سأطلبه مرة أخرى بالتأكيد!", rating: 4, author: "منى السيد" }
-  ];
+  reviews: any;
 
 
   features = [
@@ -41,34 +181,53 @@ export class HomeComponent {
   ];
 
 
-  offers = [
-    { id:1, image: '../../../assets/i.jpg' },
-    { id:2, image: '../../../assets/f.jpg' },
-    { id:3, image: '../../../assets/g.jpg' }
-  ];
-  
-  dailyOffers = [
-    { name: 'شاي بالنعناع', image: '../../../assets/12.png', oldPrice: 100, newPrice: 80 },
-    { name: 'شاي بالليمون', image: '../../../assets/12.png', oldPrice: 120, newPrice: 95 },
-    { name: 'شاي بالفراولة', image: '../../../assets/12.png', oldPrice: 110, newPrice: 90 }
-  ];
+  offers: any;
 
-  weeklyOffers = [
-    { name: 'شاي أخضر', image: '../../../assets/12.png', oldPrice: 130, newPrice: 100 },
-    { name: 'شاي أحمر', image: '../../../assets/12.png', oldPrice: 140, newPrice: 110 },
-    { name: 'شاي بالعسل', image: '../../../assets/12.png', oldPrice: 150, newPrice: 120 }
-  ];
+  originalOffers: any;
 
-  vipOffers = [
-    { name: 'شاي الزعفران', image: '../../../assets/12.png', oldPrice: 200, newPrice: 170 },
-    { name: 'شاي باللافندر', image: '../../../assets/12.png', oldPrice: 180, newPrice: 150 },
-    { name: 'شاي بالقرفة', image: '../../../assets/12.png', oldPrice: 190, newPrice: 160 }
-  ];
+  weeklyOffers: any;
 
-  categories:any = [
-    {id:1 ,image:'../../../assets/11.jpg' ,title:'شاي أسود', description:"تجربة غنية بنكهة الشاي الأسود الأصيلة، تعزز التركيز وتنشط الحواس."},
-    {id:2 ,image:'../../../assets/22.jpg' ,title:'شاي أخضر', description:"شاي أخضر منعش، يساعد على الاسترخاء ويدعم صحة الجسم العامه."},
-    {id:3 ,image:'../../../assets/33.jpg' ,title:'شاي أعشاب', description:"خليط من الأعشاب الطبيعية المهدئة، يبعث على الراحة والهدوء."},
-  ]
+  vipOffers: any;
+
+  categories: any;
+
+  getPriceAfterDiscount(disc: number, oldPrice: number): number {
+    return oldPrice - (oldPrice * (disc / 100));
+  }
+
+
+
+
+
+
+
+  addToCart(prodId: number) {
+
+
+    const token = localStorage.getItem('Token');
+    if(!token){
+      this.router.navigate(['/auth']);
+    }
+
+
+    console.log(prodId);
+    const data =
+    {
+      userId: this.userId,
+      productId: prodId,
+      quantity: 1
+    }
+
+    this.callApis.addToCart(data).subscribe({
+      next: (response) => {
+        console.log(response);
+        this.callApis.updateCartCount(this.userId);
+
+        this.toastr.success('تم إضافة المنتج إلي السلة بنجاح!');
+
+      }
+    })
+
+  }
 
 }

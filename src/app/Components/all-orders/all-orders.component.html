@@ -1,44 +1,62 @@
-<div class="container ">
-    <h2 class="text-end  header">جميع الطلبات</h2>
-    
-    <div *ngIf="orders.length > 0; else noOrders">
-      <div class="order-card" *ngFor="let order of orders; let i = index">
-        <h4 class="text-end text-darkgreen">طلب #{{ i + 1 }}</h4>
-        <table class="table table-bordered text-center">
-          <thead class="">
-            <tr>
-              <th class="text-darkgreen">المنتج</th>
-              <th class="text-darkgreen">السعر</th>
-              <th class="text-darkgreen">الكمية</th>
-              <th class="text-darkgreen">الإجمالي</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr *ngFor="let item of order.items">
-              <td>{{ item.productName }}</td>
-              <td>{{ item.price }} ج.م</td>
-              <td>{{ item.quantity }}</td>
-              <td>{{ item.total }} ج.م</td>
-            </tr>
-          </tbody>
-        </table>
-        <div class="order-summary text-end">
-          <p class="fs-5 text-darkgreen">الإجمالي الكلي: {{ order.totalAmount }} ج.م</p>
-        </div>
-        <div class="text-end mt-2">
-          <span class="badge" [ngClass]="{
-            'bg-success': order.status === 'مكتمل',
-            'bg-warning': order.status === 'قيد التنفيذ',
-            'bg-danger': order.status === 'ملغي'
-          }">
-            {{ order.status }}
-          </span>
-        </div>
+<div class="container " *ngIf="orders.length > 0">
+  <h2 class="text-end header">جميع الطلبات</h2>
+
+  <div *ngIf="orders.length > 0; else noOrders">
+    <div class="order-card" *ngFor="let order of orders; let i = index">
+      <h4 class="text-end text-darkgreen">طلب #{{order.id}}</h4>
+      <table class="table table-bordered text-center">
+        <thead class="">
+          <tr>
+            <th class="text-darkgreen">المنتج</th>
+            <th class="text-darkgreen">السعر</th>
+            <th class="text-darkgreen">الكمية</th>
+            <th class="text-darkgreen">الإجمالي</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let item of order.items">
+            <td>{{ getFlvourName(item.product.flavour) }}</td>
+            <td>{{ item.price }} د.ك</td>
+            <td>{{ item.quantity }}</td>
+            <td>{{ item.price * item.quantity }} د.ك</td>
+          </tr>
+        </tbody>
+      </table>
+      <div class="order-summary text-end">
+        <p class="fs-5 text-darkgreen">الإجمالي الكلي: {{ order.totalAmount }} د.ك</p>
       </div>
+
+
+      <div class="text-end mt-2 d-flex align-items-center">
+        <span class="badge py-2 ms-2" [ngClass]="{
+              'bg-success': order.status === 1,
+              'bg-warning': order.status === 0,
+              'bg-danger': order.status === 4
+            }">
+          {{ getOrderStatus(order.status) }}
+        </span>
+
+
+        <div class="text-end " *ngIf="order.status === 1">
+          <a [routerLink]="['/review', order.id]" class="btn btn-outline-primary btn-sm">📝 قيّم المنتجات</a>
+        </div>
+
+
+      </div>
+
+
     </div>
-    
-    <ng-template #noOrders>
-      <p class="text-center text-muted text-darkgreen">لا توجد طلبات حتى الآن.</p>
-    </ng-template>
   </div>
-  
+
+  <ng-template #noOrders>
+    <p class="text-center text-muted text-darkgreen">لا توجد طلبات حتى الآن.</p>
+  </ng-template>
+</div>
+
+
+
+
+<div *ngIf=" orders.length === 0" class="text-center py-5 container ">
+  <p class="fs-4">ليس لديك أي طلبات بعد، تصفح المنتجات واطلب الآن!</p>
+  <a routerLink="/all-products" class="btn btn-gold">تصفح المنتجات</a>
+</div>

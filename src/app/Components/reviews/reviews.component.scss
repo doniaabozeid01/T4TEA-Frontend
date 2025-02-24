@@ -1,0 +1,24 @@
+.container{
+    max-width: 1200px;
+    margin-top: 85px;
+    padding: 20px 10px;
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+
+}
+
+@media (max-width:768px){
+    .container{
+        width: 95%;
+    }
+}
+
+.btn-gold {
+    background-color: #d8ab6b;
+    transition: all 0.3s ease-out;
+}
+
+.btn-gold:hover {
+    background-color: #c09150;
+}

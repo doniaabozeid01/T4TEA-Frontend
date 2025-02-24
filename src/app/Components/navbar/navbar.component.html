@@ -3,17 +3,67 @@
 
     <!-- الأيقونات على اليمين -->
     <div class="d-flex align-items-center gap-3">
-      <i routerLink="/auth" routerLinkActive="active-nav" class="fas fa-user fs-5"></i>
-      <i routerLink="/wishlist" routerLinkActive="active-nav" class="fas fa-heart fs-5"></i>
-      <i routerLink="/cart" routerLinkActive="active-nav" class="fas fa-shopping-cart fs-5"></i>
+      <!-- <i routerLink="/auth" routerLinkActive="active-nav" class="fas fa-user fs-5"></i> -->
+
+      <div class="user-icon-container ">
+        <i class="fas fa-user fs-5" routerLink="/auth" routerLinkActive="active-nav"></i>
+
+        <div class="user-menu  p-0 m-0 py-1 text-center">
+          <p class=" p-0 m-0">{{userName}}</p>
+          <button class="btn btn-gold btn-sm mt-2" *ngIf="logind == true" (click)="signOut()">Sign Out</button>
+          <button class="btn btn-gold btn-sm mt-2" *ngIf="logind == false" (click)="signIn()">Sign In</button>
+        </div>
+      </div>
+
+
+
+
+
+
+      <!-- <i routerLink="/wishlist" routerLinkActive="active-nav" class="fas fa-heart fs-5"></i> -->
+      <!-- <i routerLink="/cart" routerLinkActive="active-nav" class="fas fa-shopping-cart fs-5"></i> -->
+
+
+
+
+
+
+      <div class="wishlist-container position-relative">
+        <i routerLink="/wishlist" routerLinkActive="active-nav" class="fas fa-heart fs-5"></i>
+        <span *ngIf="wishlistCount > 0" class="wishlist-badge">{{ wishlistCount }}</span>
+      </div>
+      
+      <div class="cart-container position-relative">
+        <i routerLink="/cart" routerLinkActive="active-nav" class="fas fa-shopping-cart fs-5"></i>
+        <span *ngIf="cartCount > 0" class="cart-badge">{{ cartCount }}</span>
+      </div>
+      
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     </div>
 
     <!-- زر القائمة الجانبية -->
-    <button class="navbar-toggler" type="button" aria-controls="navbarSupportedContent"
-    aria-expanded="false" aria-label="Toggle navigation" (click)="toggleMenu()">
-    <span class="navbar-toggler-icon"></span>
-  </button>
-  
+    <button class="navbar-toggler" type="button" aria-controls="navbarSupportedContent" aria-expanded="false"
+      aria-label="Toggle navigation" (click)="toggleMenu()">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
 
     <!-- الروابط على اليسار -->
     <div class="collapse navbar-collapse justify-content-end" id="navbarSupportedContent" [class.show]="isMenuOpen">
@@ -24,13 +74,13 @@
         <li class="nav-item">
           <a class="nav-link" routerLink="/all-products" routerLinkActive="active-nav">المنتجات</a>
         </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/all-orders" routerLinkActive="active-nav">طلباتي السابقه</a>
+        </li>
       </ul>
     </div>
 
 
-
-
-    
   </div>
 </nav>
 

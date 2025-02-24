@@ -32,10 +32,18 @@ form {
     background-color: #B88C57;
 }
 
+.pxsmall-4{
+    padding:0px 24px;
+
+}
 
 @media (max-width:768px) {
     .container {
         width: 95%;
+    }
+
+    .pxsmall-4{
+        padding:0px 10px;
     }
 }
 

@@ -1,7 +1,7 @@
 .cart-item img {
     width: 100px;
     height: 100px;
-    object-fit: cover;
+    object-fit: contain;
     border-radius: 8px;
     margin-right: 20px;
 }
@@ -17,12 +17,14 @@
     padding: 20px 0px;
     border-radius: 12px;
     min-height: 90vh;
+    
     // box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
 }
 
 .cart-items {
     max-height: 72vh;
     overflow-y: auto;
+    background-color: white;
 }
 
 .cart-item {
@@ -99,6 +101,10 @@ fieldset:disabled .btn {
     margin: 0;
 }
 
+
+.tot{
+    background-color: white;
+}
 @media (max-width: 768px) {
     .cart-header {
         background: none;

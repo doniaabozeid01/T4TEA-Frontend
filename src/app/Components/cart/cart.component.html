@@ -1,15 +1,16 @@
-<div class="cart-container">
+<div class="cart-container" *ngIf="products.length > 0">
     <h2 class="header text-end ">عربة التسوق </h2>
 
     <div class="row">
+
         <div class="col-md-3 p-1 total ">
-            <div class="shadow-lg p-2">
+            <div class="shadow-lg p-2 tot">
                 <div class="d-flex justify-content-between align-items-center fs-5 fw-light">
-                    <p>$1,435.00</p>
+                    <p>${{subTotal}}</p>
                     <p>Subtotal</p>
                 </div>
                 <div class="d-flex justify-content-between align-items-center fs-5 fw-light">
-                    <p>26%</p>
+                    <p>{{discount}}%</p>
                     <p>Discount</p>
                 </div>
                 <div class="d-flex justify-content-between align-items-center fs-5 fw-light">
@@ -17,15 +18,17 @@
                     <p>Shipping</p>
                 </div>
                 <div class="d-flex justify-content-between align-items-center fs-5 fw-light">
-                    <p>$1026.23</p>
+                    <p>${{total}}</p>
                     <p>Total</p>
                 </div>
-                <button class="btn btn-gold w-100" (click)="goToPayment()">متابعة إلى الدفع</button>
+                <button class="btn btn-gold w-100" (click)="goToPayment()" >متابعة إلى الدفع
+                   
+                </button>
             </div>
         </div>
 
         <div class="col-md-9 p-1">
-            <div class="shadow-lg ">
+            <div class="shadow-lg">
                 <div class="row cart-header d-none d-md-flex justify-content-between p-2 mt-0 px-3">
                     <div class="col-4 fs-5 fw-light ">المنتجات</div>
                     <div class="col-2 fs-5 fw-light text-center">السعر</div>
@@ -33,49 +36,62 @@
                     <div class="col-4 fs-5 fw-light text-start">المجموع الفرعي</div>
                 </div>
 
-                <div class="cart-items ">
+                <div class="cart-items " >
                     <div class="row cart-item py-3 align-items-center" *ngFor="let item of products; let i = index">
                         <!-- عند الشاشات الكبيرة -->
                         <div class="col-4 d-flex align-items-center d-none d-md-flex">
-                            <i class="fa-solid fa-x remove-icon" (click)="removeProduct(i)"></i>
-                            <img [src]="item.image" alt="صورة المنتج" class="cart-item-image me-2">
-                            <p class="m-0 me-2">{{ item.name }}</p>
+                            <i class="fa-solid fa-x remove-icon" (click)="removeProduct(item.id)"></i>
+                            <img [src]="item.product.images?.length ? baseUrl + item.product.images[0].imagePath : 'assets/6Q1A1667.png'" 
+                            alt="صورة المنتج" class="cart-item-image me-2">
+                            <p class="m-0 me-2">{{ getFlvourName(item.product.flavour)}}</p>
                         </div>
 
-                        <div class="col-2 d-none d-md-block text-center ">د.ك {{ item.price }}</div>
+                        <div class="col-2 d-none d-md-block text-center ">د.ك {{ getPriceAfterDiscount(item.product.discount,item.product.oldPrice) }}</div>
 
                         <div class="col-2 d-none d-md-block text-center ">
-                            <button (click)="decreaseQuantity(item)"
+                            <button (click)="decreaseQuantity(item.id,item)"
                                 class="btn btn-outline-secondary btn-sm ms-1">-</button>
                             {{ item.quantity }}
-                            <button (click)="increaseQuantity(item)"
+                            <button (click)="increaseQuantity(item.id,item)"
                                 class="btn btn-outline-secondary btn-sm me-1">+</button>
                         </div>
 
                         <div class="col-4 d-none d-md-block text-start d-flex align-ite">
-                            د.ك {{ item.price * item.quantity }}
+                            د.ك {{ getPriceAfterDiscount(item.product.discount,item.product.oldPrice) * item.quantity }}
                         </div>
 
                         <!-- عند الشاشات الصغيرة -->
                         <div class="col-12 d-flex d-md-none flex-column p-0">
-                            <i class="fa-solid fa-x remove-icon my-1" (click)="removeProduct(i)"></i>
+                            <i class="fa-solid fa-x remove-icon my-1" (click)="removeProduct(item.id)"></i>
                             <div class="d-flex align-items-center justify-content-between w-100 ">
-                                <img [src]="item.image" alt="صورة المنتج" class="cart-item-image me-0 ms-2" style="width: 50px; height: auto;">
+                                <img [src]="item.product.images?.length ? baseUrl + item.product.images[0].imagePath : 'assets/6Q1A1667.png'"
+                                 alt="صورة المنتج" class="cart-item-image me-0 ms-2" style="width: 50px; height: auto;">
                                 <div class="d-flex flex-column flex-grow-1">
-                                    <p class="m-0 fw-bold">{{ item.name }}</p>
-                                    <p class="m-0 text-muted">item/{{ item.price  }}</p>
-                                    <p class="m-0 text-muted">د.ك {{ item.price*item.quantity }}</p>
+                                    <p class="m-0 fw-bold">{{ getFlvourName(item.product.flavour)}}</p>
+                                    <p class="m-0 text-muted">item/{{ getPriceAfterDiscount(item.product.discount ,item.product.oldPrice) }}</p>
+                                    <p class="m-0 text-muted">د.ك {{ getPriceAfterDiscount(item.product.discount ,item.product.oldPrice) * item.quantity }}</p>
                                 </div>
                                 <div class="d-flex flex-column align-items-center">
-                                    <button (click)="increaseQuantity(item)" class="btn btn-outline-secondary btn-sm">+</button>
+                                    <button (click)="increaseQuantity(item.id,item)" class="btn btn-outline-secondary btn-sm">+</button>
                                     <p class="m-0">{{ item.quantity }}</p>
-                                    <button (click)="decreaseQuantity(item)" class="btn btn-outline-secondary btn-sm">-</button>
+                                    <button (click)="decreaseQuantity(item.id,item)" class="btn btn-outline-secondary btn-sm">-</button>
                                 </div>
                             </div>
                         </div>
+
                     </div>
                 </div>
             </div>
         </div>
     </div>
+</div>
+
+
+
+
+
+
+<div *ngIf=" products.length === 0" class="text-center py-5 cart-container ">
+    <p class="fs-4">عربة التسوق الخاصة بك فارغة، ابدأ التسوق الآن!</p>
+    <a routerLink="/all-products" class="btn btn-gold">تسوق الآن</a>
 </div>

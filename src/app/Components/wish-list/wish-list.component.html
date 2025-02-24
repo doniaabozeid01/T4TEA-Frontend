@@ -1,6 +1,6 @@
-<div class="cart-container">
+<div class="cart-container" *ngIf="products.length > 0">
     <h2 class="header text-end">قائمة الرغبات</h2>
-    <div class="sub-container pt-0 rounded-2 ">
+    <div class="sub-container pt-0 ">
 
         <div class="row cart-header d-none d-md-flex justify-content-between p-2 mt-0 px-4">
             <div class="col-4 fs-5 fw-light">المنتجات</div>
@@ -12,34 +12,36 @@
             <div class="row cart-item py-3" *ngFor="let item of products; let i = index">
                 <!-- عند الشاشات الكبيرة -->
                 <div class="col-4 d-flex align-items-center d-none d-md-flex">
-                    <i class="fa-solid fa-x remove-icon" (click)="removeProduct(i)"></i>
-                    <img [src]="item.image" alt="صورة المنتج" class="cart-item-image me-2">
-                    <p class="m-0 me-2">{{ item.name }}</p>
+                    <i class="fa-solid fa-x remove-icon" (click)="removeProduct(item.id)"></i>
+                    <img [src]="item.product.images?.length ? baseUrl + item.product.images[0].imagePath : 'assets/6Q1A1667.png'"
+                        alt="صورة المنتج" class="cart-item-image me-2">
+                    <p class="m-0 me-2">{{  getFlvourName(item.product.flavour ) }}</p>
                 </div>
 
-                <div class="col-4 d-none d-md-block text-center">د.ك {{ item.price }}</div>
+                <div class="col-4 d-none d-md-block text-center">د.ك {{ getPriceAfterDiscount(item.product.discount,item.product.oldPrice) }}</div>
 
 
 
                 <div class="col-4 d-none d-md-block text-start">
-                    <button  class="btn btn-gold" (click)="addToCart(item)">
+                    <button class="btn btn-gold" (click)="addToCart(item.product.id)">
                         اضف إلى السلة
                     </button>
                 </div>
 
                 <!-- عند الشاشات الصغيرة -->
                 <div class="col-12 d-flex d-md-none flex-column p-0">
-                    <i class="fa-solid fa-x remove-icon my-1" (click)="removeProduct(i)"></i>
+                    <i class="fa-solid fa-x remove-icon my-1" (click)="removeProduct(item.id)"></i>
                     <div class="d-flex align-items-center w-100">
-                        <img [src]="item.image" alt="صورة المنتج" class="cart-item-image me-0 ms-2">
+                        <img [src]="item.product.images?.length ? baseUrl + item.product.images[0].imagePath : 'assets/6Q1A1667.png'"
+                        alt="صورة المنتج" class="cart-item-image me-0 ms-2">
                         <div class="d-flex flex-column">
-                            <p class="m-0 fw-bold">{{ item.name }}</p>
-                            <p class="m-0 text-muted">د.ك {{ item.price }}</p>
+                            <p class="m-0 fw-bold">{{ getFlvourName(item.product.flavour )}}</p>
+                            <p class="m-0 text-muted">د.ك {{ getPriceAfterDiscount(item.product.discount,item.product.oldPrice) }}</p>
                         </div>
                     </div>
 
                     <div class="mt-2 text-end w-100 ">
-                        <button  class="btn btn-gold w-100" (click)="addToCart(item)">
+                        <button class="btn btn-gold w-100" (click)="addToCart(item.product.id)">
                             اضف إلى السلة
                         </button>
                         <!-- <button *ngIf="!item.inStock" class="btn w-100" disabled>
@@ -53,4 +55,19 @@
 
     </div>
 
+</div>
+
+
+
+
+
+
+
+
+
+
+
+<div *ngIf=" products.length === 0" class="text-center py-5 cart-container ">
+    <p class="fs-4">لم تقم بإضافة أي منتجات إلى المفضلة بعد!</p>
+    <a routerLink="/all-products" class="btn btn-gold">استعرض المنتجات</a>
 </div>

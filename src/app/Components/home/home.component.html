@@ -2,7 +2,8 @@
   <div id="carouselExampleAutoplaying" class="carousel slide" data-bs-ride="carousel">
     <div class="carousel-inner">
       <div class="carousel-item active d-flex justify-content-center align-items-center">
-        <img src="../../../assets/10.png" class="d-block w-100 slide" alt="...">
+        <img src="../../../assets/15.png" srcset="../../../assets/art.png 768w, ../../../assets/15.png 1200w"
+          sizes="(max-width: 768px) 100vw, 50vw" class="d-block w-100 slide" alt="...">
         <div class="carousel-caption p-5 d-flex justify-content-center align-items-center flex-column">
           <h3>T4 Tea</h3>
           <p>تجربة شاي فريدة تمزج بين النكهة الأصيلة والجودة العالية، لتمنحك لحظات من الاستمتاع والانتعاش في كل كوب.
@@ -10,8 +11,9 @@
         </div>
       </div>
       <div class="carousel-item">
-        <img src="../../../assets/philip-myrtorp-46Y946UVyfw-unsplash.jpg" class="d-block w-100 slide" alt="...">
-        <div class="carousel-caption2 p-5 text-center">
+        <img src="../../../assets/14.png" srcset="../../../assets/art.png 768w, ../../../assets/14.png 1200w"
+          sizes="(max-width: 768px) 100vw, 50vw" class="d-block w-100 slide" alt="...">
+        <div class="carousel-caption p-5 text-center">
           <h3>T4 Tea</h3>
           <p>تجربة شاي فريدة تمزج بين النكهة الأصيلة والجودة العالية، لتمنحك لحظات من الاستمتاع والانتعاش في كل كوب.
             استمتع بمذاق غني يعكس تراث الشاي الحقيقي.</p>
@@ -19,7 +21,8 @@
       </div>
       <div class="carousel-item">
         <div class="carousel-image-wrapper bg-info ">
-          <img src="../../../assets/philip-myrtorp-46Y946UVyfw-unsplash.jpg" class="d-block w-100 slide" alt="...">
+          <img src="../../../assets/15.png" srcset="../../../assets/art.png 768w, ../../../assets/15.png 1200w"
+            sizes="(max-width: 768px) 100vw, 50vw" class="d-block w-100 slide" alt="...">
           <div class="carousel-caption p-5">
             <h3>T4 Tea</h3>
             <p>تجربة شاي فريدة تمزج بين النكهة الأصيلة والجودة العالية، لتمنحك لحظات من الاستمتاع والانتعاش في كل كوب.
@@ -56,42 +59,31 @@
 
 
 
-<section class="home2 d-flex w-100 bg-white">
 
-  <div class="row categories ">
+
+
+
+
+
+
+
+
+
+<section class="home2 d-flex w-100 bg-white my-4 m-width m-auto">
+
+  <div class="row categories w-100">
 
     <div class="col-lg-4 p-3" *ngFor="let category of categories">
-      <div class="card m-auto w-100 p-5 border-secondary-subtle border " style="width: 18rem;">
-        <img [src]="category.image" class="card-img-top rounded-circle m-auto" alt="...">
+      <div class="card m-auto w-100 py-5 border-secondary-subtle border " style="width: 18rem;">
+        <img [src]="baseUrl+category.imageUrl" class="card-img-top rounded-circle m-auto" alt="...">
         <div class="card-body text-center">
-          <h2 class="card-title">{{category.title}}</h2>
+          <h2 class="card-title">{{category.name}}</h2>
           <p class="card-text fs-5">{{category.description}}</p>
-          <a class="btn bg-gold w-75" [routerLink]="['/product', 1]"> عرض المنتجات</a>
-        </div>
-      </div>
-    </div>
-<!-- 
-    <div class="col-lg-4 p-3">
-      <div class="card m-auto w-100 p-5" style="width: 18rem;">
-        <img src="../../../assets/22.jpg" class="card-img-top rounded-circle bg-info m-auto" alt="...">
-        <div class="card-body text-center">
-          <h2 class="card-title">شاي اخضر</h2>
-          <p class="card-text fs-5">شاي أخضر منعش، يساعد على الاسترخاء ويدعم صحة الجسم العامه.</p>
-          <a class="btn btn-success w-75" [routerLink]="['/product', 2]"> عرض المنتجات</a>
+          <a class="btn bg-gold w-75" [routerLink]="['/product', category.id]"> عرض المنتجات</a>
         </div>
       </div>
     </div>
 
-    <div class="col-lg-4 p-3">
-      <div class="card m-auto w-100 p-5" style="width: 18rem;">
-        <img src="../../../assets/33.jpg" class="card-img-top rounded-circle bg-info m-auto" alt="...">
-        <div class="card-body text-center">
-          <h2 class="card-title">شاي اعشاب</h2>
-          <p class="card-text fs-5">خليط من الأعشاب الطبيعية المهدئة، يبعث على الراحة والهدوء.</p>
-          <a class="btn btn-success w-75" [routerLink]="['/product', 3]"> عرض المنتجات</a>
-        </div>
-      </div>
-    </div> -->
 
   </div>
 
@@ -121,16 +113,14 @@
 
 
 
-<section class="home-section pb-5 bg-white text-center">
+<section class="home-section py-5 bg-white text-center bg-info mb-4 m-width m-auto">
   <h2 class="text-center mb-4 text-gold"> عروض مميزة لهذا الأسبوع </h2>
 
   <ul class="nav nav-pills justify-content-center text-center mb-3  p-0">
     <li class="nav-item m-0 p-0">
       <button class="nav-link active" data-bs-toggle="pill" data-bs-target="#daily-offers">عروض اليوم</button>
     </li>
-    <li class="nav-item m-0 p-0">
-      <button class="nav-link" data-bs-toggle="pill" data-bs-target="#weekly-offers">عروض الأسبوع</button>
-    </li>
+
     <li class="nav-item m-0 p-0">
       <button class="nav-link" data-bs-toggle="pill" data-bs-target="#vip-offers">عروض VIP</button>
     </li>
@@ -140,45 +130,35 @@
     <!-- عروض اليوم -->
     <div class="tab-pane fade show active" id="daily-offers">
       <div class="row off3">
-        <div class="col-md-4 " *ngFor="let offer of dailyOffers">
+        <div class="col-md-4 " *ngFor="let offer of displayedOffers">
           <div class="card border my-1 ">
-            <img [src]="offer.image" class="card-img-top">
+            <img [src]="offer.images?.length ? baseUrl + offer.images[0].imagePath : 'assets/6Q1A1667.png'"
+              class="card-img-top">
             <div class="card-body">
               <h5 class="card-title">{{ offer.name }}</h5>
-              <p class="card-text"><del>{{ offer.oldPrice }} EGP</del> <strong>{{ offer.newPrice }} EGP</strong></p>
-              <button class="btn bg-gold">اطلب الآن</button>
+              <p class="card-text"><del>{{ offer.oldPrice }} KD</del> <strong>{{
+                  getPriceAfterDiscount(offer.discount,offer.oldPrice) }} KD</strong></p>
+              <button class="btn bg-gold" (click)="addToCart(offer.id)">اطلب الآن</button>
             </div>
           </div>
         </div>
       </div>
     </div>
 
-    <!-- عروض الأسبوع -->
-    <div class="tab-pane fade" id="weekly-offers">
-      <div class="row">
-        <div class="col-md-4" *ngFor="let offer of weeklyOffers">
-          <div class="card border">
-            <img [src]="offer.image" class="card-img-top">
-            <div class="card-body">
-              <h5 class="card-title">{{ offer.name }}</h5>
-              <p class="card-text"><del>{{ offer.oldPrice }} EGP</del> <strong>{{ offer.newPrice }} EGP</strong></p>
-              <button class="btn bg-gold">اطلب الآن</button>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
+
 
     <!-- عروض VIP -->
     <div class="tab-pane fade" id="vip-offers">
       <div class="row">
-        <div class="col-md-4" *ngFor="let offer of vipOffers">
-          <div class="card border">
-            <img [src]="offer.image" class="card-img-top">
+        <div class="col-md-4" *ngFor="let offer of displayedVipOffers">
+          <div class="card border my-1 ">
+            <img [src]="offer.images?.length ? baseUrl + offer.images[0].imagePath : 'assets/6Q1A1667.png'"
+              class="card-img-top">
             <div class="card-body">
               <h5 class="card-title">{{ offer.name }}</h5>
-              <p class="card-text"><del>{{ offer.oldPrice }} EGP</del> <strong>{{ offer.newPrice }} EGP</strong></p>
-              <button class="btn bg-gold">اطلب الآن</button>
+              <p class="card-text"><del>{{ offer.oldPrice }} KD</del> <strong>{{
+                  getPriceAfterDiscount(offer.discount,offer.oldPrice) }} KD</strong></p>
+              <button class="btn bg-gold" (click)="addToCart(offer.id)">اطلب الآن</button>
             </div>
           </div>
         </div>
@@ -214,44 +194,11 @@
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<section class="bg-white">
+<section class="bg-white py-5 mb-4 m-width m-auto">
   <div id="carouselExampleAutoplayingOffers" class="carousel slide custom-carousel " data-bs-ride="carousel">
     <div class="carousel-inner">
       <div class="carousel-item" *ngFor="let offer of offers; let first = first" [ngClass]="{'active': first}">
-        <img [src]="offer.image" class="carousel-img" alt="عرض">
+        <img [src]=" baseUrl+offer.imagePath" class="carousel-img" alt="عرض">
       </div>
     </div>
 
@@ -296,58 +243,12 @@
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<section class="why-choose-us text-center py-5 fade-in bg-white">
+<section class="why-choose-us text-center py-5 fade-in bg-white m-width m-auto">
   <h2 class="section-title custom-title py-3 fw-light text-gold">لماذا تختارنا؟</h2>
 
   <div class="container">
     <div class="row justify-content-center">
-      <div class="col-md-4" *ngFor="let feature of features">
+      <div class="col-md-4 mt-1" *ngFor="let feature of features">
         <div class="feature-card p-4 rounded bg-white shadow-sm">
           <div class="icon-wrapper">
             <i [class]="feature.icon + ' fs-1 text-gold'"></i>
@@ -372,52 +273,6 @@
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 <section class="customer-reviews text-center my-5 fade-in ">
   <h2 class="section-title custom-title py-3 fw-light fs-1 text-gold">آراء العملاء</h2>
 
@@ -428,11 +283,12 @@
           <div class="row justify-content-center ">
             <div class="col-md-6 d-flex justify-content-center">
               <div class="review-card p-4 shadow rounded bg-white text-center  w-100">
-                <p class="mb-3 review-text">"{{ review.text }}"</p>
+                <p class="mb-3 review-text">"{{ review.comment }}"</p>
                 <div class="rating mb-2">
-                  <span *ngFor="let star of [].constructor(review.rating)">⭐</span>
+                  <!-- <span *ngFor="let star of [].constructor(review.rating)">⭐</span> -->
+                  <span *ngFor="let star of getStars(review.rating)">⭐</span>
                 </div>
-                <h5 class="text-success">- {{ review.author }}</h5>
+                <h5 class="text-success">- {{ review.user.fullName }}</h5>
               </div>
             </div>
           </div>
@@ -450,35 +306,6 @@
     </div>
   </div>
 </section>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 

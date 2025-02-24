@@ -2,7 +2,14 @@
     // background-color: #4a936f;
     // background-image: url('../../../assets/seamless-pattern-of-stylized-leaves-vector-5960488.jpg');
     height: calc(100vh - 92px);
-    margin-top: 75px;
+    margin-top: 85px;
+}
+
+@media (max-width:768px) {
+    .pic {
+
+        margin-top: 72px;
+    }
 }
 
 i {
@@ -19,7 +26,7 @@ i {
 }
 
 
-.products{
+.products {
     min-height: 90vh;
 }
 
@@ -49,8 +56,8 @@ i {
     background-color: white;
 }
 
-img{
-    height: 220px!important;
+img {
+    height: 220px !important;
 }
 
 .section-title {
@@ -110,6 +117,7 @@ img{
     overflow-x: hidden;
     max-width: 1500px;
     margin: auto;
+    border-radius: 12px;
 }
 
 .child {
@@ -165,10 +173,10 @@ img{
     }
 
     .section-title {
-        margin-top: 2!important;
+        margin-top: 2 !important;
     }
-    
-    .fltr{
+
+    .fltr {
         display: none;
 
     }
@@ -281,3 +289,40 @@ input[type="range"]::-webkit-slider-thumb {
     flex-direction: column;
     justify-content: space-between;
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

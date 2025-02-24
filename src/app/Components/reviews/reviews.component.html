@@ -1,0 +1,23 @@
+<div class="container mb-5">
+    <h2 class="text-end">قيّم المنتجات في طلب #{{ orderId }}</h2>
+  
+    <label class="d-block text-end fw-bold mt-3 mb-1">اختر المنتج:</label>
+    <select class="form-select text-end" [(ngModel)]="selectedProduct">
+      <option *ngFor="let item of orderItems" [ngValue]="item">{{ getFlvourName(item.product.flavour) }}</option>
+    </select>
+  
+    <label class="d-block text-end fw-bold mt-3 mb-1">التقييم:</label>
+    <div class="rating d-flex justify-content-start">
+      <i class="fa-star fs-3 mx-1" *ngFor="let star of [1,2,3,4,5]" 
+         [ngClass]="{'fa-solid text-warning': rating >= star, 'fa-regular text-muted': rating < star}"
+         (click)="rating = star">
+      </i>
+    </div>
+  
+    <label class="d-block text-end fw-bold mt-3 mb-1">التعليق:</label>
+    <textarea class="form-control" [(ngModel)]="comment" rows="4" placeholder="اكتب تعليقك هنا..."></textarea>
+    <p *ngIf="errorMessage" class="text-danger text-end mt-2">{{ errorMessage }}</p>
+
+    <button class="btn btn-gold w-100 mt-3" (click)="submitReview()">إرسال التقييم</button>
+  </div>
+  

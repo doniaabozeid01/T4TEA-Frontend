@@ -22,19 +22,13 @@ export class AppComponent {
   isAuthPage = false;
 
   constructor(private router: Router) {
-    // مراقبة التغيير في المسار (الـ routes)
     this.router.events.subscribe(event => {
       if (event instanceof NavigationEnd) {
-        // التحقق إذا كنا في صفحة "auth"
-        this.isAuthPage = event.url.includes('auth'); // تغيير 'auth' إذا كان المسار مختلفًا
+        this.isAuthPage = event.url.includes('auth'); 
       }
     });
   }
 
   ngOnInit(): void {}
-  
 
-  // prepareRoute(outlet: RouterOutlet) {
-  //   return outlet?.activatedRouteData?.['animation']; // ✅ يحدد الأنيميشن بناءً على الصفحة الحالية
-  // }
 }
