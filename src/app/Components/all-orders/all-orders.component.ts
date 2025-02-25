@@ -6,27 +6,29 @@ import { CallApisService } from 'src/app/Services/call-apis.service';
   templateUrl: './all-orders.component.html',
   styleUrls: ['./all-orders.component.scss']
 })
-export class AllOrdersComponent implements OnInit{
+export class AllOrdersComponent implements OnInit {
 
-  
+
   orders: any[] = [];  // مصفوفة الطلبات
   userId: any;
+  shippingAndDiscount: any;
 
-  constructor(private callApi: CallApisService) {}
+  constructor(private callApi: CallApisService) { }
 
   ngOnInit(): void {
+
     this.callApi.getUserId().subscribe({
       next: (response) => {
         console.log("User ID:", response.userId);
         this.userId = response.userId;
 
-        if (this.userId) { 
+        if (this.userId) {
           this.callApi.getAllOrdersByUserId(this.userId).subscribe({
             next: (ordersResponse) => {
               console.log("الطلبات:", ordersResponse);
               // this.orders = ordersResponse;
               this.orders = ordersResponse.sort(
-                (a:any, b:any) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()
+                (a: any, b: any) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()
               );
 
 
@@ -35,7 +37,7 @@ export class AllOrdersComponent implements OnInit{
                 this.callApi.getCartOrdersByorderId(order.id).subscribe({
                   next: (detailsResponse) => {
                     console.log(`تفاصيل الطلب ${order.id}:`, detailsResponse);
-                    
+
                     // تحديث الطلب الحالي بالـ items الخاصة به
                     this.orders[index].items = detailsResponse;
                   },
@@ -56,8 +58,28 @@ export class AllOrdersComponent implements OnInit{
         console.log("خطأ في جلب User ID:", err);
       }
     });
+
+
+    this.callApi.GetShippingAndDiscount().subscribe({
+      next: (response) => {
+        console.log(response);
+        this.shippingAndDiscount = response[0];
+      }
+    })
   }
-  
+
+
+
+
+  getTotalPrice(total: number) : number{
+    const shipping = this.shippingAndDiscount.shippingPrice ;
+    if (!isNaN(Number(shipping))) {
+      total += Number(shipping);
+    }
+    return total;
+  }
+
+
 
 
 

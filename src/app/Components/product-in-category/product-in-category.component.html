@@ -20,7 +20,7 @@
                 <label for="priceRange">نطاق السعر:</label>
                 <div class="price-range d-flex align-items-center w-100">
                     <span class="price-label">10</span>
-                    <input type="range" id="priceRange" min="10" max="1000" step="5"  [(ngModel)]="selectedPrice"
+                    <input type="range" id="priceRange" min="1" max="1000" step="5"  [(ngModel)]="selectedPrice"
                         (input)="updatePriceLabel()" />
                     <span class="price-label">1000</span>
                 </div>
@@ -92,7 +92,7 @@
                             </div>
 
                             <div class="carousel-inner">
-                                <div class="carousel-item" *ngFor="let image of product.images; let first = first"
+                                <div class="carousel-item bg-white" *ngFor="let image of product.images; let first = first"
                                     [ngClass]="{'active': first}">
                                     <img [src]="baseUrl+image.imagePath" class="d-block w-100 h-100" alt="Product Image">
                                 </div>

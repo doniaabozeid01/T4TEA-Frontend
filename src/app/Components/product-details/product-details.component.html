@@ -1,10 +1,10 @@
 <div class="container bg-white">
-    <div class="row height-control justify-content-center align-items-between p-2  " >
+    <div class="row height-control justify-content-center align-items-between p-2  ">
         <div class="col-md-6 h-100 ">
             <!-- صورة المنتج -->
             <div class="image-container w-100 h-100">
-               <img [src]="product.images?.length ? baseUrl + product.images[0].imagePath : 'assets/6Q1A1667.png'"
-                                alt="Blueberry Blues" class="">
+                <img [src]="product.images?.length ? baseUrl + product.images[0].imagePath : 'assets/6Q1A1667.png'"
+                    alt="Blueberry Blues" class="">
             </div>
         </div>
         <div class="col-md-6 h-100 d-flex flex-column justify-content-between py-1">
@@ -19,6 +19,9 @@
                 <li *ngFor="let item of product.benifits">{{item.description}}</li>
             </ul>
 
+            <h6> <span  class="fw-bold fs-5">{{product.weight}}</span> مللي جرام </h6>
+
+
             <!-- السعر -->
             <div class="product-price ">
                 <h5 class="fw-bold m-0 price-text d-flex justify-content-start align-items-center  gap-0">
@@ -28,7 +31,7 @@
                     <span class=" text-success fs-6">{{ product.discount }}%</span>
                 </h5>
             </div>
-            
+
             <div class="rating mt-3">
                 <ng-container *ngFor="let star of fullStars">
                     <i class="fa-solid fa-star text-warning fs-4"></i>
@@ -37,7 +40,7 @@
                     <i class="fa-regular fa-star text-warning fs-4"></i>
                 </ng-container>
             </div>
-            
+
             <!-- الأزرار -->
             <div class="d-flex mt-4 ">
                 <!-- زر إضافة إلى السلة -->
@@ -55,81 +58,83 @@
 </div>
 
 
-    <div class="recomended mb-5">
-        <div class="recommended-section">
-            <h2 class="section-title">Recommended Products</h2>
-        </div>
+<div class="recomended mb-5">
+    <div class="recommended-section">
+        <h2 class="section-title">Recommended Products</h2>
+    </div>
 
-        <div class="row product ">
+    <div class="row product ">
 
-            <div class="col-md-4 in-out mt-4" *ngFor="let product of recommendedProducts">
-                <div class="card w-100">
-                    <div class="offer-label" *ngIf="product.discount!=0">عرض</div>
+        <div class="col-md-4 in-out mt-4" *ngFor="let product of recommendedProducts">
+            <div class="card w-100">
+                <div class="offer-label" *ngIf="product.discount!=0">عرض</div>
 
-                    <div class="carousel slide bg-dark card-img-top" [attr.id]="'carousel' + product.id"
-                        (mouseenter)="startCarousel('carousel' + product.id)"
-                        (mouseleave)="pauseCarousel('carousel' + product.id)">
+                <div class="carousel slide bg-dark card-img-top" [attr.id]="'carousel' + product.id"
+                    (mouseenter)="startCarousel('carousel' + product.id)"
+                    (mouseleave)="pauseCarousel('carousel' + product.id)">
 
 
-                        <div class="carousel-indicators my-0">
-                            <button *ngFor="let image of product.images; let index = index" type="button"
-                                [attr.data-bs-target]="'#carousel' + product.id" [attr.data-bs-slide-to]="index"
-                                [ngClass]="{'active': index === 0}" [attr.aria-current]="index === 0 ? 'true' : null"
-                                [attr.aria-label]="'Slide ' + (index + 1)">
-                            </button>
-                        </div>
-
-                        <div class="carousel-inner">
-                            <div class="carousel-item" *ngFor="let image of product.images; let first = first"
-                                [ngClass]="{'active': first}">
-                                <img [src]="baseUrl+product.images[0].imagePath" class="d-block w-100 h-100 imgInCarousel" alt="Product Image">
-                            </div>
-                        </div>
-
-                        <button class="carousel-control-prev" type="button"
-                            [attr.data-bs-target]="'#carousel' + product.id" data-bs-slide="prev">
-                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                            <span class="visually-hidden">Previous</span>
+                    <div class="carousel-indicators my-0">
+                        <button *ngFor="let image of product.images; let index = index" type="button"
+                            [attr.data-bs-target]="'#carousel' + product.id" [attr.data-bs-slide-to]="index"
+                            [ngClass]="{'active': index === 0}" [attr.aria-current]="index === 0 ? 'true' : null"
+                            [attr.aria-label]="'Slide ' + (index + 1)">
                         </button>
-                        <button class="carousel-control-next" type="button"
-                            [attr.data-bs-target]="'#carousel' + product.id" data-bs-slide="next">
-                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                            <span class="visually-hidden">Next</span>
-                        </button>
-
                     </div>
 
-
-
-                    <div class="card-body text-center" (click)="goToDetails(product.id)">
-                        <h5 class="card-title">{{getFlvourName(product.flavour)}}</h5>
-                        <p class="card-text">{{product.description }}</p>
-
-                        <div class="d-flex justify-content-between align-items-center dynamicPad">
-                            <h5 class="fw-bold m-0 price-text">
-                                <span class="price-currency fs-6">د.ك</span>
-                                <span class="price-amount">{{getPriceAfterDiscount(product.discount,product.oldPrice)}}</span>
-                                <span class="old-price fs-6 me-1 ms-0">{{product.oldPrice}}</span>
-                                <span class="text-success fs-6">{{product.discount}}%</span>
-                            </h5>
-                            <div class="d-flex align-items-center">
-                                <i class="fa-solid fa-star text-warning"></i>
-                                <p class="m-0 pe-1"> {{product.rate === 0 ? 5.0 : product.rate}} </p>
-                            </div>
+                    <div class="carousel-inner">
+                        <div class="carousel-item bg-white" *ngFor="let image of product.images; let first = first"
+                            [ngClass]="{'active': first}">
+                            <img [src]="baseUrl+product.images[0].imagePath" class="d-block w-100 h-100 imgInCarousel"
+                                alt="Product Image">
                         </div>
+                    </div>
 
-                        <div class="d-flex justify-content-between tog">
-                            <a class="btn btn-gold w-75" (click)="AddToCart(product.id)">اضف الي السله</a>
-                            <i class="fa-heart fs-3 d-flex align-items-center justify-content-end me-3"
-                                [ngClass]="{'fa-solid': favourites.has(product.id), 'fa-regular': !favourites.has(product.id)}"
-                                (click)="toggleFavourite(product.id)">
-                            </i>
+                    <button class="carousel-control-prev" type="button" [attr.data-bs-target]="'#carousel' + product.id"
+                        data-bs-slide="prev">
+                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Previous</span>
+                    </button>
+                    <button class="carousel-control-next" type="button" [attr.data-bs-target]="'#carousel' + product.id"
+                        data-bs-slide="next">
+                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Next</span>
+                    </button>
+
+                </div>
+
+
+
+                <div class="card-body text-center" (click)="goToDetails(product.id)">
+                    <h5 class="card-title">{{getFlvourName(product.flavour)}}</h5>
+                    <p class="card-text">{{product.description }}</p>
+
+                    <div class="d-flex justify-content-between align-items-center dynamicPad">
+                        <h5 class="fw-bold m-0 price-text">
+                            <span class="price-currency fs-6">د.ك</span>
+                            <span
+                                class="price-amount">{{getPriceAfterDiscount(product.discount,product.oldPrice)}}</span>
+                            <span class="old-price fs-6 me-1 ms-0">{{product.oldPrice}}</span>
+                            <span class="text-success fs-6">{{product.discount}}%</span>
+                        </h5>
+                        <div class="d-flex align-items-center">
+                            <i class="fa-solid fa-star text-warning"></i>
+                            <p class="m-0 pe-1"> {{product.rate === 0 ? 5.0 : product.rate}} </p>
                         </div>
+                    </div>
+
+                    <div class="d-flex justify-content-between tog">
+                        <a class="btn btn-gold w-75" (click)="AddToCart(product.id)">اضف الي السله</a>
+                        <i class="fa-heart fs-3 d-flex align-items-center justify-content-end me-3"
+                            [ngClass]="{'fa-solid': favourites.has(product.id), 'fa-regular': !favourites.has(product.id)}"
+                            (click)="toggleFavourite(product.id)">
+                        </i>
                     </div>
                 </div>
             </div>
-
-
-
         </div>
+
+
+
     </div>
+</div>

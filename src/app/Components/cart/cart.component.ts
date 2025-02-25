@@ -15,30 +15,6 @@ export class CartComponent {
 
   userId: any;
   baseUrl: any;
-  // subTotal: number = 0;
-
-  // ngOnInit(): void {
-
-  //   this.baseUrl = this.callApi.baseUrl;
-  //   this.callApi.getUserId().subscribe({
-  //     next: (response) => {
-  //       this.userId = response.userId;
-
-  //       this.callApi.GetCartByUserId(this.userId).subscribe({
-  //         next: (res) => {
-  //           console.log(res);
-  //           this.products = res;
-  //           for(let i=0 ; i< res.count; i++){
-  //             this.subTotal+= res[i].quantity * (res[i].product.oldPrice - (res[i].product.oldPrice * res[i].product.discount)) ;
-  //             console.log(this.subTotal);
-
-  //           }
-  //         }
-  //       })
-  //     }
-  //   })
-  // }
-
 
 
 
@@ -46,8 +22,10 @@ export class CartComponent {
   subTotal: number = 0; // حل المشكلة
   total: number = 0; // حل المشكلة
   discount: number = 10;
+  shippingAndDiscount: any;
 
   ngOnInit(): void {
+
     this.baseUrl = this.callApi.baseUrl;
     this.callApi.getUserId().subscribe({
       next: (response) => {
@@ -74,6 +52,15 @@ export class CartComponent {
         });
       }
     });
+
+
+
+    this.callApi.GetShippingAndDiscount().subscribe({
+      next: (res) => {
+        console.log("res : ", res);
+        this.shippingAndDiscount = res[0];
+      }
+    })
   }
 
 
@@ -109,9 +96,9 @@ export class CartComponent {
       }
 
       console.log(cartdata);
-      
-      this.callApi.updateCart(id,cartdata).subscribe({
-        next:(response)=>{
+
+      this.callApi.updateCart(id, cartdata).subscribe({
+        next: (response) => {
           console.log(response);
         }
       })
@@ -122,7 +109,7 @@ export class CartComponent {
     }
   }
 
-  decreaseQuantity(id:number, item: any) {
+  decreaseQuantity(id: number, item: any) {
     if (item.quantity > 1) { // يمكنك تعديل الحد الأدنى حسب الحاجة
       item.quantity--;
 
@@ -136,9 +123,9 @@ export class CartComponent {
       }
 
       console.log(cartdata);
-      
-      this.callApi.updateCart(id,cartdata).subscribe({
-        next:(response)=>{
+
+      this.callApi.updateCart(id, cartdata).subscribe({
+        next: (response) => {
           console.log(response);
         }
       })
@@ -167,6 +154,10 @@ export class CartComponent {
 
   updateTotal() {
     this.total = parseFloat((this.subTotal - (this.subTotal * (this.discount / 100))).toFixed(2));
+    const shipping = this.shippingAndDiscount.shippingPrice ;
+    if (!isNaN(Number(shipping))) {
+      this.total += Number(shipping);
+    }
   }
 
 

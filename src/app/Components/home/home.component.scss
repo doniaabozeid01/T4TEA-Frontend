@@ -167,8 +167,18 @@ img {
 
 }
 
+.card{
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
 
-
+.card-body{
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
 
 
 
@@ -182,49 +192,6 @@ img {
 
 
 //////////////////////////////////////////////////////////////////////
-
-
-
-
-// .special-offers {
-//     background: linear-gradient(to right, #009688, #4caf50);
-//     color: rgb(0, 0, 0);
-//     padding: 50px 0;
-//     overflow: hidden;
-// }
-
-// .offer-card {
-//     background: white;
-//     border-radius: 12px;
-//     transition: transform 0.3s ease-in-out;
-// }
-
-// .offer-card:hover {
-//     transform: scale(1.05);
-// }
-
-// .countdown {
-//     font-weight: bold;
-//     font-size: 1.5rem;
-//     color: #ffeb3b;
-// }
-
-// .fade-in {
-//     animation: fadeInUp 1s ease-out;
-// }
-
-// @keyframes fadeInUp {
-//     from {
-//         opacity: 0;
-//         transform: translateY(20px);
-//     }
-
-//     to {
-//         opacity: 1;
-//         transform: translateY(0);
-//     }
-// }
-
 
 
 
@@ -294,33 +261,6 @@ img {
 
 
 ////////////////////////////////////////////////////////////////
-// .feature-card {
-//     background: white;
-//     border-radius: 12px;
-//     transition: transform 0.3s ease-in-out;
-// }
-
-// .feature-card:hover {
-//     transform: scale(1.05);
-// }
-
-
-
-
-// .custom-title {
-//     font-size: 2.5rem;
-//     font-weight: bold;
-//     color: #000000;
-//     /* أخضر داكن */
-//     text-align: center;
-//     text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.3);
-//     /* ظل خفيف */
-// }
-
-
-// .icon {
-//     color: #000000A6;
-// }
 
 
 

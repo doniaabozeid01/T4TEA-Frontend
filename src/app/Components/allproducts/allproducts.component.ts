@@ -16,7 +16,7 @@ export class AllproductsComponent {
   constructor(private router: Router, private route: ActivatedRoute, private callApi: CallApisService, private toastr: ToastrService) {
   }
 
-  priceRange = { min: 10, max: 1000 };
+  priceRange = { min: 1, max: 1000 };
   ratingFilter = 'all';
   flavorFilter = 'all';
   offerFilter = 'all';
@@ -25,6 +25,41 @@ export class AllproductsComponent {
   filteredProducts: any;
   baseUrl: any;
   favouritesList: any;
+  TeaFlavorsAr: string[] = [
+    "شاي المانجو",
+    "شاي التفاح والكراميل",
+    "شاي فراولة الشيكولاتة",
+    "شاي الرمان",
+    "شاي الألفندر",
+    "شاي التوت الأحمر",
+    "شاي النعناع المغربي",
+    "شاي الشوكولاتة بالنعناع",
+    "شاي القطيفة الأولى",
+    "شاي الياسمين والبرتقال",
+    "شاي الليمون الحمضي",
+    "شاي الليمون والعسل",
+    "شاي الخوخ الأخضر",
+    "شاي Tranquility",
+    "شاي التفاح والقرفة",
+    "شاي بلو بيري بلوز",
+    "شاي Chai",
+    "شاي جوز الهند",
+    "شاي الليمون بالجنزبيل",
+    "شاي Luscious Lavender",
+    "شاي المورينجا والكركم",
+    "شاي البابونج والبرتقال",
+    "شاي الرويبوس بالنعناع",
+    "شاي ثمر الورد والخوخ",
+    "شاي الفواكه الاستوائية"
+  ];
+
+  categoriesTitles = ['أسود', 'أخضر', 'أعشاب'];
+  flavors = this.TeaFlavorsAr;
+  selectedCategory = '';
+  selectedFlavor = 'all';
+  selectedPrice: number = this.priceRange.min;
+  searchQuery = "";
+
 
   ngOnInit() {
 
@@ -42,13 +77,9 @@ export class AllproductsComponent {
         console.log("categories ", response);
         this.categories = response;
         this.filteredProducts = [...this.categories];
-
-
+        console.log("filteredProducts : ", this.filteredProducts);
       }
     })
-
-
-
 
 
     this.callApi.getUserId().subscribe({
@@ -74,19 +105,16 @@ export class AllproductsComponent {
 
   }
 
-
-
   goToDetails(productId: number) {
     this.router.navigate(['/product-details', productId]);
   }
-
 
   goToCart(event: MouseEvent, prodId: number) {
     event.stopPropagation(); // منع الانتقال إلى صفحة التفاصيل عند النقر على "اضف الى السلة"
 
 
     const token = localStorage.getItem('Token');
-    if(!token){
+    if (!token) {
       this.router.navigate(['/auth']);
     }
 
@@ -110,8 +138,6 @@ export class AllproductsComponent {
 
   }
 
-
-
   @ViewChild('filtersPanel', { static: false }) filtersPanel!: ElementRef;
   toggleFilters(): void {
     if (this.filtersPanel) {
@@ -119,20 +145,17 @@ export class AllproductsComponent {
     }
   }
 
-
   isFavourite(productId: number): boolean {
     return this.favourites.has(productId); // التحقق مما إذا كان المنتج في المفضلة
   }
 
-
   favourites: Set<number> = new Set(); // لتخزين المنتجات المفضلة
-
 
   toggleFavourite(event: Event, productId: number): void {
 
 
     const token = localStorage.getItem('Token');
-    if(!token){
+    if (!token) {
       this.router.navigate(['/auth']);
     }
 
@@ -185,7 +208,6 @@ export class AllproductsComponent {
     this.favourites = new Set(this.favouritesList.map((fav: { productId: number }) => fav.productId));
   }
 
-
   private carousels: { [key: string]: bootstrap.Carousel } = {};
 
   ngAfterViewInit() {
@@ -201,8 +223,6 @@ export class AllproductsComponent {
       });
     }, 1000); // تأخير للتأكد من تحميل العناصر
   }
-
-
 
   intervals: { [key: string]: any } = {}; // ✅ تعريف intervals لتخزين المؤقتات
 
@@ -249,53 +269,9 @@ export class AllproductsComponent {
 
 
 
-  TeaFlavorsAr: string[] = [
-    "شاي المانجو",
-    "شاي التفاح والكراميل",
-    "شاي فراولة الشيكولاتة",
-    "شاي الرمان",
-    "شاي الألفندر",
-    "شاي التوت الأحمر",
-    "شاي النعناع المغربي",
-    "شاي الشوكولاتة بالنعناع",
-    "شاي القطيفة الأولى",
-    "شاي الياسمين والبرتقال",
-    "شاي الليمون الحمضي",
-    "شاي الليمون والعسل",
-    "شاي الخوخ الأخضر",
-    "شاي Tranquility",
-    "شاي التفاح والقرفة",
-    "شاي بلو بيري بلوز",
-    "شاي Chai",
-    "شاي جوز الهند",
-    "شاي الليمون بالجنزبيل",
-    "شاي Luscious Lavender",
-    "شاي المورينجا والكركم",
-    "شاي البابونج والبرتقال",
-    "شاي الرويبوس بالنعناع",
-    "شاي ثمر الورد والخوخ",
-    "شاي الفواكه الاستوائية"
-  ];
-
-  categoriesTitles = ['أسود', 'أخضر', 'أعشاب'];
-  flavors = this.TeaFlavorsAr;
-  selectedCategory = '';
-  selectedFlavor = 'all';
-  selectedPrice: number = this.priceRange.min;
-
-
-  searchQuery = "";
-
-
-
-
-
-
   getPriceAfterDiscount(disc: number, oldPrice: number): number {
     return oldPrice - (oldPrice * (disc / 100));
   }
-
-
 
   getFlvourName(flavorId: number): string {
     return this.TeaFlavorsAr[flavorId] || " ";
@@ -308,41 +284,98 @@ export class AllproductsComponent {
 
 
 
+  // applyFilters(product: Product): boolean {
+  //   console.log("product : ", product);
+  //   console.log("this.searchQuery : ", this.searchQuery);
+  //   console.log("this.searchQuery.toLowerCase() : ", this.searchQuery.toLowerCase());
+  //   console.log("product.description.toLowerCase() : ",  product.description.toLowerCase());
+  //   console.log("product.name.toLowerCase() : ", product.name.toLowerCase());
+  //   console.log("this.getFlvourName(product.flavour).toLowerCase() : ", this.getFlvourName(product.flavour).toLowerCase());
+
+
+  //   // 1️⃣ فلتر البحث
+  //   const matchesSearch = this.searchQuery
+  //     ? product.description.toLowerCase().includes(this.searchQuery.toLowerCase()) ||
+  //     product.name.toLowerCase().includes(this.searchQuery.toLowerCase()) ||
+  //     this.getFlvourName(product.flavour).toLowerCase().includes(this.searchQuery.toLowerCase())
+  //     : true;
+
+
+
+  //   // // 2️⃣ فلتر السعر
+  //   // const matchesPrice = this.getPriceAfterDiscount(product.discount, product.oldPrice) >= this.selectedPrice && this.getPriceAfterDiscount(product.discount, product.oldPrice) <= this.priceRange.max;
+
+  //   // // 3️⃣ فلتر التقييم
+  //   // const matchesRating = this.ratingFilter === 'all' || product.rate >= parseInt(this.ratingFilter, 10);
+
+  //   // // 4️⃣ فلتر النكهة
+  //   // // const matchesFlavor = this.selectedFlavor === 'all' || this.getFlvourName(product.flavour) === this.selectedFlavor;
+  //   // const matchesFlavor = this.selectedFlavor === 'all' || this.getFlvourName(product.flavour).toLowerCase() === this.selectedFlavor.toLowerCase();
+
+  //   // // 5️⃣ فلتر العروض
+  //   // const matchesOffer = this.offerFilter === 'all' || (this.offerFilter === 'offers' && product.discount != 0);
+  //   // console.log("Filtering:", product, this.selectedFlavor, matchesFlavor);
+  //   // ✅ عودة المنتج إذا اجتاز جميع الفلاتر
+  //   // return matchesSearch && matchesPrice && matchesRating && matchesFlavor && matchesOffer;
+  //   return matchesSearch;
+  // }
+
+
 
 
   applyFilters(product: Product): boolean {
+    console.log("🔍 المنتج: ", product);
+    console.log("🔎 كلمة البحث: ", this.searchQuery);
+
     // 1️⃣ فلتر البحث
     const matchesSearch = this.searchQuery
       ? product.description.toLowerCase().includes(this.searchQuery.toLowerCase()) ||
-        product.name.toLowerCase().includes(this.searchQuery.toLowerCase()) ||
-        this.getFlvourName(product.flavour).toLowerCase().includes(this.searchQuery.toLowerCase()) 
+      product.name.toLowerCase().includes(this.searchQuery.toLowerCase()) ||
+      this.getFlvourName(product.flavour).toLowerCase().includes(this.searchQuery.toLowerCase())
       : true;
-  
-    // 2️⃣ فلتر السعر
-    const matchesPrice = this.getPriceAfterDiscount(product.discount,product.oldPrice) >= this.selectedPrice && this.getPriceAfterDiscount(product.discount,product.oldPrice) <= this.priceRange.max;
 
-  
+    console.log("✅ نتيجة فلتر البحث:", matchesSearch);
+
+    // 2️⃣ فلتر السعر
+    const productPrice = this.getPriceAfterDiscount(product.discount, product.oldPrice);
+    const matchesPrice = productPrice >= this.selectedPrice && productPrice <= this.priceRange.max;
+    console.log("💰 نتيجة فلتر السعر:", matchesPrice, " | السعر بعد الخصم:", productPrice);
+
     // 3️⃣ فلتر التقييم
     const matchesRating = this.ratingFilter === 'all' || product.rate >= parseInt(this.ratingFilter, 10);
-  
+    console.log("⭐ نتيجة فلتر التقييم:", matchesRating, " | تقييم المنتج:", product.rate);
+
     // 4️⃣ فلتر النكهة
-    const matchesFlavor = this.selectedFlavor === 'all' || this.getFlvourName(product.flavour) === this.selectedFlavor;
-  
+    const matchesFlavor = this.selectedFlavor === 'all' || this.getFlvourName(product.flavour).toLowerCase() === this.selectedFlavor.toLowerCase();
+    console.log("🍵 نتيجة فلتر النكهة:", matchesFlavor, " | نكهة المنتج:", this.getFlvourName(product.flavour));
+
     // 5️⃣ فلتر العروض
-    const matchesOffer = this.offerFilter === 'all' || (this.offerFilter === 'offers' && product.discount > 0);
-  
-    // ✅ عودة المنتج إذا اجتاز جميع الفلاتر
+    const matchesOffer = this.offerFilter === 'all' || (this.offerFilter === 'offers' && product.discount != 0);
+    console.log("🎁 نتيجة فلتر العروض:", matchesOffer, " | نسبة الخصم:", product.discount);
+
+    // ✅ تشغيل الفلاتر واحدًا واحدًا أثناء التصحيح
     return matchesSearch && matchesPrice && matchesRating && matchesFlavor && matchesOffer;
   }
 
-  
+
+
+
+
+
+
+
   filterProducts() {
+    console.log("كل المنتجات قبل الفلترة:", this.filteredProducts);
+
+
     this.filteredProducts = this.categories.map((category: Category) => ({
       ...category,
       products: category.products.filter((product: Product) => this.applyFilters(product))
     })).filter((category: Category) => category.products.length > 0);
+
+    console.log("Filtered Categories 2 :", this.filteredProducts);
   }
-  
+
 
 
   updateProgress() {

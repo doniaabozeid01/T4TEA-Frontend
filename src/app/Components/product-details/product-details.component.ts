@@ -20,7 +20,7 @@ export class ProductDetailsComponent {
 
   baseUrl: string = "https://localhost:7095"; // تأكد من وضع الـ API URL هنا
   productId: any;
-
+  products: any;
   fullStars: number[] = [];
   emptyStars: number[] = [];
 
@@ -28,6 +28,7 @@ export class ProductDetailsComponent {
 
     this.callApi.getAllProducts().subscribe({
       next: (response) => {
+        this.products = response;
         this.recommendedProducts = this.getRandomProducts(response, 3);
         console.log(response);
 
@@ -44,7 +45,18 @@ export class ProductDetailsComponent {
 
       }
     })
-    this.productId = this.route.snapshot.paramMap.get('id');
+    // this.productId = this.route.snapshot.paramMap.get('id');
+
+
+    this.route.paramMap.subscribe(params => {
+      this.productId = params.get('id');
+
+      if (this.productId) {
+        this.loadProductDetails(this.productId);
+      }
+    });
+
+
 
     if (this.productId) {
       this.callApi.getProductById(+this.productId).subscribe({
@@ -64,6 +76,26 @@ export class ProductDetailsComponent {
   }
 
 
+  loadProductDetails(productId: number) {
+    this.callApi.getProductById(+productId).subscribe({
+      next: (response) => {
+        console.log("✅ Product Data:", response);
+        this.product = response;
+        let rating = response.rate ?? 0;
+        let roundedRate = Math.round(rating);
+        this.fullStars = Array(roundedRate).fill(0);
+        this.emptyStars = Array(5 - roundedRate).fill(0);
+      },
+      error: (error) => {
+        console.error("🚨 API Error:", error);
+      }
+    });
+
+    this.recommendedProducts = this.getRandomProducts(this.products, 3);
+
+  }
+
+
 
   getRandomProducts(products: any[], count: number): any[] {
     let shuffled = [...products].sort(() => 0.5 - Math.random());
@@ -72,16 +104,20 @@ export class ProductDetailsComponent {
 
 
   goToDetails(productId: number) {
+    console.log("hiiiiiiii");
+    console.log(productId);
+
     this.router.navigate(['/product-details', productId]);
   }
+
 
   AddToCart(prodId: number) {
     // event.stopPropagation(); // منع الانتقال إلى صفحة التفاصيل عند النقر على "اضف الى السلة"
     const token = localStorage.getItem('Token');
-    if(!token){
+    if (!token) {
       this.router.navigate(['/auth']);
     }
-    
+
     console.log(prodId);
     const data =
     {
@@ -112,7 +148,7 @@ export class ProductDetailsComponent {
   toggleFavourite(productId: number): void {
 
     const token = localStorage.getItem('Token');
-    if(!token){
+    if (!token) {
       this.router.navigate(['/auth']);
     }
 
@@ -248,7 +284,7 @@ export class ProductDetailsComponent {
     "شاي التفاح والكراميل",
     "شاي فراولة الشيكولاتة",
     "شاي الرمان",
-    "شاي الألفندر",
+    "شاي اللافندر",
     "شاي التوت الأحمر",
     "شاي النعناع المغربي",
     "شاي الشوكولاتة بالنعناع",

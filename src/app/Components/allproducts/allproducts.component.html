@@ -17,16 +17,14 @@
             <div class="filter-price mb-3 me-md-2">
                 <label for="priceRange">نطاق السعر:</label>
                 <div class="price-range d-flex align-items-center w-100">
-                    <span class="price-label">10</span>
-                    <input type="range" id="priceRange" min="10" max="1000" step="5" [(ngModel)]="selectedPrice"
+                    <span class="price-label">1</span>
+                    <input type="range" id="priceRange" min="1" max="1000" step="5" [(ngModel)]="selectedPrice"
                         (input)="updatePriceLabel()" />
                     <span class="price-label">1000</span>
                 </div>
                 <p id="priceValue">الحد الأدنى: {{ selectedPrice }} دينار - الحد الأقصى: 1000 دينار</p>
             </div>
 
-
-            <!-- فلتر النكهة -->
             <div class="filter-flavor mb-3 me-md-2">
                 <label>النكهة:</label>
                 <select class="form-control" [(ngModel)]="selectedFlavor" (change)="filterProducts()">
@@ -36,7 +34,6 @@
                 </select>
             </div>
 
-            <!-- فلتر التقييم -->
             <div class="filter-rating mb-3 me-md-2">
                 <label>التقييم:</label>
                 <select class="form-control" [(ngModel)]="ratingFilter" (change)="filterProducts()">
@@ -48,9 +45,6 @@
                 </select>
             </div>
 
-
-
-            <!-- فلتر العروض -->
             <div class="filter-availability mb-3 me-md-2">
                 <label>التوفر مع عروض:</label>
                 <select class="form-control" [(ngModel)]="offerFilter" (change)="filterProducts()">
@@ -58,6 +52,8 @@
                     <option value="offers">المنتجات التي تحتوي على عروض فقط</option>
                 </select>
             </div>
+            
+        
         </div>
 
         <div class="col-md-9 products bg-white pb-3">

@@ -47,7 +47,7 @@ export class ProductInCategoryComponent {
     "شاي الفواكه الاستوائية"
   ];
 
-  priceRange = { min: 10, max: 1000 };
+  priceRange = { min: 1, max: 1000 };
   ratingFilter = 'all';
   flavorFilter = 'all';
   offerFilter = 'all';

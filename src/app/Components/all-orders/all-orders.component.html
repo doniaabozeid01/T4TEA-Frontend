@@ -23,7 +23,7 @@
         </tbody>
       </table>
       <div class="order-summary text-end">
-        <p class="fs-5 text-darkgreen">الإجمالي الكلي: {{ order.totalAmount }} د.ك</p>
+        <p class="fs-5 text-darkgreen">الإجمالي الكلي: {{ getTotalPrice(order.totalAmount - (order.totalAmount * (shippingAndDiscount.overAllDiscount/100 ))) }}  د.ك</p>
       </div>
 
 

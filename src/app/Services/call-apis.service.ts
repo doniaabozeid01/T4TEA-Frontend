@@ -202,16 +202,21 @@ export class CallApisService {
 
 
 
-  ForgotPassword(data:any): Observable<any> {
-    return this.http.post(`${this.baseUrl}/api/Account/forgotPassword`,data);
+  ForgotPassword(data: any): Observable<any> {
+    return this.http.post(`${this.baseUrl}/api/Account/forgotPassword`, data);
   }
 
 
-  ResetPassword(data:any):Observable<any>{
-    return this.http.post(`${this.baseUrl}/api/Account/resetPassword`,data);
+  ResetPassword(data: any): Observable<any> {
+    return this.http.post(`${this.baseUrl}/api/Account/resetPassword`, data);
 
   }
 
 
+
+
+  GetShippingAndDiscount(): Observable<any> {
+    return this.http.get(`${this.baseUrl}/api/ShippingAndDiscount/GetAllShippingAndDiscount`)
+  }
 
 }
