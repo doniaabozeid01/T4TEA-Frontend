@@ -18,6 +18,7 @@ export class ReviewsComponent implements OnInit{
   rating: number = 0;
   comment: string = '';
   userId:any;
+  isAdding: boolean = false;
 
   constructor(private route: ActivatedRoute, private router: Router, private callApi : CallApisService, private toastr : ToastrService) {}
 
@@ -51,6 +52,8 @@ export class ReviewsComponent implements OnInit{
   errorMessage: string = ''; // 🔥 تخزين رسالة الخطأ
 
 submitReview() {
+  this.isAdding= true;
+
   this.errorMessage = ''; // تصفير الرسالة قبل كل محاولة
 
   if (!this.comment || this.rating === 0) {
@@ -69,12 +72,16 @@ submitReview() {
   // 🔥 إرسال التقييم إلى API
   this.callApi.addReview(reviewData).subscribe({
     next: () => {
+      this.isAdding= false;
+
       // ✅ عند نجاح التقييم، الانتقال إلى صفحة الطلبات
       this.toastr.success('تم إضافة التعليق بنجاح!');
       this.router.navigate(['/all-orders']);
 
     },
     error: (err) => {
+      this.isAdding= false;
+
       console.log("خطأ في إرسال التقييم:", err);
       this.errorMessage = 'حدث خطأ أثناء إرسال التقييم. حاول مرة أخرى.';
     }

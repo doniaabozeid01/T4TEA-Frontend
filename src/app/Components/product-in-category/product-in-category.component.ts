@@ -13,6 +13,10 @@ import { CallApisService } from 'src/app/Services/call-apis.service';
 })
 export class ProductInCategoryComponent {
   orderId: string | null = null; // متغير لتخزين الـ ID
+  isAdding: boolean = false;
+
+
+
 
   constructor(private router: Router, private activatedRoute: ActivatedRoute, private callApis : CallApisService , private toastr : ToastrService) { 
     // this.updateFavouritesSet();
@@ -111,6 +115,8 @@ export class ProductInCategoryComponent {
 
 
   goToCart(event: MouseEvent, prodId: number) {
+    this.isAdding= true;
+
     event.stopPropagation(); // منع الانتقال إلى صفحة التفاصيل عند النقر على "اضف الى السلة"
 
     // if (product.inStock) {
@@ -132,10 +138,14 @@ export class ProductInCategoryComponent {
 
     this.callApis.addToCart(data).subscribe({
       next: (response) => {
+        this.isAdding= false;
         console.log(response);
         this.callApis.updateCartCount(this.userId);
         this.toastr.success('تم إضافة المنتج إلي السلة بنجاح!');
 
+      },
+      error:(err)=>{
+        this.isAdding= false;
       }
     })
 

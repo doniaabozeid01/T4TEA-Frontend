@@ -56,7 +56,7 @@ import { ResetPasswordComponent } from './Components/reset-password/reset-passwo
     SwiperModule,
     HttpClientModule,
     ToastrModule.forRoot({  
-      positionClass: 'toast-bottom-right', // تحديد موقع التوست
+      positionClass: 'custom-toast', // تحديد موقع التوست
       timeOut: 2000, // مدة ظهور الرسالة
       progressBar: true, // إظهار شريط تقدم,
       

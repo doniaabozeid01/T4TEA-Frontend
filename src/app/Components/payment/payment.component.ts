@@ -14,6 +14,8 @@ export class PaymentComponent {
 
   paymentForm: FormGroup;
   userId: any;
+  isAdding: boolean = false;
+
   constructor(private fb: FormBuilder, private router: Router, private callApi: CallApisService) {
     this.paymentForm = this.fb.group({
       address: ['', Validators.required],
@@ -41,6 +43,8 @@ export class PaymentComponent {
   }
 
   onSubmit() {
+    this.isAdding= false;
+
     this.loading = true; // إيقاف التحميل عند النجاح
 
     if (this.paymentForm.valid) {
@@ -59,6 +63,8 @@ export class PaymentComponent {
 
       this.callApi.createOrder(orderData).subscribe({
         next: (response) => {
+          this.isAdding= false;
+
           this.loading = false; // إيقاف التحميل عند النجاح
 
           console.log(response);
@@ -67,6 +73,8 @@ export class PaymentComponent {
           this.router.navigate(['/all-orders'])
         },
         error:(err)=>{
+          this.isAdding= false;
+
           this.loading = false; // إيقاف التحميل عند النجاح
         }
       })

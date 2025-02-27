@@ -15,7 +15,7 @@ import { CallApisService } from 'src/app/Services/call-apis.service';
 export class AllproductsComponent {
   constructor(private router: Router, private route: ActivatedRoute, private callApi: CallApisService, private toastr: ToastrService) {
   }
-
+  isAddingToCart: boolean = false;
   priceRange = { min: 1, max: 1000 };
   ratingFilter = 'all';
   flavorFilter = 'all';
@@ -111,6 +111,7 @@ export class AllproductsComponent {
 
   goToCart(event: MouseEvent, prodId: number) {
     event.stopPropagation(); // منع الانتقال إلى صفحة التفاصيل عند النقر على "اضف الى السلة"
+    this.isAddingToCart = true; // تشغيل التحميل
 
 
     const token = localStorage.getItem('Token');
@@ -128,10 +129,16 @@ export class AllproductsComponent {
 
     this.callApi.addToCart(data).subscribe({
       next: (response) => {
+        this.isAddingToCart = false; // تشغيل التحميل
+
         console.log(response);
         this.callApi.updateCartCount(this.userId);
 
         this.toastr.success('تم إضافة المنتج إلي السلة بنجاح!');
+
+      },
+      error:(err)=>{
+        this.isAddingToCart = false; // تشغيل التحميل
 
       }
     })

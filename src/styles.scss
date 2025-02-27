@@ -67,5 +67,12 @@ html, body {
 }
 
 
+.custom-toast {
+  top: 10% !important;
+  right: 1% !important;
+  left: auto !important; /* تأكد من تعطيل اليسار */
+  position: fixed !important;
+  z-index: 9999 !important; /* لضمان ظهوره فوق كل العناصر */
+}
 
 

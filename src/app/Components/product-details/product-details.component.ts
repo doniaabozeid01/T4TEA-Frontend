@@ -15,9 +15,8 @@ export class ProductDetailsComponent {
   product: any;
   userId: any;
   favouritesList: any[] = []; // مصفوفة تحتوي على المنتجات المفضلة
-
   recommendedProducts: any;
-
+  isAdding: boolean = false;
   baseUrl: string = "https://localhost:7095"; // تأكد من وضع الـ API URL هنا
   productId: any;
   products: any;
@@ -112,6 +111,8 @@ export class ProductDetailsComponent {
 
 
   AddToCart(prodId: number) {
+    this.isAdding= true;
+
     // event.stopPropagation(); // منع الانتقال إلى صفحة التفاصيل عند النقر على "اضف الى السلة"
     const token = localStorage.getItem('Token');
     if (!token) {
@@ -130,10 +131,15 @@ export class ProductDetailsComponent {
 
     this.callApi.addToCart(data).subscribe({
       next: (response) => {
+        this.isAdding= false;
+        
         console.log(response);
         this.callApi.updateCartCount(this.userId);
-
         this.toastr.success('تم إضافة المنتج إلي السلة بنجاح!');
+      },
+      error:(err)=>{
+        this.isAdding= false;
+
       }
     })
 

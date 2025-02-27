@@ -151,7 +151,14 @@ export class CartComponent {
     }, 0);
   }
 
-
+  isNumber(check:any):boolean{
+    if(!isNaN(Number(check))){
+      return true
+    }
+    else{
+      return false;
+    }
+  }
   updateTotal() {
     this.total = parseFloat((this.subTotal - (this.subTotal * (this.discount / 100))).toFixed(2));
     const shipping = this.shippingAndDiscount.shippingPrice ;

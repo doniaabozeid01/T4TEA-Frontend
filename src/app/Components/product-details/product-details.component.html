@@ -19,7 +19,7 @@
                 <li *ngFor="let item of product.benifits">{{item.description}}</li>
             </ul>
 
-            <h6> <span  class="fw-bold fs-5">{{product.weight}}</span> مللي جرام </h6>
+            <h6> <span class="fw-bold fs-5">{{product.weight}}</span> مللي جرام </h6>
 
 
             <!-- السعر -->
@@ -44,7 +44,12 @@
             <!-- الأزرار -->
             <div class="d-flex mt-4 ">
                 <!-- زر إضافة إلى السلة -->
-                <button class="btn btn-gold w-75 " (click)="AddToCart(product.id)">اضف الي السلة</button>
+                <button class="btn btn-gold w-75 " (click)="AddToCart(product.id)">
+                    <div *ngIf="isAdding" class="spinner-border spinner-border-sm me-2" role="status">
+                        <span class="visually-hidden">Loading...</span>
+                    </div>
+                    اضف الي السلة
+                </button>
 
                 <!-- زر إضافة إلى قائمة الرغبات -->
                 <i class="fa-heart fs-3 d-flex align-items-center justify-content-between me-3"
@@ -124,7 +129,14 @@
                     </div>
 
                     <div class="d-flex justify-content-between tog">
-                        <a class="btn btn-gold w-75" (click)="AddToCart(product.id)">اضف الي السله</a>
+                        <a class="btn btn-gold w-75" (click)="AddToCart(product.id)">
+                            <div *ngIf="isAdding" class="spinner-border spinner-border-sm me-2" role="status">
+                                <span class="visually-hidden">Loading...</span>
+                            </div>
+
+                            اضف الي السله
+
+                        </a>
                         <i class="fa-heart fs-3 d-flex align-items-center justify-content-end me-3"
                             [ngClass]="{'fa-solid': favourites.has(product.id), 'fa-regular': !favourites.has(product.id)}"
                             (click)="toggleFavourite(product.id)">

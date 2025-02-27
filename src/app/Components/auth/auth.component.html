@@ -1,9 +1,8 @@
-<section class="parent">
+<!-- <section class="parent">
 
-  <!-- شاشه كبيره  -->
+  شاشه كبيره 
   <div class="container d-none d-md-block" [ngClass]="{'right-panel-active': isSignUp}">
 
-    <!-- تسجيل جديد -->
     <div class="sign-up">
       <form (ngSubmit)="signUp()">
         <h1 class="mb-2">إنشاء حساب</h1>
@@ -14,11 +13,17 @@
         <input type="password" placeholder="كلمة المرور" class="border rounded-1" [(ngModel)]="registerData.password"
           name="password" required>
         <p class="error-text" *ngIf="errors.register">{{ errors.register }}</p>
-        <button type="submit">تسجيل</button>
+        <button type="submit">
+          
+          <div *ngIf="isAdding" class="spinner-border spinner-border-sm me-2" role="status">
+            <span class="visually-hidden">Loading...</span>
+          </div>
+          
+          تسجيل</button>
       </form>
     </div>
 
-    
+
     <div class="sign-in">
       <form (ngSubmit)="signIn()">
         <h1 class="mb-2">تسجيل الدخول</h1>
@@ -28,13 +33,17 @@
           name="password" required>
         <a routerLink="/forget-password">هل نسيت كلمة المرور؟</a>
         <p class="error-text" *ngIf="errors.login">{{ errors.login }}</p>
-        <button type="submit">تسجيل الدخول</button>
+        <button type="submit">
+        
+        <div *ngIf="isAdding" class="spinner-border spinner-border-sm me-2" role="status">
+          <span class="visually-hidden">Loading...</span>
+        </div>
+        تسجيل الدخول</button>
       </form>
     </div>
 
 
 
-    <!-- الجزء المتحرك -->
     <div class="overlay-container">
       <div class="overlay">
         <div class="overlay-left">
@@ -56,26 +65,208 @@
   <div class="container small-container d-md-none" [ngClass]="{'signup-mode': isSignUp}">
 
     <div class="form-container">
-      <!-- عنوان متغير حسب الحالة -->
       <h1 class="mb-3 h1">{{ isSignUp ? 'إنشاء حساب' : 'تسجيل الدخول' }}</h1>
 
-      <!-- نموذج تسجيل الدخول -->
-      <form *ngIf="!isSignUp" class="form">
-        <input type="email" placeholder="البريد الإلكتروني" class="border rounded-1 input" required>
-        <input type="password" placeholder="كلمة المرور" class="border rounded-1 input" required>
+      <form *ngIf="!isSignUp" class="form" (ngSubmit)="signIn()">
+        <input type="email" placeholder="البريد الإلكتروني" class="border rounded-1" [(ngModel)]="loginData.email"
+          name="email" required>
+        <input type="password" placeholder="كلمة المرور" class="border rounded-1" [(ngModel)]="loginData.password"
+          name="password" required>
+
         <a routerLink="/forget-password">هل نسيت كلمة المرور؟</a>
-        <button class="button btn-light" (click)="signIn()">تسجيل الدخول</button>
+        <p class="error-text" *ngIf="errors.login">{{ errors.login }}</p>
+        <button class="button btn-light" type="submit">
+          <div *ngIf="isAdding" class="spinner-border spinner-border-sm me-2" role="status">
+            <span class="visually-hidden">Loading...</span>
+          </div>
+          تسجيل الدخول
+
+
+        </button>
       </form>
 
-      <!-- نموذج إنشاء الحساب -->
-      <form *ngIf="isSignUp" class="form">
-        <input type="text" placeholder="الاسم" class="border rounded-1 input" required>
-        <input type="email" placeholder="البريد الإلكتروني" class="border rounded-1 input" required>
-        <input type="password" placeholder="كلمة المرور" class="border rounded-1 input" required>
-        <button class="button" (click)="signUp()">تسجيل</button>
+      <form *ngIf="isSignUp" class="form" (ngSubmit)="signUp()">
+        <input type="text" placeholder="الاسم" class="border rounded-1" [(ngModel)]="registerData.fullName"
+          name="fullName" required>
+        <input type="email" placeholder="البريد الإلكتروني" class="border rounded-1" [(ngModel)]="registerData.email"
+          name="email" required>
+        <input type="password" placeholder="كلمة المرور" class="border rounded-1" [(ngModel)]="registerData.password"
+          name="password" required>
+        <p class="error-text" *ngIf="errors.register">{{ errors.register }}</p>
+        <button class="button" type="submit">
+        
+        <div *ngIf="isAdding" class="spinner-border spinner-border-sm me-2" role="status">
+          <span class="visually-hidden">Loading...</span>
+        </div>
+        تسجيل</button>
       </form>
 
-      <!-- زر تبديل أنيق -->
+      <p class="toggle-text" (click)="togglePanel()">
+        {{ isSignUp ? 'لديك حساب؟ تسجيل الدخول' : 'ليس لديك حساب؟ إنشاء حساب' }}
+      </p>
+    </div>
+
+  </div>
+
+
+</section>
+
+ -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<section class="parent">
+
+  <!-- شاشه كبيره  -->
+  <div class="container d-none d-md-block" [ngClass]="{'right-panel-active': isSignUp}">
+
+    <div class="sign-up">
+      <form (ngSubmit)="signUp()">
+        <h1 class="mb-2">إنشاء حساب</h1>
+        <input type="text" placeholder="الاسم" class="border rounded-1" [(ngModel)]="registerData.fullName" name="name"
+          required>
+        <input type="email" placeholder="البريد الإلكتروني" class="border rounded-1" [(ngModel)]="registerData.email"
+          name="email" required>
+
+        <div class="position-relative">
+          <input [type]="showPassword ? 'text' : 'password'" placeholder="كلمة المرور" class="border rounded-1" [(ngModel)]="registerData.password"
+            name="password" required>
+          <button type="button" class="toggle-password" (click)="showPassword = !showPassword">
+            <!-- الأيقونة ستظهر عند النقر -->
+            <i class="bi" [ngClass]="showPassword ? 'bi bi-eye-slash-fill' : 'bi bi-eye-fill'"></i>
+          </button>
+        </div>
+
+
+        <p class="error-text" *ngIf="errors.register">{{ errors.register }}</p>
+        <button type="submit">
+
+          <div *ngIf="isAdding" class="spinner-border spinner-border-sm me-2" role="status">
+            <span class="visually-hidden">Loading...</span>
+          </div>
+
+          تسجيل
+        </button>
+      </form>
+    </div>
+
+
+    <div class="sign-in">
+      <form (ngSubmit)="signIn()">
+        <h1 class="mb-2">تسجيل الدخول</h1>
+        <input type="email" placeholder="البريد الإلكتروني" class="border rounded-1" [(ngModel)]="loginData.email"
+          name="email" required>
+        <input type="password" placeholder="كلمة المرور" class="border rounded-1" [(ngModel)]="loginData.password"
+          name="password" required>
+        <a routerLink="/forget-password">هل نسيت كلمة المرور؟</a>
+        <p class="error-text" *ngIf="errors.login">{{ errors.login }}</p>
+        <button type="submit">
+
+          <div *ngIf="isAdding" class="spinner-border spinner-border-sm me-2" role="status">
+            <span class="visually-hidden">Loading...</span>
+          </div>
+          تسجيل الدخول
+        </button>
+      </form>
+    </div>
+
+
+
+    <div class="overlay-container">
+      <div class="overlay">
+        <div class="overlay-left">
+          <h1>مرحبًا بعودتك!</h1>
+          <p>للبقاء على اتصال معنا، يرجى تسجيل الدخول</p>
+          <button (click)="togglePanel()">تسجيل الدخول</button>
+        </div>
+        <div class="overlay-right">
+          <h1>مرحبًا بك، صديقنا!</h1>
+          <p>أدخل بياناتك وابدأ رحلتك معنا</p>
+          <button (click)="togglePanel()">إنشاء حساب</button>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+
+  <div class="container small-container d-md-none" [ngClass]="{'signup-mode': isSignUp}">
+
+    <div class="form-container">
+      <h1 class="mb-3 h1">{{ isSignUp ? 'إنشاء حساب' : 'تسجيل الدخول' }}</h1>
+
+      <form *ngIf="!isSignUp" class="form" (ngSubmit)="signIn()">
+        <input type="email" placeholder="البريد الإلكتروني" class="border rounded-1" [(ngModel)]="loginData.email"
+          name="email" required>
+        <input type="password" placeholder="كلمة المرور" class="border rounded-1" [(ngModel)]="loginData.password"
+          name="password" required>
+
+        <a routerLink="/forget-password">هل نسيت كلمة المرور؟</a>
+        <p class="error-text" *ngIf="errors.login">{{ errors.login }}</p>
+        <button class="button btn-light" type="submit">
+          <div *ngIf="isAdding" class="spinner-border spinner-border-sm me-2" role="status">
+            <span class="visually-hidden">Loading...</span>
+          </div>
+          تسجيل الدخول
+
+
+        </button>
+      </form>
+
+      <form *ngIf="isSignUp" class="form" (ngSubmit)="signUp()">
+        <input type="text" placeholder="الاسم" class="border rounded-1" [(ngModel)]="registerData.fullName"
+          name="fullName" required>
+        <input type="email" placeholder="البريد الإلكتروني" class="border rounded-1" [(ngModel)]="registerData.email"
+          name="email" required>
+        <input type="password" placeholder="كلمة المرور" class="border rounded-1" [(ngModel)]="registerData.password"
+          name="password" required>
+        <p class="error-text" *ngIf="errors.register">{{ errors.register }}</p>
+        <button class="button" type="submit">
+
+          <div *ngIf="isAdding" class="spinner-border spinner-border-sm me-2" role="status">
+            <span class="visually-hidden">Loading...</span>
+          </div>
+          تسجيل
+        </button>
+      </form>
+
       <p class="toggle-text" (click)="togglePanel()">
         {{ isSignUp ? 'لديك حساب؟ تسجيل الدخول' : 'ليس لديك حساب؟ إنشاء حساب' }}
       </p>

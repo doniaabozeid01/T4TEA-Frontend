@@ -13,10 +13,13 @@ export class WishListComponent {
 
 
 
+  isAdding: boolean = false;
 
   products: any = [];
 
   addToCart(prodId: number) {
+    this.isAdding= true;
+
     // if (product.inStock) {
     //   console.log(`${product.name} تمت إضافته إلى السلة!`);
     // }
@@ -31,10 +34,16 @@ export class WishListComponent {
     
     this.callApis.addToCart(data).subscribe({
       next:(response)=>{
+        this.isAdding= false;
+
         console.log(response);
         this.callApis.updateCartCount(this.userId);
 
         this.toastr.success('تم إضافة المنتج إلي السلة بنجاح!');
+
+      },
+      error:(err)=>{
+        this.isAdding= false;
 
       }
     })

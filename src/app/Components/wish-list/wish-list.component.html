@@ -42,6 +42,12 @@
 
                     <div class="mt-2 text-end w-100 ">
                         <button class="btn btn-gold w-100" (click)="addToCart(item.product.id)">
+
+                            <div *ngIf="isAdding" class="spinner-border spinner-border-sm me-2" role="status">
+                                <span class="visually-hidden">Loading...</span>
+                            </div>
+
+
                             اضف إلى السلة
                         </button>
                         <!-- <button *ngIf="!item.inStock" class="btn w-100" disabled>

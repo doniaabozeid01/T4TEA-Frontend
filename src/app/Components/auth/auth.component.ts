@@ -14,6 +14,7 @@ export class AuthComponent {
   registerData = { fullName: '', email: '', password: '' };
 
   errors = { login: '', register: '' };
+  isAdding: boolean = false;
 
   constructor(private router: Router, private callApi: CallApisService) { }
 
@@ -33,52 +34,73 @@ export class AuthComponent {
   }
 
   signIn(): void {
+    console.log("sign in : ",this.loginData  );
+    this.isAdding= true;
+
     this.errors.login = '';
 
     if (!this.loginData.email || !this.loginData.password) {
+      this.isAdding= false;
+
       this.errors.login = 'يجب ملء جميع الحقول.';
       return;
     }
 
     if (!this.validateEmail(this.loginData.email)) {
-      this.errors.login = 'يجب أن يكون البريد الإلكتروني Gmail.';
+      this.isAdding= false;
+      this.errors.login = 'البريد الالكتروني او الباسورد غير صحيح';
       return;
     }
 
     if (!this.validatePassword(this.loginData.password)) {
-      this.errors.login = 'يجب أن تحتوي كلمة المرور على 6 أحرف على الأقل، رقم واحد، وحرف صغير.';
+      this.isAdding= false;
+      this.errors.login = 'البريد الالكتروني او الباسورد غير صحيح';
       return;
     }
 
     console.log('تسجيل الدخول:', this.loginData);
     this.callApi.Login(this.loginData).subscribe({
       next: (response) => {
+        this.isAdding= false;
         console.log(response.token);
         localStorage.setItem('Token', response.token)
         this.router.navigate(['/home']);
 
       },
       error: (err) => {
+        this.isAdding= false;
         console.log(err.error.message);
-        this.errors.login = err.error.message;
+        if(err.error.message == "Invalid email or password"){
+          this.errors.login = 'البريد الالكتروني او الباسورد غير صحيح';
+        }
+        else{
+          this.errors.login = err.error.message;
+        }
       }
     });
+    
   }
 
   signUp(): void {
+
+    this.isAdding= true;
     this.errors.register = '';
 
     if (!this.registerData.fullName || !this.registerData.email || !this.registerData.password) {
+      this.isAdding= false;
+
       this.errors.register = 'يجب ملء جميع الحقول.';
       return;
     }
 
     if (!this.validateEmail(this.registerData.email)) {
+      this.isAdding= false;
       this.errors.register = 'يجب أن يكون البريد الإلكتروني Gmail.';
       return;
     }
 
     if (!this.validatePassword(this.registerData.password)) {
+      this.isAdding= false;
       this.errors.register = 'يجب أن تحتوي كلمة المرور على 6 أحرف على الأقل، رقم واحد، وحرف صغير.';
       return;
     }
@@ -86,11 +108,13 @@ export class AuthComponent {
     console.log('إنشاء حساب:', this.registerData);
     this.callApi.Register(this.registerData).subscribe({
       next: (response) => {
+        this.isAdding= false;
         console.log(response);
         localStorage.setItem('Token', response.token)
         this.router.navigate(['/home']);
       },
       error: (err) => {
+        this.isAdding= false;
         console.log(err);
         this.errors.register = err.error
       }
@@ -100,9 +124,6 @@ export class AuthComponent {
 
 
 
-
+  showPassword: boolean = false; // يتحكم في عرض/إخفاء كلمة المرور
 
 }
-
-
-

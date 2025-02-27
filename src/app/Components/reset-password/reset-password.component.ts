@@ -14,6 +14,7 @@ export class ResetPasswordComponent {
   successMessage: string | null = null;
   token: string | null = null;
   email: string | null = null;
+  isAdding: boolean = false;
 
   constructor(
     private route: ActivatedRoute,
@@ -50,6 +51,8 @@ export class ResetPasswordComponent {
   
 
   onSubmit(): void {
+    this.isAdding= true;
+
     if (this.resetPasswordForm.valid && this.token && this.email) {
       this.errorMessage = null;
       this.successMessage = null;
@@ -62,10 +65,14 @@ export class ResetPasswordComponent {
 
       this.callApi.ResetPassword(data).subscribe({
         next: () => {
+          this.isAdding= false;
+
           this.successMessage = 'تم إعادة تعيين كلمة المرور بنجاح! يمكنك تسجيل الدخول الآن.';
           setTimeout(() => this.router.navigate(['/auth']), 3000);
         },
         error: (err) => {
+          this.isAdding= false;
+
           console.log(err);
           this.errorMessage = 'حدث خطأ أثناء إعادة تعيين كلمة المرور.';
         }

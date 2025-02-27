@@ -1,68 +1,74 @@
 <div class="container  pb-4">
-    <h2 class="text-end header">إتمام عملية الشراء</h2>
-    <form [formGroup]="paymentForm" (ngSubmit)="onSubmit()" class="pxsmall-4 py-3">
-      
-      <!-- العنوان -->
-      <div class="mb-3">
-        <label for="address" class="form-label">العنوان *</label>
-        <input type="text" id="address" class="form-control" formControlName="address">
-        <div class="text-danger" *ngIf="paymentForm.controls['address'].invalid && paymentForm.controls['address'].touched">
-          يجب إدخال العنوان
-        </div>
+  <h2 class="text-end header">إتمام عملية الشراء</h2>
+  <form [formGroup]="paymentForm" (ngSubmit)="onSubmit()" class="pxsmall-4 py-3">
+
+    <!-- العنوان -->
+    <div class="mb-3">
+      <label for="address" class="form-label">العنوان *</label>
+      <input type="text" id="address" class="form-control" formControlName="address">
+      <div class="text-danger"
+        *ngIf="paymentForm.controls['address'].invalid && paymentForm.controls['address'].touched">
+        يجب إدخال العنوان
       </div>
-  
-      <!-- المدينة -->
-      <div class="mb-3">
-        <label for="city" class="form-label">المدينة *</label>
-        <input type="text" id="city" class="form-control" formControlName="city">
-        <div class="text-danger" *ngIf="paymentForm.controls['city'].invalid && paymentForm.controls['city'].touched">
-          يجب إدخال المدينة
-        </div>
+    </div>
+
+    <!-- المدينة -->
+    <div class="mb-3">
+      <label for="city" class="form-label">المدينة *</label>
+      <input type="text" id="city" class="form-control" formControlName="city">
+      <div class="text-danger" *ngIf="paymentForm.controls['city'].invalid && paymentForm.controls['city'].touched">
+        يجب إدخال المدينة
       </div>
-  
-      <!-- البلد -->
-      <div class="mb-3">
-        <label for="country" class="form-label">البلد *</label>
-        <input type="text" id="country" class="form-control" formControlName="country">
-        <div class="text-danger" *ngIf="paymentForm.controls['country'].invalid && paymentForm.controls['country'].touched">
-          يجب إدخال البلد
-        </div>
+    </div>
+
+    <!-- البلد -->
+    <div class="mb-3">
+      <label for="country" class="form-label">البلد *</label>
+      <input type="text" id="country" class="form-control" formControlName="country">
+      <div class="text-danger"
+        *ngIf="paymentForm.controls['country'].invalid && paymentForm.controls['country'].touched">
+        يجب إدخال البلد
       </div>
-  
-      <!-- رقم الهاتف -->
-      <div class="mb-3">
-        <label for="phone" class="form-label">رقم الهاتف *</label>
-        <input type="text" id="phone" class="form-control" formControlName="phone">
-        <div class="text-danger" *ngIf="paymentForm.controls['phone'].invalid && paymentForm.controls['phone'].touched">
-          يجب إدخال رقم هاتف صالح (10-15 أرقام)
-        </div>
+    </div>
+
+    <!-- رقم الهاتف -->
+    <div class="mb-3">
+      <label for="phone" class="form-label">رقم الهاتف *</label>
+      <input type="text" id="phone" class="form-control" formControlName="phone">
+      <div class="text-danger" *ngIf="paymentForm.controls['phone'].invalid && paymentForm.controls['phone'].touched">
+        يجب إدخال رقم هاتف صالح (10-15 أرقام)
       </div>
-  
-      <!-- تأكيد رقم الهاتف -->
-      <div class="mb-3">
-        <label for="confirmPhone" class="form-label">تأكيد رقم الهاتف *</label>
-        <input type="text" id="confirmPhone" class="form-control" formControlName="confirmPhone">
-        <div class="text-danger" *ngIf="paymentForm.controls['confirmPhone'].invalid && paymentForm.controls['confirmPhone'].touched">
-          يجب تأكيد رقم الهاتف
-        </div>
-        <div class="text-danger" *ngIf="paymentForm.errors?.['phoneMismatch'] && paymentForm.controls['confirmPhone'].touched">
-          رقم الهاتف غير متطابق
-        </div>
+    </div>
+
+    <!-- تأكيد رقم الهاتف -->
+    <div class="mb-3">
+      <label for="confirmPhone" class="form-label">تأكيد رقم الهاتف *</label>
+      <input type="text" id="confirmPhone" class="form-control" formControlName="confirmPhone">
+      <div class="text-danger"
+        *ngIf="paymentForm.controls['confirmPhone'].invalid && paymentForm.controls['confirmPhone'].touched">
+        يجب تأكيد رقم الهاتف
       </div>
-  
-      <!-- طريقة الدفع -->
-      <div class="mb-3">
-        <label for="paymentMethod" class="form-label">طريقة الدفع *</label>
-        <select id="paymentMethod" class="form-select" formControlName="paymentMethod">
-          <option value="cash">الدفع عند الاستلام</option>
-        </select>
+      <div class="text-danger"
+        *ngIf="paymentForm.errors?.['phoneMismatch'] && paymentForm.controls['confirmPhone'].touched">
+        رقم الهاتف غير متطابق
       </div>
-  
-      <!-- زر الإرسال -->
-      <button type="submit" class="btn btn-gold w-100 mt-2 border-none" [disabled]="paymentForm.invalid">
-        إتمام الشراء
-      </button>
-  
-    </form>
-  </div>
-  
+    </div>
+
+    <!-- طريقة الدفع -->
+    <div class="mb-3">
+      <label for="paymentMethod" class="form-label">طريقة الدفع *</label>
+      <select id="paymentMethod" class="form-select" formControlName="paymentMethod">
+        <option value="cash">الدفع عند الاستلام</option>
+      </select>
+    </div>
+
+    <!-- زر الإرسال -->
+    <button type="submit" class="btn btn-gold w-100 mt-2 border-none" [disabled]="paymentForm.invalid">
+      <div *ngIf="isAdding" class="spinner-border spinner-border-sm me-2" role="status">
+        <span class="visually-hidden">Loading...</span>
+      </div>
+      إتمام الشراء
+    </button>
+
+  </form>
+</div>

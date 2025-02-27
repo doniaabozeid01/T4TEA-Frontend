@@ -14,7 +14,7 @@
                     <p>Discount</p>
                 </div>
                 <div class="d-flex justify-content-between align-items-center fs-5 fw-light">
-                    <p>{{shippingAndDiscount.shippingPrice}}</p>
+                    <p>{{shippingAndDiscount.shippingPrice}} <span *ngIf="isNumber(shippingAndDiscount.shippingPrice)">$</span></p>
                     <p>Shipping</p>
                 </div>
                 <div class="d-flex justify-content-between align-items-center fs-5 fw-light">

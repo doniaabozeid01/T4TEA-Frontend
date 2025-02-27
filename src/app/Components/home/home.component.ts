@@ -15,6 +15,8 @@ export class HomeComponent {
   countdown: string = '';
   userId: any;
   baseUrl = this.callApis.baseUrl;
+  isAdding: boolean = false;
+
   ngOnInit() {
     this.startCountdown();
 
@@ -203,6 +205,7 @@ export class HomeComponent {
 
   addToCart(prodId: number) {
 
+    this.isAdding= true;
 
     const token = localStorage.getItem('Token');
     if(!token){
@@ -220,12 +223,18 @@ export class HomeComponent {
 
     this.callApis.addToCart(data).subscribe({
       next: (response) => {
+        this.isAdding= false;
+
         console.log(response);
         this.callApis.updateCartCount(this.userId);
 
         this.toastr.success('تم إضافة المنتج إلي السلة بنجاح!');
 
-      }
+      },
+      error: (err) =>{
+        this.isAdding= false;
+
+      },
     })
 
   }

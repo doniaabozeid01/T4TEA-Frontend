@@ -20,7 +20,7 @@
                 <label for="priceRange">نطاق السعر:</label>
                 <div class="price-range d-flex align-items-center w-100">
                     <span class="price-label">10</span>
-                    <input type="range" id="priceRange" min="1" max="1000" step="5"  [(ngModel)]="selectedPrice"
+                    <input type="range" id="priceRange" min="1" max="1000" step="5" [(ngModel)]="selectedPrice"
                         (input)="updatePriceLabel()" />
                     <span class="price-label">1000</span>
                 </div>
@@ -92,9 +92,11 @@
                             </div>
 
                             <div class="carousel-inner">
-                                <div class="carousel-item bg-white" *ngFor="let image of product.images; let first = first"
+                                <div class="carousel-item bg-white"
+                                    *ngFor="let image of product.images; let first = first"
                                     [ngClass]="{'active': first}">
-                                    <img [src]="baseUrl+image.imagePath" class="d-block w-100 h-100" alt="Product Image">
+                                    <img [src]="baseUrl+image.imagePath" class="d-block w-100 h-100"
+                                        alt="Product Image">
                                 </div>
                             </div>
 
@@ -121,18 +123,26 @@
                             <div class="d-flex justify-content-between align-items-center dynamicPad">
                                 <h5 class="fw-bold m-0 price-text">
                                     <span class="price-currency fs-6">د.ك</span>
-                                    <span class="price-amount">{{getPriceAfterDiscount(product.discount,product.oldPrice)}}</span>
+                                    <span
+                                        class="price-amount">{{getPriceAfterDiscount(product.discount,product.oldPrice)}}</span>
                                     <span class="old-price fs-6 me-1 ms-0">{{product.oldPrice}}</span>
                                     <span class="text-success fs-6">{{product.discount}}%</span>
                                 </h5>
                                 <div class="d-flex align-items-center" *ngIf="product.rate !=0">
                                     <i class="fa-solid fa-star text-warning"></i>
-                                    <p class="m-0 pe-1" > {{product.rate}} </p>
+                                    <p class="m-0 pe-1"> {{product.rate}} </p>
                                 </div>
                             </div>
 
                             <div class="d-flex justify-content-between tog">
-                                <a class="btn btn-gold w-75" (click)="goToCart($event ,product.id)">اضف الي السله</a>
+                                <a class="btn btn-gold w-75" (click)="goToCart($event ,product.id)">
+
+                                    <div *ngIf="isAdding" class="spinner-border spinner-border-sm me-2" role="status">
+                                        <span class="visually-hidden">Loading...</span>
+                                    </div>
+                                    اضف الي السله
+
+                                </a>
                                 <i class="fa-heart fs-3 d-flex align-items-center justify-content-end me-3"
                                     [ngClass]="{'fa-solid': favourites.has(product.id), 'fa-regular': !favourites.has(product.id)}"
                                     (click)="toggleFavourite($event, product.id)">
@@ -145,5 +155,3 @@
         </div>
     </div>
 </section>
-
-
